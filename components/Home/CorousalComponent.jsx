@@ -24,7 +24,7 @@ export default function PremiumCarousel() {
   const current = slides[currentIndex];
 
   return (
-    <div className="relative w-full h-[65vh] md:h-[88vh] overflow-hidden bg-black">
+    <div className="relative w-full h-[60vh] md:h-[88vh] overflow-hidden bg-black">
       {/* Background Image with Smooth Fade */}
       <div className="absolute inset-0">
         {slides.map((slide, index) => (
@@ -41,7 +41,7 @@ export default function PremiumCarousel() {
       <div className="relative h-full flex items-center justify-center px-6">
         <div className="max-w-7xl mx-auto text-center">
           {/* Title - Animated */}
-          <h1 className="text-4xl md:text-7xl font-black text-white tracking-tight leading-tight mb-6">
+          <h1 className="text-[42px] md:text-7xl font-black text-white tracking-tight leading-tight mb-6">
             <span className="inline-block animate-fade-up">
               {current.title}
             </span>
@@ -62,10 +62,10 @@ export default function PremiumCarousel() {
           </div>
 
           {/* CTA Buttons */}
-          <div className=" grid grid-cols-2  *:text-lg *:md:text-xl sm:flex *:px-8 *:py-4 *:sm:px-12 *:sm:py-5  sm:flex-row gap-6 justify-center items-center opacity-0 animate-fade-up animation-delay-900">
+          <div className=" grid grid-cols-2  *:text-lg *:md:text-xl sm:flex *:px-8 *:py-4 *:sm:px-12 *:sm:py-5  sm:flex-row gap-4 sm:gap-6 justify-center items-center opacity-0 animate-fade-up animation-delay-900">
             <Link
               href="/developers"
-              className="group relative  bg-linear-to-r from-violet-600 via-fuchsia-600 to-pink-600 rounded-2xl font-black shadow-2xl shadow-fuchsia-600/70 hover:shadow-fuchsia-500/90 transition-all duration-500 hover:scale-110 active:scale-95 overflow-hidden"
+              className="group relative  bg-linear-to-r from-blue-600 via-sky-600 to-teal-600 rounded-2xl font-black shadow-2xl shadow-sky-600/70 hover:shadow-sky-500/90 transition-all duration-500 hover:scale-110 active:scale-95 overflow-hidden"
             >
               <span className="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
               <span className="relative flex flex-nowrap justify-center items-center gap-4 sm:gap-2">
@@ -100,7 +100,7 @@ export default function PremiumCarousel() {
       </button>
 
       {/* Dots Indicator */}
-      <div className="absolute bottom-20 sm:bottom-10 left-1/2 -translate-x-1/2 flex gap-3 z-10">
+      <div className="absolute bottom-12 sm:bottom-10 left-1/2 -translate-x-1/2 flex gap-3 z-10">
         {slides.map((_, index) => (
           <button
             key={index}

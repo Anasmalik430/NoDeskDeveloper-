@@ -1,4 +1,7 @@
-import { Shield, Clock, Zap, Code2, Package, Wrench } from "lucide-react";
+import { Shield, Clock, Code2, Package, Wrench, Blocks, Brain, Cloud, Palette, Server, Zap, } from "lucide-react";
+import { GrWordpress } from "react-icons/gr";
+import { CiMobile1 } from "react-icons/ci";
+import { FaGlobeAsia } from "react-icons/fa";
 
 export const slides = [
   {
@@ -83,5 +86,69 @@ export const getStartedLinks = [
     desc: "Tailored solutions for unique needs",
     href: "/contact",
     linear: "from-pink-600 to-violet-600",
+  },
+];
+
+// Starting steps
+
+export const startingSteps = [
+  {
+    title: "Post Your Project",
+    desc: "Tell us what you need – get quotes in hours",
+    linear: "from-blue-600 via-cyan-600 to-sky-600",
+  },
+  {
+    title: "Hire Top Talent",
+    desc: "Choose from vetted freelancers with proven track record",
+    linear: "from-cyan-600 via-sky-600 to-blue-600",
+  },
+  {
+    title: "Get Work Done",
+    desc: "Pay safely via escrow. Release only when satisfied",
+    linear: "from-sky-600 via-blue-600 to-cyan-600",
+  },
+];
+
+// Services List
+export const services = [
+  {
+    title: "Web Development",
+    icon: FaGlobeAsia,
+    color: "from-blue-600 to-cyan-500",
+  },
+  {
+    title: "Mobile Apps",
+    icon: CiMobile1,
+    color: "from-cyan-600 to-teal-500",
+  },
+  {
+    title: "UI/UX Design",
+    icon: Palette,
+    color: "from-sky-600 to-blue-500",
+  },
+  {
+    title: "Backend & APIs",
+    icon: Server,
+    color: "from-teal-600 to-cyan-500",
+  },
+  {
+    title: "DevOps & Cloud",
+    icon: Cloud,
+    color: "from-blue-700 to-sky-600",
+  },
+  {
+    title: "AI & ML",
+    icon: Brain,
+    color: "from-purple-600 to-blue-600",
+  },
+  {
+    title: "WordPress",
+    icon: GrWordpress,
+    color: "from-sky-500 to-cyan-600",
+  },
+  {
+    title: "No-Code Tools",
+    icon: Blocks,
+    color: "from-cyan-500 to-blue-700",
   },
 ];

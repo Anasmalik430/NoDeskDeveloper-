@@ -11,16 +11,16 @@ const DevCard = ({ filteredDevelopers }) => {
         {filteredDevelopers.map((dev) => (
           <div
             key={dev.id}
-            className="group relative bg-linear-to-br from-violet-900/30 via-fuchsia-900/20 to-pink-900/30 backdrop-blur-2xl border border-violet-500/40 rounded-3xl overflow-hidden shadow-2xl shadow-violet-900/60 hover:shadow-violet-600/80 hover:border-violet-400 transition-all duration-500 hover:scale-[1.02]"
+            className="group relative bg-linear-to-br from-blue-900/30 via-sky-900/20 to-teal-900/30 backdrop-blur-2xl border border-blue-500/40 rounded-3xl overflow-hidden shadow-2xl shadow-blue-900/60 hover:shadow-blue-600/80 hover:border-blue-400 transition-all duration-500 hover:scale-[1.02]"
           >
-            <div className="absolute inset-0 bg-linear-to-br from-violet-600/20 via-fuchsia-600/20 to-pink-600/20 opacity-0 group-hover:opacity-100 blur-3xl transition-opacity duration-700" />
+            <div className="absolute inset-0 bg-linear-to-br from-blue-600/20 via-sky-600/20 to-teal-600/20 opacity-0 group-hover:opacity-100 blur-3xl transition-opacity duration-700" />
 
             <div className="relative p-6">
               {/* Profile Photo n Name */}
               <div className="flex items-start justify-between mb-6">
                 <div className="flex gap-6">
                   <div className="relative">
-                    <div className="size-40 rounded-3xl overflow-hidden ring-4 ring-violet-500/60 shadow-2xl shadow-violet-800/70">
+                    <div className="size-40 rounded-3xl overflow-hidden ring-4 ring-blue-500/60 shadow-2xl shadow-blue-800/70">
                       <Image
                         src={dev.photo}
                         alt={dev.name}
@@ -30,7 +30,7 @@ const DevCard = ({ filteredDevelopers }) => {
                         className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
                       />
                     </div>
-                    <div className="absolute -bottom-1 -right-1 bg-linear-to-r from-violet-500 to-fuchsia-500 rounded-full p-2 shadow-lg">
+                    <div className="absolute -bottom-1 -right-1 bg-linear-to-r from-blue-500 to-sky-500 rounded-full p-2 shadow-lg">
                       <Sparkles className="size-5 text-white group-hover:animate-pulse" />
                     </div>
                   </div>
@@ -41,14 +41,14 @@ const DevCard = ({ filteredDevelopers }) => {
                     </h3>
                     <div className="flex items-center gap-2 mt-1.5 text-sm">
                       <Star className="size-5 text-yellow-400 -translate-y-0.5 fill-current" />
-                      <span className="text-violet-200 font-semibold">
+                      <span className="text-blue-200 font-semibold">
                         {dev.rating}
                       </span>
                       {/* Exp Level */}
                       <span
                         className={`text-xs px-2 py-1 rounded-full ${
                           dev.level.toLocaleString() === "Expert"
-                            ? "text-violet-400 bg-violet-900/50"
+                            ? "text-blue-400 bg-blue-900/50"
                             : dev.level.toLocaleString() === "Beginner"
                             ? "text-green-400 bg-green-900/50"
                             : "text-yellow-400 bg-yellow-900/50"
@@ -64,15 +64,15 @@ const DevCard = ({ filteredDevelopers }) => {
                         {dev.hourlyRate.toLocaleString()}/hr
                       </span>
                     </div>
-                    <div className="flex items-center mt-1.5 gap-2 text-violet-300">
+                    <div className="flex items-center mt-1.5 gap-2 text-blue-300">
                       <Clock className="size-5" />
                       <span>{dev.experience} years+</span>
                     </div>
-                    <div className="text-fuchsia-300 font-medium mt-1.5 flex gap-1.5">
+                    <div className="text-sky-300 font-medium mt-1.5 flex gap-1.5">
                       <BadgeCheck
                         className={`${
                           dev.availability.toLocaleString() === "Full-time"
-                            ? "text-violet-400"
+                            ? "text-blue-400"
                             : dev.availability.toLocaleString() === "Part-time"
                             ? "text-yellow-400"
                             : "text-green-400"
@@ -89,7 +89,7 @@ const DevCard = ({ filteredDevelopers }) => {
               {/* Skills */}
               <div className="flex flex-wrap gap-2 mb-6 ">
                 {dev.skills.map((skill) => (
-                  <span key={skill} className="px-3 py-1 bg-linear-to-tl from-violet-600/40 to-fuchsia-600/40 backdrop-blur-md rounded-full text-xs font-medium text-white border border-violet-500/50 shadow-md">
+                  <span key={skill} className="px-3 py-1 bg-linear-to-tl from-blue-600/40 to-sky-600/40 backdrop-blur-md rounded-full text-xs font-medium text-white border border-blue-500/50 shadow-md">
                     {skill}
                   </span>
                 ))}

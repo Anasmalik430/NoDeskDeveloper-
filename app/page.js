@@ -1,12 +1,11 @@
-import React from 'react'
-import HomeComponent from '@/components/Home/HomeComponent'
+import HomeComponent from "@/components/Home/HomeComponent";
 
 const Home = () => {
   return (
     <>
-    <HomeComponent />
+      <HomeComponent />
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

@@ -36,11 +36,11 @@ export default function ReadyMadeSoftwarePage() {
 
         {/* Hero Section */}
         <div className="text-center mb-12">
-          <h1 className="text-6xl md:text-7xl font-black tracking-tighter bg-linear-to-r from-violet-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent leading-tight">
+          <h1 className="text-6xl font-black tracking-tighter bg-linear-to-r from-blue-600 via-sky-500 to-teal-400 bg-clip-text text-transparent leading-tight">
             Software Solutions You Want
           </h1>
-          <p className="mt-1 text-xl font-medium text-violet-300/90 max-w-4xl mx-auto leading-relaxed">
-            Launch your business in <span className="text-fuchsia-400 font-bold">days</span>, not months.
+          <p className="mt-1 text-lg font-medium text-blue-300/90 max-w-4xl mx-auto leading-relaxed">
+            Launch your business in <span className="text-sky-400 font-bold">days</span>, not months.
             Fully tested • Production-ready • 100% Customizable
           </p>
         </div>
@@ -49,13 +49,13 @@ export default function ReadyMadeSoftwarePage() {
         <div className="flex flex-col lg:flex-row gap-6 items-center justify-center mb-16">
           {/* Search */}
           <div className="relative w-full max-w-xl">
-            <Search className="z-10 absolute left-6 top-1/2 -translate-y-1/2 size-5 text-violet-400" />
+            <Search className="z-10 absolute left-6 top-1/2 -translate-y-1/2 size-5 text-blue-400" />
             <input
               type="text"
               placeholder="Search powerful apps..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-16 pr-8 py-3 bg-white/5 border border-violet-500/40 rounded-full backdrop-blur-2xl text-white placeholder-violet-400/70 focus:outline-none focus:border-violet-400 focus:ring-4 focus:ring-violet-500/20 transition-all text-lg font-medium"
+              className="w-full pl-16 pr-8 placeholder:tracking-wide py-3 bg-white/5 border border-blue-500/40 rounded-full backdrop-blur-2xl text-white placeholder-blue-400/70 focus:outline-none focus:border-blue-400 focus:ring-4 focus:ring-blue-500/20 transition-all text-lg font-medium"
             />
           </div>
 
@@ -63,14 +63,14 @@ export default function ReadyMadeSoftwarePage() {
           <div className="relative">
             <button
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="flex cursor-pointer min-w-30 items-center justify-between px-5 py-3 bg-linear-to-r from-violet-600/20 to-fuchsia-600/20 border border-violet-500/50 rounded-full backdrop-blur-2xl font-bold text-lg hover:border-violet-400 transition-all duration-300 hover:shadow-2xl hover:shadow-violet-600/40"
+              className="flex cursor-pointer min-w-30 items-center justify-between px-5 py-3 bg-linear-to-r from-blue-600/20 to-sky-600/20 border border-blue-500/50 rounded-full backdrop-blur-2xl font-bold text-lg hover:border-blue-400 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-600/40"
             >
               <span>{selectedCategory}</span>
               <ChevronDown className={`w-5 h-5 transition-transform ${dropdownOpen ? "rotate-180" : ""}`} />
             </button>
 
             {dropdownOpen && (
-              <div className="absolute right-0 mt-3 w-full bg-black/90 backdrop-blur-3xl border border-violet-500/50 rounded-2xl shadow-2xl shadow-violet-900/80 overflow-hidden z-50">
+              <div className="absolute right-0 mt-3 w-full bg-black/90 backdrop-blur-3xl border border-blue-500/50 rounded-2xl shadow-2xl shadow-blue-900/80 overflow-hidden z-50">
                 {categories.map((cat) => (
                   <button
                     key={cat}
@@ -78,8 +78,8 @@ export default function ReadyMadeSoftwarePage() {
                       setSelectedCategory(cat);
                       setDropdownOpen(false);
                     }}
-                    className={`w-full px-4 py-2 text-left font-medium transition-all hover:bg-linear-to-r text-nowrap hover:from-violet-600/30 hover:to-fuchsia-600/30 ${
-                      selectedCategory === cat ? "bg-violet-600/40 text-white" : "text-violet-200"
+                    className={`w-full px-4 py-2 text-left font-medium transition-all hover:bg-linear-to-r text-nowrap hover:from-blue-600/30 hover:to-sky-600/30 ${
+                      selectedCategory === cat ? "bg-blue-600/40 text-white" : "text-blue-200"
                     }`}
                   >
                     {cat}
@@ -95,10 +95,10 @@ export default function ReadyMadeSoftwarePage() {
         {/* Empty State */}
         {filteredProducts.length === 0 && (
           <div className="text-center py-32">
-            <div className="text-6xl font-black bg-linear-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent">
+            <div className="text-6xl font-black bg-linear-to-r from-blue-400 to-sky-400 bg-clip-text text-transparent">
               No Apps Found
             </div>
-            <p className="text-xl text-violet-300 mt-6">Try adjusting your search or filter</p>
+            <p className="text-xl text-blue-300 mt-6">Try adjusting your search or filter</p>
           </div>
         )}
       </div>
