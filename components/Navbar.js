@@ -31,7 +31,7 @@ export default function Navbar() {
               <div className="relative">
                 <div className="absolute inset-0 bg-linear-to-br from-blue-500 via-sky-500 to-teal-500 rounded-2xl blur-xl opacity-70 group-hover:opacity-100 scale-100 group-hover:scale-110 transition-all duration-500" />
                 <div className="relative bg-linear-to-br from-blue-600 via-sky-500 to-teal-400  p-3 rounded-2xl shadow-2xl ring-2 ring-blue-400/50">
-                  <Sparkles className="w-7 h-7 text-white" strokeWidth={3} />
+                  <Code2 className="w-7 h-7 text-white" strokeWidth={3} />
                 </div>
               </div>
               <div>
