@@ -1,12 +1,13 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Home, Code2, Mail, Menu, X, Sparkles, FolderCode } from "lucide-react";
+import { Home, Code2, Mail, Menu, X, Sparkles, FolderCode, BookAudio } from "lucide-react";
 import Link from "next/link";
 
 const navLinks = [
   { name: "Home", href: "/", icon: Home },
   { name: "Developers", href: "/developers", icon: Code2 },
   { name: "Softwares", href: "/softwares-readymade", icon: FolderCode  },
+  { name: "About", href: "/about", icon: BookAudio   },
   { name: "Contact", href: "/contact", icon: Mail },
 ];
 
@@ -24,7 +25,7 @@ export default function Navbar() {
   return (
     <>
       <nav className={`z-50 border-b border-blue-300/70 transition-all duration-500 ${scrolled ? "bg-black/80 backdrop-blur-2xl border-b border-blue-500/30 shadow-xl shadow-blue-900/50": "bg-transparent"}`}>
-        <div className="max-w-7xl mx-auto px-5 lg:px-8">
+        <div className="max-w-[1350px] mx-auto px-5 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3 group">
@@ -36,7 +37,7 @@ export default function Navbar() {
               </div>
               <div>
                 <h1 className="text-2xl font-black bg-linear-to-r from-blue-400 via-sky-400 to-teal-400 bg-clip-text text-transparent tracking-tight">
-                  CodeConnect
+                  NoDeskDeveloper
                 </h1>
                 <p className="text-xs font-medium text-blue-300/70 tracking-wider">
                   CONNECT • BUILD • GROW
