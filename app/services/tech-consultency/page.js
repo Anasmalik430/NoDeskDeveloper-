@@ -61,7 +61,7 @@ export default function TechConsultancy() {
 
   return (
     <>
-      <div className="min-h-screen bg-gradient-to-b from-black via-gray-950 to-black py-12 px-4 lg:px-8 relative overflow-hidden">
+      <div className="min-h-screen bg-linear-to-b from-black via-gray-950 to-black py-12 px-4 lg:px-8 relative overflow-hidden">
         {/* Animated Background */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-20 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
@@ -72,14 +72,14 @@ export default function TechConsultancy() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-gradient-to-b from-white/10 to-white/5 backdrop-blur-xl border border-blue-500/30 rounded-3xl p-8 lg:p-12 shadow-2xl"
+            className="bg-linear-to-b from-white/10 to-white/5 backdrop-blur-xl border border-blue-500/30 rounded-3xl p-8 lg:p-12 shadow-2xl"
           >
             {/* Header */}
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-8">
               <div className="space-y-2">
                 <div className="flex items-center gap-3">
                   <MessageSquare className="w-8 h-8 text-blue-400" strokeWidth={2.5} />
-                  <h1 className="text-3xl lg:text-4xl font-black bg-gradient-to-r from-blue-400 via-blue-400 to-teal-400 bg-clip-text text-transparent">
+                  <h1 className="text-3xl lg:text-4xl font-black bg-linear-to-r from-blue-400 via-blue-400 to-teal-400 bg-clip-text text-transparent">
                     Tech Consultancy
                   </h1>
                 </div>
@@ -92,7 +92,7 @@ export default function TechConsultancy() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsModalOpen(true)}
-                className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 via-blue-500 to-teal-500 rounded-2xl font-bold text-white overflow-hidden shadow-2xl hover:shadow-blue-500/50 transition-all duration-300"
+                className="group relative px-8 py-4 bg-linear-to-r from-blue-600 via-blue-500 to-teal-500 rounded-2xl font-bold text-white overflow-hidden shadow-2xl hover:shadow-blue-500/50 transition-all duration-300"
               >
                 <span className="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                 <span className="relative flex items-center gap-2 whitespace-nowrap">
@@ -113,7 +113,7 @@ export default function TechConsultancy() {
                       whileHover={{ scale: 1.08 }}
                       whileTap={{ scale: 0.95 }}
                       onClick={() => setSelectedService(service.id)}
-                      className={`relative px-6 py-3 rounded-full font-semibold transition-all duration-300 bg-gradient-to-r from-blue-700 via-sky-700 to-teal-700 text-white shadow-lg hover:shadow-blue-500/50`}
+                      className={`relative px-6 py-3 rounded-full font-semibold transition-all duration-300 bg-linear-to-r from-blue-700 via-sky-700 to-teal-700 text-white shadow-lg hover:shadow-blue-500/50`}
                     >
                       <span className="flex items-center gap-2 text-sm">
                         <Icon className="w-4 h-4" strokeWidth={2.5} />

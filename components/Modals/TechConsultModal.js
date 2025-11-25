@@ -98,7 +98,7 @@ export default function TechConsultModal({ onClose }) {
           </div>
 
           {/* Consultant Card */}
-          {/* <div className="bg-gradient-to-r from-blue-600/20 to-teal-600/20 border border-blue-500/40 rounded-2xl p-4 flex justify-between items-center">
+          {/* <div className="bg-linear-to-r from-blue-600/20 to-teal-600/20 border border-blue-500/40 rounded-2xl p-4 flex justify-between items-center">
             <div>
               <h4 className="text-white font-semibold">Aarav (App)</h4>
               <p className="text-gray-400 text-xs">Per-hour communication rate</p>
@@ -151,7 +151,7 @@ export default function TechConsultModal({ onClose }) {
                 className="mt-1 w-full px-4 py-3 bg-white/5 border border-blue-500/30 rounded-xl text-white focus:outline-none focus:border-blue-400 transition"
               >
                 {languages.map((lang) => (
-                    <option key={lang}>{lang}</option>
+                    <option key={lang} className="bg-black">{lang}</option>
                   ))}
               </select>
             </div>
@@ -173,7 +173,7 @@ export default function TechConsultModal({ onClose }) {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             type="submit"
-            className="w-full mt-6 py-4 bg-gradient-to-r from-blue-600 via-blue-500 to-purple-600 rounded-2xl font-bold text-white shadow-lg hover:shadow-purple-500/50 flex items-center justify-center gap-2"
+            className="w-full mt-6 py-4 bg-linear-to-r from-blue-600 via-sky-500 to-teal-600 rounded-2xl font-bold text-white shadow-lg hover:shadow-purple-500/50 flex items-center justify-center gap-2"
           >
             Confirm Booking
             <ArrowRight className="w-5 h-5" />
