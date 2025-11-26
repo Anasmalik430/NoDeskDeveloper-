@@ -12,7 +12,7 @@ const footerLinks = {
     { name: "Careers", href: "/careers" },
     { name: "Our Team", href: "/team" },
     { name: "Blog", href: "/blog" },
-    { name: "How It Works", href: "/howitworks" },
+    { name: "How It Works", href: "/quickLinks/how-it-works" },
   ],
   Services: [
     { name: "Web Development", href: "/services/web" },
