@@ -1,16 +1,16 @@
 "use client";
 import { useState, useEffect } from "react";
-import { ArrowUpRight, Sparkles } from "lucide-react";
+import { ArrowUpRight, Sparkles, TrendingUp, Zap, ZapIcon } from "lucide-react";
 import Link from "next/link";
 import MotivationalCarousel from "./CorousalComponent";
 import {
   getStartedLinks,
-  services,
   startingSteps,
   whyChooseUs,
 } from "./SlidesData";
 import { techLogos } from "../Loop/Data";
 import LogoLoop from "../Loop/LogoLoop";
+import ServicesVerticalBar from "../ServicesVertical/ServicesVerticalBar";
 
 export default function HomePage() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -82,10 +82,7 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
-            <div className="max-w-[90vw] md:max-w-6xl mx-auto  px-4 py-0 rounded-3xl drop-shadow-md border-white/40 mt-8 flex justify-center items-center " style={{ height: "100px", position: "relative", overflow: "hidden", }}>
-              {/* Basic horizontal loop */}
-              <LogoLoop logos={techLogos} speed={120} direction="left" logoHeight={48} gap={40} hoverSpeed={0} scaleOnHover fadeOut fadeOutColor="#0000" ariaLabel="Technology partners" />
-            </div>
+           
           </div>
         </section>
 
@@ -135,9 +132,13 @@ export default function HomePage() {
                 for Any Service
               </span>
             </h2>
+            {/* Logo Loop  Component Here */}
+             <div className="max-w-[90vw] md:max-w-5xl mb-16 mx-auto  px-4 py-0 rounded-3xl drop-shadow-md border-white/40 mt-8 flex justify-center items-center " style={{ height: "100px", position: "relative", overflow: "hidden", }}>
+              {/* Basic horizontal loop */}
+              <LogoLoop logos={techLogos} speed={120} direction="left" logoHeight={48} gap={40} hoverSpeed={0} scaleOnHover fadeOut fadeOutColor="#0000" ariaLabel="Technology partners" />
+            </div>
 
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-              {services.map((service) => (
+              {/* {services.map((service) => (
                 <Link
                   href="/developers"
                   key={service.title}
@@ -153,9 +154,9 @@ export default function HomePage() {
                     </h3>
                   </div>
                 </Link>
-              ))}
+              ))} */}
+            <ServicesVerticalBar />
             </div>
-          </div>
         </section>
 
         {/* Quick Get Started Tiles */}
@@ -197,7 +198,7 @@ export default function HomePage() {
                 Ready to Build Something Amazing?
               </h2>
               <Link
-                href="/developers"
+                href="/book-services"
                 className="inline-flex items-center gap-4 px-12 py-7 bg-linear-to-r text-nowrap from-blue-600 via-sky-600 to-teal-600 rounded-2xl font-black text-lg shadow-2xl shadow-sky-600/70 hover:shadow-sky-500/90 transition-all duration-500 hover:scale-110 active:scale-95"
               >
                 Start Now! It’s Free
@@ -205,6 +206,8 @@ export default function HomePage() {
               </Link>
             </div>
           </section>
+           {/* Bottom CTA */}
+        
         </section>
       </div>
     </>
