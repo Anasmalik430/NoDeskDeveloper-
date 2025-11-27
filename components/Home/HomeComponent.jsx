@@ -7,6 +7,7 @@ import { getStartedLinks, startingSteps, whyChooseUs } from "./SlidesData";
 import { techLogos } from "../Loop/Data";
 import LogoLoop from "../Loop/LogoLoop";
 import ServicesVerticalBar from "../ServicesVertical/ServicesVerticalBar";
+import TestimonialsComponent from "../Testimonials/TestimonialsComponent";
 
 export default function HomePage() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -152,13 +153,19 @@ export default function HomePage() {
             <ServicesVerticalBar />
           </div>
         </section>
+{/* ===================================================================================================================== */}
 
+      <TestimonialsComponent />
+
+
+
+{/* ===================================================================================================================== */}
         {/* Quick Get Started Tiles */}
         <section className="py-4 sm:py-12 md:py-16 lg:py-20  px-6">
           <div className="max-w-7xl mx-auto text-center">
             <h2 className="text-5xl md:text-6xl font-black mb-16">
               <span className="bg-linear-to-r from-blue-400 via-cyan-400 to-sky-400 bg-clip-text text-transparent">
-                Start Talent in
+                Start in
                 <span className="bg-linear-to-tl  from-blue-600 via-sky-500 to-teal-600 text-transparent bg-clip-text">
                   {" "}
                   60 Seconds
