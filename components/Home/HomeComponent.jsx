@@ -8,6 +8,7 @@ import { techLogos } from "../Loop/Data";
 import LogoLoop from "../Loop/LogoLoop";
 import ServicesVerticalBar from "../ServicesVertical/ServicesVerticalBar";
 import TestimonialsComponent from "../Testimonials/TestimonialsComponent";
+import DevNsoftwareComponent from "./DevNsoftwareComponent";
 
 export default function HomePage() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -80,7 +81,7 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-
+<DevNsoftwareComponent />
         {/* Quick Navigation Tiles */}
         <section className="py-10 pt-8 px-6">
           <div className="max-w-7xl mx-auto">
