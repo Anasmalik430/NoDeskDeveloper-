@@ -9,7 +9,6 @@ const DevCard = ({ filteredDevelopers }) => {
     clientName: "",
     email: "",
     projectType: "",
-    budget: "",
     description: "",
   });
 
@@ -23,7 +22,6 @@ const DevCard = ({ filteredDevelopers }) => {
       clientName: "",
       email: "",
       projectType: "",
-      budget: "",
       description: "",
     });
   };
@@ -49,13 +47,16 @@ const DevCard = ({ filteredDevelopers }) => {
         clientName: formData.clientName,
         email: formData.email,
         projectType: formData.projectType,
-        estimatedBudget: formData.budget,
         description: formData.description,
         developerRate: `₹${selectedDeveloper.hourlyRate}/hr`,
       },
       timestamp: new Date().toISOString(),
     });
     setSelectedDeveloper(null);
+
+    setTimeout(() => {
+      alert("Your booking request has been submitted!");
+    }, 1000);
   };
 
   const handleCancel = () => {
@@ -265,7 +266,7 @@ const DevCard = ({ filteredDevelopers }) => {
                   </div>
                 </div>
 
-                {/* Project Type and Budget Row */}
+                {/* Project Type */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {/* Project Type */}
                   <div>
@@ -289,7 +290,7 @@ const DevCard = ({ filteredDevelopers }) => {
                   </div>
 
                   {/* Estimated Budget */}
-                  <div>
+                  {/* <div>
                     <label className="block text-sm font-medium text-gray-300 mb-2">
                       Estimated Budget (₹)
                     </label>
@@ -302,7 +303,7 @@ const DevCard = ({ filteredDevelopers }) => {
                       required
                       className="w-full px-4 py-3 bg-slate-700/50 border border-blue-500/30 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                     />
-                  </div>
+                  </div> */}
                 </div>
 
                 {/* Short Description */}
@@ -322,7 +323,7 @@ const DevCard = ({ filteredDevelopers }) => {
                 </div>
 
                 {/* Rate and Payment Info */}
-                <div className="flex items-center justify-between bg-blue-900/20 border border-blue-500/30 rounded-xl p-4">
+                {/* <div className="flex items-center justify-between bg-blue-900/20 border border-blue-500/30 rounded-xl p-4">
                   <div className="flex items-center gap-2 text-blue-300">
                     <Clock className="size-5" />
                     <span className="font-medium">
@@ -335,7 +336,7 @@ const DevCard = ({ filteredDevelopers }) => {
                       Secure payment & confirmation
                     </span>
                   </div>
-                </div>
+                </div> */}
 
                 {/* Action Buttons */}
                 <div className="flex gap-4 pt-2">

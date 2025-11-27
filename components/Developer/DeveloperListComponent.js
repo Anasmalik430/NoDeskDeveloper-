@@ -67,8 +67,8 @@ export default function DevelopersPage() {
         </div>
 
         {/* Filters */}
-       {/* Filters */}
-        <div className="mb-10 bg-white/5 backdrop-blur-xl rounded-2xl p-6 pb-3 border border-blue-500/20">
+        {/* Filters */}
+        <div className="mb-4 bg-white/5 backdrop-blur-xl rounded-2xl p-6 pb-3 border border-blue-500/20">
           {/* Search and Rate Sort Row */}
           <div className="flex flex-col lg:flex-row gap-4 items-center justify-between mb-6">
             <div className="relative w-full lg:flex-1 text-xs">
@@ -87,9 +87,15 @@ export default function DevelopersPage() {
               onChange={(e) => setSortByRate(e.target.value)}
               className="px-5 py-3 text-xs  bg-black/30 border border-gray-600/30 rounded-xl text-white focus:outline-none focus:border-blue-400 transition-all lg:w-auto w-full"
             >
-              <option value="default" className="bg-black">Rate: Low → High</option>
-              <option value="low" className="bg-black">Rate: Low → High</option>
-              <option value="high" className="bg-black">Rate: High → Low</option>
+              <option value="default" className="bg-black">
+                Rate: Low → High
+              </option>
+              <option value="low" className="bg-black">
+                Rate: Low → High
+              </option>
+              <option value="high" className="bg-black">
+                Rate: High → Low
+              </option>
             </select>
           </div>
 
@@ -128,12 +134,32 @@ export default function DevelopersPage() {
           </div>
 
           {/* Results Count */}
-          <div className="mt-4 pt-2.5 border-t border-gray-700/30">
-            <p className="text-gray-400 text-xs">
-              Showing <span className="text-white font-semibold">{filteredDevelopers.length}</span> developers
-            </p>
-          </div>
+         
         </div>
+        {/* Results Count */}
+        {/* <div className="my-2 px-4 pb-2.5 text-sm flex justify-between items-center">
+          <p className="text-gray-400">
+            Top{" "}
+            <span className="text-white font-semibold">
+              {filteredDevelopers.length}
+            </span>{" "}
+            developers
+          </p>
+          <button className="  rounded-full bg-radial-[at_95%_5%] from-white to-zinc-900 to-35% px-4 py-2 flex items-center">
+            View All <ArrowRight className="inline-block w-4 h-4 ml-1 -mt-0.5" />
+          </button>
+        </div> */}
+         <div className="my-2 px-4 pb-2.5 text-sm flex justify-between items-center"> 
+
+        <p className="text-gray-400">
+            Top{" "}
+            <span className="text-white font-semibold">
+              {filteredDevelopers.length}
+            </span>{" "}
+            developers
+          </p>
+          </div>
+        
 
         {/* Dev Component */}
         <DevCard filteredDevelopers={filteredDevelopers} />
