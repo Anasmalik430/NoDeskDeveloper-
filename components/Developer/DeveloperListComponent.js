@@ -7,13 +7,13 @@ import DevCard from "./DevCard";
 const techOptions = [
   "All",
   "React",
+  "Python",
+  "Angular",
   "Next.js",
   "Flutter",
   "Laravel",
   "Node.js",
-  "Python",
   "React Native",
-  "Angular",
 ];
 const experienceLevels = ["All", "Beginner", "Intermediate", "Expert"];
 
@@ -67,7 +67,6 @@ export default function DevelopersPage() {
         </div>
 
         {/* Filters */}
-       {/* Filters */}
         <div className="mb-10 bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-blue-500/20">
           {/* Search and Rate Sort Row */}
           <div className="flex flex-col lg:flex-row gap-4 items-center justify-between mb-6">
@@ -87,19 +86,26 @@ export default function DevelopersPage() {
               onChange={(e) => setSortByRate(e.target.value)}
               className="px-5 py-3 bg-black/30 border border-gray-600/30 rounded-xl text-white focus:outline-none focus:border-blue-400 transition-all lg:w-auto w-full"
             >
-              <option value="default" className="bg-black">Rate: Low → High</option>
-              <option value="low" className="bg-black">Rate: Low → High</option>
-              <option value="high" className="bg-black">Rate: High → Low</option>
+              <option value="default" className="bg-black">
+                Rate: Low → High
+              </option>
+              <option value="low" className="bg-black">
+                Rate: Low → High
+              </option>
+              <option value="high" className="bg-black">
+                Rate: High → Low
+              </option>
             </select>
           </div>
 
+<div className="grid grid-cols-2 justify-between  *:w-fit">
           {/* Level Buttons Row */}
-          <div className="flex flex-wrap gap-3 mb-6">
+          <div className="flex flex-wrap gap-3 mb-6 items-center">
             {experienceLevels.map((level) => (
               <button
                 key={level}
                 onClick={() => setSelectedLevel(level)}
-                className={`px-6 py-2.5 rounded-lg font-medium transition-all ${
+                className={`px-5 py-2.5 rounded-full text-xs font-medium border border-white/20 transition-all ${
                   selectedLevel === level
                     ? "bg-black text-white"
                     : "bg-white/5 text-gray-300 hover:bg-white/10"
@@ -111,12 +117,12 @@ export default function DevelopersPage() {
           </div>
 
           {/* Tech Stack Buttons Row */}
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-3 items-center">
             {techOptions.map((tech) => (
               <button
                 key={tech}
                 onClick={() => setSelectedTech(tech)}
-                className={`px-5 py-2 rounded-lg font-medium text-sm transition-all ${
+                className={`px-5 py-2 rounded-full text-xs font-medium font-semibold transition-all ${
                   selectedTech === tech
                     ? "bg-blue-500/20 text-blue-300 border border-blue-400/50"
                     : "bg-white/5 text-gray-300 hover:bg-white/10 border border-transparent"
@@ -126,11 +132,15 @@ export default function DevelopersPage() {
               </button>
             ))}
           </div>
-
+</div>
           {/* Results Count */}
           <div className="mt-6 pt-4 border-t border-gray-700/30">
             <p className="text-gray-400 text-sm">
-              Showing <span className="text-white font-semibold">{filteredDevelopers.length}</span> developers
+              Showing{" "}
+              <span className="text-white font-semibold">
+                {filteredDevelopers.length}
+              </span>{" "}
+              developers
             </p>
           </div>
         </div>
