@@ -18,7 +18,7 @@ const ProductCard = ({ filteredProducts }) => {
   };
   const [openProduct, setOpenProduct] = useState(null);
 
-  const handleBuyNow = (product) => {
+  const handleRequestDemo = (product) => {
     alert(`Purchasing ${product.name} for ₹${product.price}`);
   };
 
@@ -123,7 +123,7 @@ const ProductCard = ({ filteredProducts }) => {
               {/* Action Buttons */}
               <div className="flex gap-3 pt-2">
                 <button
-                  onClick={() => setOpenProduct(product)}
+                  onClick={() => handleRequestDemo(product)}
                   className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-slate-800/50 hover:bg-slate-700/50 border border-slate-600/50 hover:border-blue-500/50 rounded-xl font-semibold text-sm text-white transition-all duration-300 hover:scale-105 active:scale-95"
                 >
                   <Play className="w-4 h-4" />
@@ -132,7 +132,8 @@ const ProductCard = ({ filteredProducts }) => {
                 </button>
 
                 <button
-                  onClick={() => handleBuyNow(product)}
+                                    onClick={() => setOpenProduct(product)}
+
                   className="flex-1 relative overflow-hidden px-4 py-3 bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 rounded-xl font-bold text-sm text-white shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transition-all duration-300 hover:scale-105 active:scale-95 group/buy"
                 >
                   <span className="absolute inset-0 bg-white/20 -translate-x-full group-hover/buy:translate-x-full transition-transform duration-700" />
