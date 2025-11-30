@@ -15,18 +15,18 @@ export default function ReadyMadeSoftwarePage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Fetch from backend
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch(`${API_BASE}/projects`);
+        const res = await fetch(`${API_BASE}/projects`, {
+          cache: "no-store",
+        });
         const result = await res.json();
-        console.log("Fetched products:", result);
         if (result.success) {
           setProducts(result.data);
         }
       } catch (err) {
-        console.error("Failed to load products");
+        console.error("Failed to load products:", err);
       } finally {
         setLoading(false);
       }
@@ -36,12 +36,12 @@ export default function ReadyMadeSoftwarePage() {
 
   const filteredProducts = useMemo(() => {
     return products.filter((p) => {
-      const matchesCategory =
-        selectedCategory === "All" || p.category === selectedCategory;
+      const matchesCategory = selectedCategory === "All" || p.category === selectedCategory;
       const matchesSearch =
-        p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        p.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        p.tech.some(t => t.toLowerCase().includes(searchTerm.toLowerCase()));
+        p.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        p.description?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (Array.isArray(p.tech) && p.tech.some(t => t.toLowerCase().includes(searchTerm.toLowerCase())));
+
       return matchesCategory && matchesSearch;
     });
   }, [products, selectedCategory, searchTerm]);
@@ -49,7 +49,7 @@ export default function ReadyMadeSoftwarePage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
-        <p className="text-3xl text-blue-400 font-bold">Loading Apps...</p>
+        <p className="text-3xl font-bold text-blue-400 animate-pulse">Loading Apps...</p>
       </div>
     );
   }
@@ -57,7 +57,6 @@ export default function ReadyMadeSoftwarePage() {
   return (
     <div className="min-h-screen bg-black text-white pt-24 pb-24 px-6 overflow-x-hidden">
       <div className="max-w-7xl mx-auto">
-        {/* Hero Section - same */}
         <div className="text-center mb-12">
           <h1 className="text-6xl font-black tracking-tighter bg-linear-to-r from-blue-600 via-sky-500 to-teal-400 bg-clip-text text-transparent leading-tight">
             Software & Ready-Made Apps
@@ -68,7 +67,6 @@ export default function ReadyMadeSoftwarePage() {
           </p>
         </div>
 
-        {/* Filters - same */}
         <div className="mb-4 bg-white/5 backdrop-blur-xl border border-blue-500/20 rounded-3xl p-3.5 md:p-6">
           <div className="flex flex-wrap gap-3 mb-6">
             {categories.map((cat) => (
