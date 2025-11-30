@@ -82,7 +82,7 @@ export default function ProductDetailPage() {
         </Link>
 
         <div className="bg-slate-900 rounded-3xl max-w-6xl mx-auto overflow-hidden border border-slate-700 shadow-2xl">
-          <div className="bg-gradient-to-r from-blue-900/50 to-purple-900/50 p-8 border-b border-slate-700">
+          <div className="bg-linear-to-r from-blue-900/50 to-purple-900/50 p-8 border-b border-slate-700">
             <h1 className="text-4xl md:text-5xl font-black text-center">{product.name}</h1>
             <p className="text-center text-blue-300 mt-3 text-lg">{product.description}</p>
           </div>
@@ -154,7 +154,7 @@ export default function ProductDetailPage() {
 
                 <div className="flex gap-4 pt-4">
                   <button type="button" onClick={handleCopyQuote} className="flex-1 py-4 bg-slate-700 hover:bg-slate-600 rounded-xl font-bold">Copy Quote</button>
-                  <button onClick={handleSubmit} className="flex-1 py-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 rounded-xl font-bold shadow-lg">Send Request</button>
+                  <button onClick={handleSubmit} className="flex-1 py-4 bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 rounded-xl font-bold shadow-lg">Send Request</button>
                 </div>
               </div>
             </div>
@@ -163,4 +163,3 @@ export default function ProductDetailPage() {
       </div>
     </div>
   );
-}
