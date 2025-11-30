@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { Users, Boxes, TrendingUp } from "lucide-react";
+import { API_BASE } from "@/lib/api";
 
-const API_BASE = "http://localhost:5000/api"; // Deploy ke baad change kar dena
 
 export default function Dashboard() {
   const [stats, setStats] = useState({
