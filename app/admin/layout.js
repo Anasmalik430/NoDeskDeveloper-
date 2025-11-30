@@ -35,7 +35,7 @@ export default function AdminLayout({ children }) {
         <aside className="w-72 fixed inset-y-0 left-0 z-50">
           <div className="h-full bg-linear-to-b from-white/5 to-white/2 backdrop-blur-2xl border-r border-white/10 flex flex-col">
             {/* Logo */}
-            <div className="h-20 flex items-center justify-center border-b border-white/10 flex px-8">
+            <div className="h-20 flex items-center justify-center border-b border-white/10 px-8">
               <h1 className="text-2xl font-black bg-linear-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                 Admin Panel
               </h1>
