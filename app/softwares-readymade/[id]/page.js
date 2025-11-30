@@ -148,10 +148,23 @@ export default function ProductDetailPage() {
     alert("Quote copied to clipboard!");
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert("Request sent successfully! We will contact you soon.");
-  };
+const handleSubmit = (e) => {
+  e.preventDefault();
+
+  // Ye nayi lines add kar do
+  console.log("=== CLIENT REQUEST DETAILS ===");
+  console.log("Name:", formData.name);
+  console.log("Contact:", formData.contact);
+  console.log("Message:", formData.message);
+  console.log("Selected Addons:", selectedAddons.map(a => `${a.label} (₹${a.cost})`));
+  console.log("Base Price: ₹", basePrice);
+  console.log("Addons Total: ₹", addonsTotal);
+  console.log("Service Fee: ₹", Math.round(serviceFee));
+  console.log("FINAL TOTAL: ₹", Math.round(total));
+  console.log("===============================");
+
+  alert("Request sent successfully! We will contact you soon.");
+};
 
   return (
     <div className="min-h-screen bg-black text-white py-6 px-4 sm:px-6 lg:px-8">
@@ -159,10 +172,10 @@ export default function ProductDetailPage() {
         <div className="bg-slate-900 rounded-2xl overflow-hidden border border-slate-800 shadow-xl">
           {/* Header */}
           <div className="relative bg-linear-to-r from-blue-900/30 to-purple-900/30 p-6 border-b border-slate-800">
-            <h1 className="text-2xl font-bold bg-linear-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+            <h1 className="text-2xl font-extrabold bg-linear-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
               {product.name}
             </h1>
-            <p className="mt-2 text-sm text-slate-300 leading-relaxed">
+            <p className="mt-1.5 text-xs text-slate-300 leading-relaxed">
               {product.description}
             </p>
 
