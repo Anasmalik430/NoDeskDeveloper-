@@ -68,7 +68,7 @@ const DevCard = ({ filteredDevelopers }) => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredDevelopers.map((dev, index) => (
           <div
-            key={dev.id}
+            key={dev._id}
             className="group relative bg-linear-to-br from-blue-900/30 via-sky-900/20 to-teal-900/30 backdrop-blur-2xl border border-blue-500/40 rounded-3xl overflow-hidden shadow-2xl shadow-blue-900/60 hover:shadow-blue-600/80 hover:border-blue-400 transition-all duration-500"
           >
             {/* Animated Background Glow */}
@@ -192,7 +192,7 @@ const DevCard = ({ filteredDevelopers }) => {
               {/* Action Buttons */}
               <div className="flex gap-3">
                 <div className="flex-1">
-                  <button onClick={()=> router.push(`/developers/${dev.id}`)} className="w-full px-4 py-2 bg-linear-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all">
+                  <button onClick={() => router.push(`/developers/${dev._id}`)} className="w-full px-4 py-2 bg-linear-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all">
                     Book Developer
                   </button>
                 </div>
