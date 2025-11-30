@@ -76,7 +76,7 @@ export default function SoftwareCard({ software }) {
           </div>
 
           <Link
-            href={`/admin/all-softwares/${software._id}`}
+            href={`/admin/softwares/${software._id}`}
             className="px-6 py-3 bg-linear-to-r from-green-600 to-blue-600 rounded-xl text-white font-semibold hover:scale-105 transition"
           >
             View Details
