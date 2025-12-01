@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Users, Package2, Home, Shield, Activity, LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { API_BASE } from "@/lib/api";
 
 export default function Dashboard() {
   const [user, setUser] = useState(null);
@@ -15,7 +16,6 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
-  const API_BASE = "https://nodeskdevbackend.onrender.com/api";
 
   useEffect(() => {
     const loadDashboard = async () => {
