@@ -2,6 +2,7 @@
 
 "use client";
 
+import { API_BASE } from "@/lib/api";
 import {
   LayoutDashboard,
   Users,
@@ -10,10 +11,11 @@ import {
   LogOut,
 } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function AdminLayout({ children }) {
   const pathname = usePathname();
+  const router = useRouter();
 
   const menuItems = [
     { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -60,8 +62,6 @@ export default function AdminLayout({ children }) {
                       }
                     `}
                   >
-                   
-
                     <Icon
                       className={`w-5 h-5 transition-colors ${
                         isActive
@@ -88,8 +88,18 @@ export default function AdminLayout({ children }) {
 
             {/* Logout */}
             <div className="p-6 border-t border-white/10">
-              <button className="w-full flex items-center justify-center gap-3 px-5 py-4 rounded-2xl bg-white/5 hover:bg-red-500/20 border border-white/10 hover:border-red-500/40 transition-all group">
-                <LogOut className="w-5 h-5 text-gray-400 group-hover:text-red-400" />
+              <button
+                onClick={async () => {
+                  await fetch(`${API_BASE}/logout`, {
+                    method: "POST",
+                    credentials: "include",
+                  });
+                  alert("logged out successfully");
+                  router.push("/")
+                }}
+                className="w-full flex items-center justify-center gap-3 px-5 py-4 rounded-2xl bg-white/5 hover:bg-red-500/20 border border-white/10 hover:border-red-500/40 transition-all group cursor-pointer"
+              >
+                <LogOut className="w-5 h-5 text-gray-400 group-hover:text-red-400 transition-colors" />
                 <span className="font-medium text-gray-300 group-hover:text-white">
                   Logout
                 </span>
