@@ -76,7 +76,7 @@ export default function Navbar() {
 
             {/* CTA Button Here... */}
             <div className="hidden md:block">
-              <button onClick={()=> router.push("/auth/me")} className="group relative px-8 py-3.5 cursor-pointer bg-linear-to-r from-blue-600 via-sky-500 to-teal-400  rounded-2xl font-bold text-white overflow-hidden shadow-2xl shadow-sky-500/40 hover:shadow-sky-500/70 transition-all duration-400 hover:scale-105 active:scale-95">
+              <button onClick={()=> router.push("/auth/login")} className="group relative px-8 py-3.5 cursor-pointer bg-linear-to-r from-blue-600 via-sky-500 to-teal-400  rounded-2xl font-bold text-white overflow-hidden shadow-2xl shadow-sky-500/40 hover:shadow-sky-500/70 transition-all duration-400 hover:scale-105 active:scale-95">
                 <span className="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                 <span className="relative flex items-center gap-2">
                   <Sparkles className="w-5 h-5 group-hover:animate-pulse" />
@@ -116,7 +116,7 @@ export default function Navbar() {
                 <span>{name}</span>
               </Link>
             ))}
-            <button onClick={()=> router.push("/auth/me")} className="w-full mt-4 py-4 bg-linear-to-r from-blue-600 via-sky-500 to-teal-400  rounded-2xl font-bold text-white shadow-2xl shadow-sky-600/60 flex items-center justify-center gap-3 hover:shadow-sky-500/80 transition-all duration-300 active:scale-95">
+            <button onClick={()=> router.push("/auth/login")} className="w-full mt-4 py-4 bg-linear-to-r from-blue-600 via-sky-500 to-teal-400  rounded-2xl font-bold text-white shadow-2xl shadow-sky-600/60 flex items-center justify-center gap-3 hover:shadow-sky-500/80 transition-all duration-300 active:scale-95">
               <Sparkles className="w-5 h-5" />
               Get Started Now
             </button>
