@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 const ProductCard = ({ filteredProducts }) => {
   const [demoProduct, setDemoProduct] = useState(null);
-  const router = useRouter()
+  const router = useRouter();
 
   const shareProduct = (product) => {
     if (navigator.share) {
@@ -63,33 +63,56 @@ const ProductCard = ({ filteredProducts }) => {
 
               <div className="flex items-center gap-2">
                 {product.platforms?.map((platform) => (
-                  <div key={platform} className="flex items-center gap-1.5 px-2.5 py-1 bg-slate-800/50 rounded-lg border border-slate-700/50">
-                    {platform === "Web" ? <Monitor className="w-3.5 h-3.5 text-slate-400" /> : <Smartphone className="w-3.5 h-3.5 text-slate-400" />}
-                    <span className="text-xs text-slate-400 font-medium">{platform}</span>
+                  <div
+                    key={platform}
+                    className="flex items-center gap-1.5 px-2.5 py-1 bg-slate-800/50 rounded-lg border border-slate-700/50"
+                  >
+                    {platform === "Web" ? (
+                      <Monitor className="w-3.5 h-3.5 text-slate-400" />
+                    ) : (
+                      <Smartphone className="w-3.5 h-3.5 text-slate-400" />
+                    )}
+                    <span className="text-xs text-slate-400 font-medium">
+                      {platform}
+                    </span>
                   </div>
                 ))}
               </div>
 
               <div className="flex flex-wrap gap-1.5">
-                {(Array.isArray(product.tech) ? product.tech : product.tech?.split(", ") || []).slice(0,4).map((tech) => (
-                  <span key={tech} className="text-xs px-2 py-1 bg-slate-800/60 text-slate-300 rounded-md border border-slate-700/50">
-                    {tech}
-                  </span>
-                ))}
-                <span  className="text-xs px-2 py-1 bg-slate-800/60 text-slate-300 rounded-md border border-slate-700/50">
-                    {product?.tech.length - 4 } +
-                  </span>
+                {(Array.isArray(product.tech)
+                  ? product.tech
+                  : product.tech?.split(", ") || []
+                )
+                  .slice(0, 4)
+                  .map((tech) => (
+                    <span
+                      key={tech}
+                      className="text-xs px-2 py-1 bg-slate-800/60 text-slate-300 rounded-md border border-slate-700/50"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                <span className="text-xs px-2 py-1 bg-slate-800/60 text-slate-300 rounded-md border border-slate-700/50">
+                  {product?.tech.length - 4} +
+                </span>
               </div>
 
               <div className="pt-4 border-t border-slate-700/50 space-y-2">
                 <div className="flex justify-between items-center flex-col w-full *:w-full *:flex *:justify-between *:items-center space-y-1">
                   <div>
                     <p className="text-xs text-slate-400 mb-0.5">One-time</p>
-                    <p className="text-2xl font-black text-white">₹{product.price?.toLocaleString() || 0}</p>
+                    <p className="text-2xl font-black text-white">
+                      ₹{product.price?.toLocaleString() || 0}
+                    </p>
                   </div>
                   <div className="text-right">
-                    <p className="text-xs text-slate-400 mb-0.5">Customization</p>
-                    <p className="text-sm font-bold text-slate-300">+₹{product.customization || 0}</p>
+                    <p className="text-xs text-slate-400 mb-0.5">
+                      Customization
+                    </p>
+                    <p className="text-sm font-bold text-slate-300">
+                      +₹{product.customization || 0}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -105,7 +128,9 @@ const ProductCard = ({ filteredProducts }) => {
                 </button>
 
                 <button
-                  onClick={() => router.push(`/softwares-readymade/${product._id}`)}
+                  onClick={() =>
+                    router.push(`/softwares-readymade/${product._id}`)
+                  }
                   className="flex-1 relative overflow-hidden px-4 py-3 bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 rounded-xl font-bold text-sm text-white shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 transition-all duration-300 hover:scale-105 active:scale-95 group/buy"
                 >
                   <span className="absolute inset-0 bg-white/20 -translate-x-full group-hover/buy:translate-x-full transition-transform duration-700" />
@@ -120,7 +145,11 @@ const ProductCard = ({ filteredProducts }) => {
         ))}
       </div>
 
-      <RequestDemoDialog product={demoProduct} isOpen={!!demoProduct} onClose={() => setDemoProduct(null)} />
+      <RequestDemoDialog
+        product={demoProduct}
+        isOpen={!!demoProduct}
+        onClose={() => setDemoProduct(null)}
+      />
     </div>
   );
 };

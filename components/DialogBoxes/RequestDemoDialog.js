@@ -1,7 +1,11 @@
+"use client"
 import { X, User, Phone, Mail, Briefcase, Globe, Clock } from "lucide-react";
 import { useState } from "react";
+import { API_BASE } from "@/lib/api";
 
 export const RequestDemoDialog = ({ product, isOpen, onClose }) => {
+
+  
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -18,39 +22,64 @@ export const RequestDemoDialog = ({ product, isOpen, onClose }) => {
     });
   };
 
-  const handleSubmit = () => {
-    if (
-      !formData.name ||
-      !formData.phone ||
-      !formData.email ||
-      !formData.projectType ||
-      !formData.preferredLanguage ||
-      !formData.availabilityTime
-    ) {
-      alert("Please fill all required fields");
-      return;
-    }
+ const handleSubmit = async () => {
+  // Validation
+  if (
+    !formData.name ||
+    !formData.phone ||
+    !formData.email ||
+    !formData.projectType ||
+    !formData.preferredLanguage ||
+    !formData.availabilityTime
+  ) {
+    alert("Please fill all required fields");
+    return;
+  }
 
-    console.log("Demo Request Details:", {
-      ...formData,
-      productName: product?.name,
-      productId: product?.id,
-    });
-
-    setTimeout(() => {
-      alert("Thank you! Your demo request has been submitted successfully.");
-    }, 1000);
-
-    setFormData({
-      name: "",
-      phone: "",
-      email: "",
-      projectType: "",
-      preferredLanguage: "",
-      availabilityTime: "",
-    });
-    onClose();
+  const demoRequestData = {
+    name: formData.name,
+    email: formData.email,
+    phone: formData.phone,
+    productId: product?._id || product?.id,
+    productName: product?.name,
+    projectType: formData.projectType,
+    preferredLanguage: formData.preferredLanguage,
+    availabilityTime: formData.availabilityTime,
   };
+
+  try {
+    const response = await fetch(`${API_BASE}/request-demo`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(demoRequestData),
+    });
+
+    const result = await response.json();
+
+    if (response.ok && result.success) {
+      // Success
+      alert("Thank you! Your demo request has been submitted successfully.");
+      
+      // Reset form + close dialog
+      setFormData({
+        name: "",
+        phone: "",
+        email: "",
+        projectType: "",
+        preferredLanguage: "",
+        availabilityTime: "",
+      });
+      onClose();
+    } else {
+      alert(result.message || "Something went wrong. Please try again.");
+    }
+  } catch (err) {
+    console.error("Demo Request Error:", err);
+    alert("Network error. Please check your connection and try again.");
+  }
+};
 
   if (!isOpen) return null;
 
