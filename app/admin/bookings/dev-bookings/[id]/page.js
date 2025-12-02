@@ -161,7 +161,7 @@ export default function BookingDetail() {
             <div className="relative space-y-6">
               {/* Project Info */}
               <div className="space-y-3">
-                <h3 className="text-xl font-bold text-white">Project Information</h3>
+                <h3 className="text-3xl font-bold text-white">Project Information</h3>
                 <div className="bg-white/5 border border-white/10 rounded-xl px-4 py-3">
                   <p className="text-xs text-gray-400 mb-1">Type</p>
                   <p className="text-sm text-white">{booking.projectType}</p>
