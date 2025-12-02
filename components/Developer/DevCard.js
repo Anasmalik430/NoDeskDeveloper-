@@ -160,7 +160,7 @@ const DevCard = ({ filteredDevelopers }) => {
                 {/* Rate */}
                 <div className="flex flex-col items-center p-2 bg-green-900/30 rounded-xl border border-green-500/30">
                   <IndianRupee className="size-4 text-green-400 mb-1" />
-                  <span className="text-xs text-green-300">Rate</span>
+                  <span className="text-xs text-green-300 pb-1">Rate</span>
                   <span className="text-sm font-bold text-white">
                     ₹{dev.hourlyRate}/hr
                   </span>
@@ -169,7 +169,7 @@ const DevCard = ({ filteredDevelopers }) => {
                 {/* Preferred Language */}
                 <div className="flex flex-col items-center p-2 bg-purple-900/30 rounded-xl border border-purple-500/30">
                   <Languages className="size-4 text-purple-400 mb-1" />
-                  <span className="text-xs text-purple-300">Language</span>
+                  <span className="text-xs text-purple-300 pb-1">Language</span>
                   <span className="text-sm font-bold text-white">{dev?.preferredLanguage}</span>
                 </div>
               </div>
