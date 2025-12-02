@@ -7,7 +7,7 @@ import {Eye} from "lucide-react";
 export default function DevCard({ developer }) {
   const { _id, name, photo, skills, experience, hourlyRate, availability, level, country, state, preferredLanguage, } = developer;
 
-  console.log("Developer Data:", _id);
+  console.log("Developer Data:", _id, developer);
  return (<>
  
  <div className="group relative bg-linear-to-b from-white/5 to-white/2 backdrop-blur-xl border border-white/10 rounded-3xl p-6 hover:border-blue-500/40 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-blue-500/10">
