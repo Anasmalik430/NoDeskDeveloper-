@@ -1,12 +1,9 @@
-// File: app/admin/bookings/dev-enquiries/[id]/page.js
-// This is the detail component that fetches a single enquiry by ID, allows status update, and delete
-
 "use client";
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { ArrowLeft, User, Mail, Code, FileText, Calendar, Sparkles, Check, Trash } from "lucide-react";
+import { ArrowLeft, User, Mail, Code, Calendar, Sparkles, Check, Trash, IndianRupee } from "lucide-react";
+import { API_BASE } from "@/lib/api";
 
-const API_BASE = process.env.NEXT_PUBLIC_BASE_URL || "https://nodeskdevbackend.onrender.com/api";
 
 export default function EnquiryDetail() {
   const params = useParams();

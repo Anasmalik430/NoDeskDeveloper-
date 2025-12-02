@@ -116,7 +116,7 @@ export default function AdminDevEnquires() {
 
                 {/* View Details Button */}
                 <button
-                  onClick={() => router.push(`/admin/bookings/dev-enquiries/${enquiry._id}`)}
+                  onClick={() => router.push(`/admin/bookings/dev-enquiries/${enquiry?._id}`)}
                   className="w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-medium rounded-xl transition-all shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40"
                 >
                   View Details
