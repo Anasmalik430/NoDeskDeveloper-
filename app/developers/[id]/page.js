@@ -43,7 +43,8 @@ export default function DeveloperDetailClient() {
     if (dev) {
       setDeveloper(dev);
     } else {
-      router.push("/developers");
+      // router.push("/developers");
+      alert("Hello 😃")
     }
   }, [params.id, router]);
 
