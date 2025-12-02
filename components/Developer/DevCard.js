@@ -147,7 +147,7 @@ const DevCard = ({ filteredDevelopers }) => {
               </div>
 
               {/* Stats Grid */}
-              <div className="grid grid-cols-3 gap-3 mb-4">
+              <div className="grid grid-cols-3 gap-3 mb-4 space-y-1">
                 {/* Experience */}
                 <div className="flex flex-col items-center p-2 bg-blue-900/30 rounded-xl border border-blue-500/30">
                   <Calendar className="size-4 text-blue-400 mb-1" />
