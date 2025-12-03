@@ -32,13 +32,11 @@ const services = [
     title: "Code Installation bookings",
     route: "/admin/bookings/CodeInstallBooking",
   },
-
-  // {
-  //   id: 7,
-  //   icon: Calculator,
-  //   title: "Project Estimations",
-  //   route: "/services/estimations",
-  // },
+  {
+    id: 7,
+    title: "Tech Consult Enquiries",
+    route: "/admin/bookings/techConsult",
+  },
 ];
 
 export default function ServicesGrid() {
