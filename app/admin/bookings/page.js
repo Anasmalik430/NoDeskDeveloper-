@@ -20,7 +20,7 @@ const services = [
   {
     id: 4,
     title: "Product Buying Enquiries",
-    route: "/admin/bookings/productsdemo-requests",
+    route: "/admin/bookings/productsbuying-requests",
   },
   // {
   //   id: 5,
