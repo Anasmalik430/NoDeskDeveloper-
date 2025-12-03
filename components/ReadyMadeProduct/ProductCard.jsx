@@ -123,7 +123,10 @@ const ProductCard = ({ filteredProducts }) => {
 
               <div className="flex gap-3 pt-2">
                 <button
-                  onClick={() => handleRequestDemo(product)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleRequestDemo(product);
+                  }}
                   className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-slate-800/50 hover:bg-slate-700/50 border border-slate-600/50 hover:border-blue-500/50 rounded-xl font-semibold text-sm text-white transition-all duration-300 hover:scale-105 active:scale-95"
                 >
                   <Play className="w-4 h-4" />
