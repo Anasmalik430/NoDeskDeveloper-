@@ -148,42 +148,73 @@ export default function ProductDetailPage() {
     alert("Quote copied to clipboard!");
   };
 
-const handleSubmit = (e) => {
+const handleSubmit = async (e) => {
   e.preventDefault();
 
-  console.log("=== CLIENT REQUEST DETAILS ===");
+  // Validation
+  if (!formData.name || !formData.contact) {
+    alert("Name and Contact are required!");
+    return;
+  }
 
-  // Form Fields
-  console.log("Name:", formData.name);
-  console.log("Contact:", formData.contact);
-  console.log("Message:", formData.message);
+  const enquiryData = {
+    // Client Info
+    name: formData.name.trim(),
+    contact: formData.contact.trim(),
+    message: formData.message.trim() || "",
 
-  // Product Details
-  console.log("Product Name:", product.name);
-  console.log("Live Demo Link:", product.demoLink);
-  console.log("Platforms:", product.platforms?.join(", "));
-  console.log("Technologies:", 
-    Array.isArray(product.tech) 
-      ? product.tech.join(", ") 
-      : product.tech
-  );
+    // Product Info
+    productId: product._id,
+    productName: product.name,
+    demoLink: product.demoLink || "",
+    platforms: product.platforms || [],
+    technologies: Array.isArray(product.tech) 
+      ? product.tech 
+      : product.tech?.split(",").map(t => t.trim()) || [],
 
-  // Addons
-  console.log("Selected Addons:", 
-    selectedAddons.length
-      ? selectedAddons.map(a => `${a.label} (₹${a.cost})`)
-      : "No addons selected"
-  );
+    // Pricing
+    basePrice: basePrice,
+    selectedAddons: selectedAddons.map(addon => ({
+      label: addon.label,
+      cost: addon.cost,
+    })),
+    addonsTotal: Math.round(addonsTotal),
+    serviceFee: Math.round(serviceFee),
+    finalTotal: Math.round(total),
+  };
 
-  // Pricing
-  console.log("Base Price: ₹", basePrice);
-  console.log("Addons Total: ₹", addonsTotal);
-  console.log("Service Fee: ₹", Math.round(serviceFee));
-  console.log("FINAL TOTAL: ₹", Math.round(total));
+  try {
+    const res = await fetch(`${API_BASE}/buy-product-enquire`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(enquiryData),
+    });
 
-  console.log("================================");
+    const result = await res.json();
 
-  alert("Request sent successfully! We will contact you soon.");
+    if (res.ok && result.success) {
+      alert("Request sent successfully! We will contact you soon.");
+      
+      // Optional: Reset form
+      setFormData({ name: "", contact: "", message: "" });
+      setAddons({
+        deployment: false,
+        branding: false,
+        payment: false,
+        gateway: false,
+        customFields: false,
+        multiLanguage: false,
+        whatsapp: false,
+      });
+    } else {
+      alert(result.message || "Something went wrong. Please try again.");
+    }
+  } catch (err) {
+    console.error("Submit Error:", err);
+    alert("Network error. Please check your connection.");
+  }
 };
 
 
