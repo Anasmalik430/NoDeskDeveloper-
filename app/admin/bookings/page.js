@@ -44,11 +44,6 @@ const services = [
   },
   {
     id: 9,
-    title: "Technical Maintenance",
-    route: "/admin/bookings/tech-maintenance",
-  },
-  {
-    id: 10,
     title: "Error Fixing Enquiries",
     route: "/admin/bookings/errorFixing",
   },
