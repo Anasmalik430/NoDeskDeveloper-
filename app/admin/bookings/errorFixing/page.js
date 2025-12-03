@@ -32,10 +32,10 @@ export default function AdminErrorFixingEnqs() {
     <div className="min-h-screen bg-black/95 p-6 lg:p-10">
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-10">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-red-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
+          <h1 className="text-4xl font-bold bg-linear-to-r from-red-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
             Error Fixing Requests
           </h1>
-          <div className="p-4 bg-gradient-to-br from-red-600/20 to-purple-600/20 border border-red-500/30 rounded-2xl backdrop-blur-xl">
+          <div className="p-4 bg-linear-to-br from-red-600/20 to-purple-600/20 border border-red-500/30 rounded-2xl backdrop-blur-xl">
             <Bug className="w-8 h-8 text-red-400" />
           </div>
         </div>
@@ -47,9 +47,9 @@ export default function AdminErrorFixingEnqs() {
             {requests.map((req) => (
               <div
                 key={req._id}
-                className="group relative bg-gradient-to-br from-slate-900/90 to-slate-950/90 border border-red-500/20 rounded-2xl p-6 shadow-2xl backdrop-blur-xl hover:border-red-500/50 transition-all duration-500 hover:scale-[1.02]"
+                className="group relative bg-linear-to-br from-slate-900/90 to-slate-950/90 border border-red-500/20 rounded-2xl p-6 shadow-2xl backdrop-blur-xl hover:border-red-500/50 transition-all duration-500 hover:scale-[1.02]"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-red-600/10 to-purple-600/10 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute inset-0 bg-linear-to-r from-red-600/10 to-purple-600/10 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
 
                 <div className="relative space-y-4">
                   <div className="flex justify-between items-start">
@@ -74,7 +74,7 @@ export default function AdminErrorFixingEnqs() {
 
                   <button
                     onClick={() => router.push(`/admin/bookings/errorFixing/${req._id}`)}
-                    className="w-full py-3 bg-gradient-to-r from-red-600 via-pink-500 to-purple-600 rounded-xl font-bold text-white shadow-lg hover:shadow-red-500/60 transition-all duration-300 flex items-center justify-center gap-2 hover:scale-105 active:scale-95"
+                    className="w-full py-3 bg-linear-to-r from-red-600 via-pink-500 to-purple-600 rounded-xl font-bold text-white shadow-lg hover:shadow-red-500/60 transition-all duration-300 flex items-center justify-center gap-2 hover:scale-105 active:scale-95"
                   >
                     View Details
                   </button>
