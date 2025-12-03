@@ -1,9 +1,18 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
-import { ArrowLeft, Loader2, Trash2, CheckCircle, Calendar, Mail, Phone, FileText, Languages } from "lucide-react";
+import {
+  ArrowLeft,
+  Loader2,
+  Trash2,
+  CheckCircle,
+  Calendar,
+  Mail,
+  Phone,
+  FileText,
+  Languages,
+} from "lucide-react";
 import { API_BASE } from "@/lib/api";
-
 
 export default function AdminCodeInstallBookingDetails() {
   const { id } = useParams();
@@ -24,7 +33,7 @@ export default function AdminCodeInstallBookingDetails() {
         setStatus(data.data.status);
       } catch (err) {
         alert("Booking not found");
-        router.push("/admin/bookings/code-install-bookings");
+        router.back();
       } finally {
         setLoading(false);
       }
@@ -57,7 +66,9 @@ export default function AdminCodeInstallBookingDetails() {
     if (!confirm("Delete this booking permanently?")) return;
     setDeleting(true);
     try {
-      await fetch(`${API_BASE}/code-install-booking/${id}`, { method: "DELETE" });
+      await fetch(`${API_BASE}/code-install-booking/${id}`, {
+        method: "DELETE",
+      });
       alert("Deleted successfully");
       router.push("/admin/bookings/code-install-bookings");
     } catch (err) {
@@ -67,12 +78,20 @@ export default function AdminCodeInstallBookingDetails() {
     }
   };
 
-  if (loading) return <div className="min-h-screen flex items-center justify-center bg-black"><Loader2 className="w-12 h-12 text-blue-500 animate-spin" /></div>;
+  if (loading)
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-black">
+        <Loader2 className="w-12 h-12 text-blue-500 animate-spin" />
+      </div>
+    );
 
   return (
     <div className="min-h-screen bg-black/95 p-6 lg:p-10">
       <div className="max-w-4xl mx-auto">
-        <button onClick={() => router.back()} className="mb-6 flex items-center gap-2 text-cyan-400 hover:text-cyan-300">
+        <button
+          onClick={() => router.back()}
+          className="mb-6 flex items-center gap-2 text-cyan-400 hover:text-cyan-300"
+        >
           <ArrowLeft className="w-5 h-5" /> Back
         </button>
 
@@ -83,21 +102,42 @@ export default function AdminCodeInstallBookingDetails() {
 
           <div className="grid md:grid-cols-2 gap-6 text-white/90">
             <div className="space-y-4">
-              <p className="flex items-center gap-3"><Mail className="w-5 h-5 text-cyan-400" /> <strong>Name:</strong> {booking.fullName}</p>
-              <p className="flex items-center gap-3"><Mail className="w-5 h-5 text-cyan-400" /> <strong>Email:</strong> {booking.email}</p>
-              <p className="flex items-center gap-3"><Phone className="w-5 h-5 text-cyan-400" /> <strong>Phone:</strong> {booking.phone}</p>
+              <p className="flex items-center gap-3">
+                <Mail className="w-5 h-5 text-cyan-400" />{" "}
+                <strong>Name:</strong> {booking.fullName}
+              </p>
+              <p className="flex items-center gap-3">
+                <Mail className="w-5 h-5 text-cyan-400" />{" "}
+                <strong>Email:</strong> {booking.email}
+              </p>
+              <p className="flex items-center gap-3">
+                <Phone className="w-5 h-5 text-cyan-400" />{" "}
+                <strong>Phone:</strong> {booking.phone}
+              </p>
             </div>
             <div className="space-y-4">
-              <p className="flex items-center gap-3"><Calendar className="w-5 h-5 text-cyan-400" /> <strong>Callback Time:</strong> {booking.callbackTime}</p>
-              <p className="flex items-center gap-3"><Languages className="w-5 h-5 text-cyan-400" /> <strong>Languages:</strong> {booking.languages.join(", ")}</p>
               <p className="flex items-center gap-3">
-                <span className={`px-3 py-1 rounded-full text-sm ${
-                  booking.status === "Pending" ? "bg-yellow-500/20 text-yellow-300" :
-                  booking.status === "Confirmed" ? "bg-blue-500/20 text-blue-300" :
-                  booking.status === "In Progress" ? "bg-purple-500/20 text-purple-300" :
-                  booking.status === "Completed" ? "bg-green-500/20 text-green-300" :
-                  "bg-red-500/20 text-red-300"
-                }`}>
+                <Calendar className="w-5 h-5 text-cyan-400" />{" "}
+                <strong>Callback Time:</strong> {booking.callbackTime}
+              </p>
+              <p className="flex items-center gap-3">
+                <Languages className="w-5 h-5 text-cyan-400" />{" "}
+                <strong>Languages:</strong> {booking.languages.join(", ")}
+              </p>
+              <p className="flex items-center gap-3">
+                <span
+                  className={`px-3 py-1 rounded-full text-sm ${
+                    booking.status === "Pending"
+                      ? "bg-yellow-500/20 text-yellow-300"
+                      : booking.status === "Confirmed"
+                      ? "bg-blue-500/20 text-blue-300"
+                      : booking.status === "In Progress"
+                      ? "bg-purple-500/20 text-purple-300"
+                      : booking.status === "Completed"
+                      ? "bg-green-500/20 text-green-300"
+                      : "bg-red-500/20 text-red-300"
+                  }`}
+                >
                   {booking.status}
                 </span>
               </p>
@@ -107,7 +147,9 @@ export default function AdminCodeInstallBookingDetails() {
           <div className="mt-8">
             <p className="flex items-start gap-3 text-gray-300">
               <FileText className="w-5 h-5 text-cyan-400 mt-1" />
-              <span><strong>Project Brief:</strong> {booking.projectBrief}</span>
+              <span>
+                <strong>Project Brief:</strong> {booking.projectBrief}
+              </span>
             </p>
           </div>
 
@@ -129,7 +171,11 @@ export default function AdminCodeInstallBookingDetails() {
               disabled={updating || status === booking.status}
               className="px-8 py-3 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-xl font-bold text-white flex items-center justify-center gap-2 disabled:opacity-50"
             >
-              {updating ? <Loader2 className="w-5 h-5 animate-spin" /> : <CheckCircle className="w-5 h-5" />}
+              {updating ? (
+                <Loader2 className="w-5 h-5 animate-spin" />
+              ) : (
+                <CheckCircle className="w-5 h-5" />
+              )}
               Update Status
             </button>
 
@@ -138,7 +184,11 @@ export default function AdminCodeInstallBookingDetails() {
               disabled={deleting}
               className="px-8 py-3 bg-gradient-to-r from-red-600 to-red-500 rounded-xl font-bold text-white flex items-center justify-center gap-2 disabled:opacity-50"
             >
-              {deleting ? <Loader2 className="w-5 h-5 animate-spin" /> : <Trash2 className="w-5 h-5" />}
+              {deleting ? (
+                <Loader2 className="w-5 h-5 animate-spin" />
+              ) : (
+                <Trash2 className="w-5 h-5" />
+              )}
               Delete Booking
             </button>
           </div>

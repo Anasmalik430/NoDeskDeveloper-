@@ -27,12 +27,12 @@ const services = [
     title: "Install OwnCode Enquiries",
     route: "/admin/bookings/installcode-enquaries",
   },
-  // {
-  //   id: 6,
-  //   icon: Bug,
-  //   title: "Bug Fixing",
-  //   route: "/services/bug-fixing",
-  // },
+  {
+    id: 6,
+    title: "Code Installation bookings",
+    route: "/admin/bookings/CodeInstallBooking",
+  },
+
   // {
   //   id: 7,
   //   icon: Calculator,
