@@ -42,6 +42,16 @@ const services = [
     title: "Technical Maintenance",
     route: "/admin/bookings/tech-maintenance",
   },
+  {
+    id: 9,
+    title: "Technical Maintenance",
+    route: "/admin/bookings/tech-maintenance",
+  },
+  {
+    id: 10,
+    title: "Error Fixing Enquiries",
+    route: "/admin/bookings/errorFixing",
+  },
 ];
 
 export default function ServicesGrid() {
