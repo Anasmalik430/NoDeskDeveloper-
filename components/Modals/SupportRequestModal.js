@@ -1,14 +1,18 @@
+"use client";
+import { API_BASE } from "@/lib/api";
 import { X, ArrowRight } from "lucide-react";
 import { useState } from "react";
 
 export default function SupportRequestModal({ onClose }) {
   const [formData, setFormData] = useState({
     category: "App",
-    codeTypes: [],
+    codeTypes: [], // array for UI toggle
     projectLink: "",
     discussionTime: "",
     language: "English",
   });
+
+  const [loading, setLoading] = useState(false);
 
   const toggleCodeType = (type) => {
     setFormData((prev) => ({
@@ -19,17 +23,45 @@ export default function SupportRequestModal({ onClose }) {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Support Request Submitted:", {
-      ...formData,
-      submittedAt: new Date().toISOString(),
-    });
-    onClose();
+    setLoading(true);
 
-    setTimeout(() => {
-      alert("Support request submitted successfully!");
-    }, 1000);
+    const payload = {
+      category: formData.category,
+      projectLink: formData.projectLink.trim(),
+      codeTypes: formData.codeTypes, // array bhej rahe hain (schema mein [String] hai)
+      language: formData.language,
+      discussionTime: formData.discussionTime.trim(),
+    };
+
+    try {
+      const res = await fetch(`${API_BASE}/technical-maintenance`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await res.json();
+
+      if (res.ok) {
+        alert(
+          "Support request submitted successfully! We'll contact you soon."
+        );
+        onClose();
+      } else {
+        alert(
+          "Error: " + (result.message || "Submission failed. Please try again.")
+        );
+      }
+    } catch (err) {
+      console.error("Submission error:", err);
+      alert("Network error! Please check your connection and try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -38,7 +70,7 @@ export default function SupportRequestModal({ onClose }) {
       onClick={onClose}
     >
       <div
-        className="relative bg-linear-to-br from-gray-900 via-black to-gray-900 border border-blue-500/30 rounded-3xl p-8 max-w-2xl w-full shadow-2xl"
+        className="relative bg-gradient-to-br from-gray-900 via-black to-gray-900 border border-blue-500/30 rounded-3xl p-8 max-w-2xl w-full shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -61,6 +93,7 @@ export default function SupportRequestModal({ onClose }) {
                 onChange={(e) =>
                   setFormData({ ...formData, category: e.target.value })
                 }
+                required
                 className="mt-2 w-full px-5 py-4 bg-white/5 border border-blue-500/30 rounded-xl text-white focus:outline-none focus:border-blue-400 transition"
               >
                 <option className="bg-black">App</option>
@@ -83,7 +116,7 @@ export default function SupportRequestModal({ onClose }) {
                       onClick={() => toggleCodeType(type)}
                       className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${
                         formData.codeTypes.includes(type)
-                          ? "bg-linear-to-r from-blue-600 to-teal-500 text-white"
+                          ? "bg-gradient-to-r from-blue-600 to-teal-500 text-white shadow-lg"
                           : "bg-white/10 text-gray-400 border border-blue-500/30"
                       }`}
                     >
@@ -102,11 +135,12 @@ export default function SupportRequestModal({ onClose }) {
               </label>
               <input
                 type="url"
-                placeholder="https://..."
+                placeholder="https://yourproject.com"
                 value={formData.projectLink}
                 onChange={(e) =>
                   setFormData({ ...formData, projectLink: e.target.value })
                 }
+                required
                 className="mt-2 w-full px-5 py-4 bg-white/5 border border-blue-500/30 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-400 transition"
               />
             </div>
@@ -122,6 +156,7 @@ export default function SupportRequestModal({ onClose }) {
                 onChange={(e) =>
                   setFormData({ ...formData, discussionTime: e.target.value })
                 }
+                required
                 className="mt-2 w-full px-5 py-4 bg-white/5 border border-blue-500/30 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-400 transition"
               />
             </div>
@@ -131,30 +166,42 @@ export default function SupportRequestModal({ onClose }) {
             <label className="text-gray-400 text-sm">
               Communication Language
             </label>
-            <input
-              type="text"
+            <select
               value={formData.language}
               onChange={(e) =>
                 setFormData({ ...formData, language: e.target.value })
               }
-              className="mt-2 w-full px-5 py-4 bg-white/5 border border-blue-500/30 rounded-xl text-gray-400 cursor-not-allowed"
-            />
+              required
+              className="mt-2 w-full px-5 py-4 bg-white/5 border border-blue-500/30 rounded-xl text-white focus:outline-none focus:border-blue-400 transition"
+            >
+              <option value="English">English</option>
+              <option value="Hindi">Hindi</option>
+              <option value="English + Hindi">English + Hindi</option>
+            </select>
           </div>
 
           <div className="flex justify-end gap-4 pt-6">
             <button
               type="button"
               onClick={onClose}
-              className="px-8 py-4 bg-white/10 border border-blue-500/30 rounded-2xl text-gray-400 hover:bg-white/20 transition"
+              disabled={loading}
+              className="px-8 py-4 bg-white/10 border border-blue-500/30 rounded-2xl text-gray-400 hover:bg-white/20 transition disabled:opacity-50"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-10 py-4 bg-linear-to-r from-blue-600 via-blue-500 to-teal-500 rounded-2xl font-bold text-white shadow-lg hover:shadow-blue-500/50 transition-all hover:scale-105 flex items-center gap-2"
+              disabled={loading || formData.codeTypes.length === 0}
+              className="px-10 py-4 bg-gradient-to-r from-blue-600 via-blue-500 to-teal-500 rounded-2xl font-bold text-white shadow-lg hover:shadow-blue-500/50 transition-all hover:scale-105 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Submit Request
-              <ArrowRight className="w-5 h-5" />
+              {loading ? (
+                "Submitting..."
+              ) : (
+                <>
+                  Submit Request
+                  <ArrowRight className="w-5 h-5" />
+                </>
+              )}
             </button>
           </div>
         </form>

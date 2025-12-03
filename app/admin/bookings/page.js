@@ -39,7 +39,7 @@ const services = [
   },
   {
     id: 8,
-    title: "Technical Maintenance Enquiries",
+    title: "Technical Maintenance",
     route: "/admin/bookings/tech-maintenance",
   },
 ];

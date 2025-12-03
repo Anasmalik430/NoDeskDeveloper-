@@ -1,21 +1,6 @@
 "use client";
 import { useState } from "react";
-import {
-  Wrench,
-  Activity,
-  Database,
-  RefreshCw,
-  Shield,
- Clock,
-  Cloud,
-  FileText,
-  Zap,
-  HelpCircle,
-  AlertTriangle,
-  HardDrive,
-  ArrowRight,
-  FileCog,
-} from "lucide-react";
+import { Wrench, Activity, Database, RefreshCw, Shield, Clock, Cloud, FileText, Zap, HelpCircle, AlertTriangle, HardDrive, ArrowRight, FileCog, } from "lucide-react";
 import SupportRequestModal from "@/components/Modals/SupportRequestModal";
 
 export default function TechnicalMaintenance() {
@@ -50,7 +35,10 @@ export default function TechnicalMaintenance() {
         {/* Animated Background Blobs */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-20 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1.5s" }} />
+          <div
+            className="absolute bottom-20 right-1/4 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl animate-pulse"
+            style={{ animationDelay: "1.5s" }}
+          />
         </div>
 
         <div className="relative max-w-7xl mx-auto">
@@ -59,13 +47,17 @@ export default function TechnicalMaintenance() {
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8 mb-10">
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
-                  <FileCog className="w-9 h-9 text-blue-400" strokeWidth={2.5} />
+                  <FileCog
+                    className="w-9 h-9 text-blue-400"
+                    strokeWidth={2.5}
+                  />
                   <h1 className="text-3xl lg:text-4xl font-black bg-linear-to-r from-blue-400 to-teal-400 bg-clip-text text-transparent">
                     Technical Maintenance
                   </h1>
                 </div>
                 <p className="text-gray-400 text-sm lg:text-base max-w-2xl">
-                  Tell us what you need support with and preferred discussion time.
+                  Tell us what you need support with and preferred discussion
+                  time.
                 </p>
               </div>
 
@@ -111,7 +103,10 @@ export default function TechnicalMaintenance() {
                   {coverage.map((item, i) => {
                     const Icon = item.icon;
                     return (
-                      <div key={i} className="px-5 py-2 bg-white/10 rounded-full text-gray-300 text-sm flex items-center gap-2 border border-blue-500/20">
+                      <div
+                        key={i}
+                        className="px-5 py-2 bg-white/10 rounded-full text-gray-300 text-sm flex items-center gap-2 border border-blue-500/20"
+                      >
                         <Icon className="w-4 h-4" />
                         {item.label}
                       </div>
@@ -132,9 +127,14 @@ export default function TechnicalMaintenance() {
                   {health.map((item, i) => {
                     const Icon = item.icon;
                     return (
-                      <div key={i} className="p-5 bg-white/10 backdrop-blur-sm rounded-xl text-center border border-blue-500/20">
+                      <div
+                        key={i}
+                        className="p-5 bg-white/10 backdrop-blur-sm rounded-xl text-center border border-blue-500/20"
+                      >
                         <Icon className="w-10 h-10 mx-auto mb-2 text-blue-400" />
-                        <p className="text-sm font-medium text-gray-300">{item.label}</p>
+                        <p className="text-sm font-medium text-gray-300">
+                          {item.label}
+                        </p>
                       </div>
                     );
                   })}
@@ -153,7 +153,9 @@ export default function TechnicalMaintenance() {
         </div>
 
         {/* Modal */}
-        {isModalOpen && <SupportRequestModal onClose={() => setIsModalOpen(false)} />}
+        {isModalOpen && (
+          <SupportRequestModal onClose={() => setIsModalOpen(false)} />
+        )}
       </div>
     </>
   );
