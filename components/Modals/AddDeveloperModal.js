@@ -46,25 +46,39 @@ export default function AddDeveloperModal({ isOpen, onClose, onAdd }) {
     setIsUploading(false);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+ const handleSubmit = (e) => {
+  e.preventDefault();
 
-    const skillsArray = formData.skills
-      .split(",")
-      .map((s) => s.trim())
-      .filter(Boolean);
+  // Convert skills (comma separated → array)
+  const skillsArray = formData.skills
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
 
-    const newDeveloper = {
-      ...formData,
-      skills: skillsArray,
-      experience: Number(formData.experience) || 0,
-      hourlyRate: Number(formData.hourlyRate) || 0,
-    };
+  // Convert preferred languages (comma separated → array)
+  const preferredLangArray = formData.preferredLanguage
+    .split(",")
+    .map((l) => l.trim())
+    .filter(Boolean);
 
-    console.log("New Developer Added:", newDeveloper);
-    onAdd?.(newDeveloper);
-    onClose();
+  // Create final developer object
+  const newDeveloper = {
+    ...formData,
+    skills: skillsArray,
+    preferredLanguage: preferredLangArray,
+    experience: Number(formData.experience) || 0,
+    hourlyRate: Number(formData.hourlyRate) || 0,
   };
+
+  console.log("New Developer Added:", newDeveloper);
+
+  // Send to parent
+  onAdd?.(newDeveloper);
+
+  // Close modal
+  onClose();
+};
+
 
   const removePhoto = (e) => {
     e.stopPropagation();
@@ -229,12 +243,21 @@ export default function AddDeveloperModal({ isOpen, onClose, onAdd }) {
                 }
                 className="px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white outline-none"
               >
-                <option value="Beginner" className="bg-black">Beginner</option>
-                <option value="Intermediate" className="bg-black">Intermediate</option>
-                <option value="Expert" className="bg-black">Expert</option>
+                <option value="Beginner" className="bg-black">
+                  Beginner
+                </option>
+                <option value="Intermediate" className="bg-black">
+                  Intermediate
+                </option>
+                <option value="Expert" className="bg-black">
+                  Expert
+                </option>
               </select>
 
-              <select
+              <input
+                type="text"
+                placeholder="Preferred Languages (comma separated) *"
+                required
                 value={formData.preferredLanguage}
                 onChange={(e) =>
                   setFormData((p) => ({
@@ -242,12 +265,9 @@ export default function AddDeveloperModal({ isOpen, onClose, onAdd }) {
                     preferredLanguage: e.target.value,
                   }))
                 }
-                className="px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white outline-none"
-              >
-                <option value="english" className="bg-black">English</option>
-                <option value="hindi" className="bg-black">Hindi</option>
-                <option value="telugu" className="bg-black">Telugu</option>
-              </select>
+                className="px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-purple-500/60 outline-none"
+              />
+
               <select
                 value={formData.country}
                 onChange={(e) =>
@@ -258,9 +278,15 @@ export default function AddDeveloperModal({ isOpen, onClose, onAdd }) {
                 }
                 className="px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white outline-none"
               >
-                <option value="India" className="bg-black">India</option>
-                <option value="USA" className="bg-black">USA</option>
-                <option value="UK" className="bg-black">UK</option>
+                <option value="India" className="bg-black">
+                  India
+                </option>
+                <option value="USA" className="bg-black">
+                  USA
+                </option>
+                <option value="UK" className="bg-black">
+                  UK
+                </option>
               </select>
             </div>
 
