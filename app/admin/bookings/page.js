@@ -47,6 +47,16 @@ const services = [
     title: "Error Fixing Enquiries",
     route: "/admin/bookings/errorFixing",
   },
+  {
+    id: 9,
+    title: "Project Estimation's Enquiries",
+    route: "/admin/bookings/projectEstimations",
+  },
+  {
+    id: 9,
+    title: "Error Fixing Enquiries",
+    route: "/admin/bookings/errorFixing",
+  },
 ];
 
 export default function ServicesGrid() {
