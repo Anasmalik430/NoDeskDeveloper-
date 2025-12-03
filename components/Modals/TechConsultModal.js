@@ -1,8 +1,9 @@
-// BookingModal.jsx
 import { motion } from "framer-motion";
 import { X, ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { developersType, languages } from "./Data";
+import { API_BASE } from "@/lib/api";
+
 
 const modalVariants = {
   hidden: { opacity: 0, scale: 0.9 },
@@ -18,7 +19,7 @@ const backdropVariants = {
 export default function TechConsultModal({ onClose }) {
   const [formData, setFormData] = useState({
     techType: "App Developers",
-    language: "English",
+    language: "English",           
     fullName: "",
     phone: "",
     email: "",
@@ -27,19 +28,50 @@ export default function TechConsultModal({ onClose }) {
     preferredTime: "",
   });
 
+  const [loading, setLoading] = useState(false); // for smooth UX
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Booking Confirmed:", {
-      ...formData,
-    //   consultant: "Aarav (App)",
-    //   rate: "₹800/hr",
-      timestamp: new Date().toISOString(),
-    });
-    onClose();
+    setLoading(true);
+
+    const payload = {
+      fullName: formData.fullName.trim(),
+      email: formData.email.toLowerCase().trim(),
+      phone: formData.phone.trim(),
+      whatsapp: formData.whatsapp.trim() || formData.phone.trim(), // fallback
+      techType: formData.techType,
+      language: [formData.language],           // schema expects array
+      preferredLang: formData.preferredLang,
+      preferredTime: formData.preferredTime.trim(),
+    };
+
+    try {
+      const res = await fetch(`${API_BASE}/tech-consult`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await res.json();
+
+      if (res.ok) {
+        alert("Consultation booked successfully! We'll contact you soon.");
+        onClose();
+      } else {
+        alert("Error: " + (result.message || "Please try again"));
+      }
+    } catch (err) {
+      console.error("Booking failed:", err);
+      alert("Network error! Please check your connection and try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -54,7 +86,7 @@ export default function TechConsultModal({ onClose }) {
       <motion.div
         variants={modalVariants}
         onClick={(e) => e.stopPropagation()}
-        className="relative bg-linear-to-br from-gray-900 via-black to-gray-900 border border-blue-500/30 rounded-3xl p-8 max-w-lg w-full shadow-2xl"
+        className="relative bg-gradient-to-br from-gray-900 via-black to-gray-900 border border-blue-500/30 rounded-3xl p-8 max-w-lg w-full shadow-2xl"
       >
         {/* Close Button */}
         <button
@@ -75,11 +107,14 @@ export default function TechConsultModal({ onClose }) {
                 name="techType"
                 value={formData.techType}
                 onChange={handleChange}
+                required
                 className="mt-1 w-full px-4 py-3 bg-white/5 border border-blue-500/30 rounded-xl text-white focus:outline-none focus:border-blue-400 transition"
               >
                 {developersType.map((dev) => (
-                    <option key={dev} className="bg-black">{dev}</option>
-                  ))}
+                  <option key={dev} value={dev} className="bg-black">
+                    {dev}
+                  </option>
+                ))}
               </select>
             </div>
             <div>
@@ -88,23 +123,17 @@ export default function TechConsultModal({ onClose }) {
                 name="language"
                 value={formData.language}
                 onChange={handleChange}
+                required
                 className="mt-1 w-full px-4 py-3 bg-white/5 border border-blue-500/30 rounded-xl text-white focus:outline-none focus:border-blue-400 transition"
               >
                 {languages.map((lang) => (
-                    <option key={lang} className="bg-black">{lang}</option>
-                  ))}
+                  <option key={lang} value={lang} className="bg-black">
+                    {lang}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
-
-          {/* Consultant Card */}
-          {/* <div className="bg-linear-to-r from-blue-600/20 to-teal-600/20 border border-blue-500/40 rounded-2xl p-4 flex justify-between items-center">
-            <div>
-              <h4 className="text-white font-semibold">Aarav (App)</h4>
-              <p className="text-gray-400 text-xs">Per-hour communication rate</p>
-            </div>
-            <div className="text-2xl font-bold text-teal-400">₹800/hr</div>
-          </div> */}
 
           {/* Form Fields */}
           <div className="grid grid-cols-2 gap-4">
@@ -112,30 +141,34 @@ export default function TechConsultModal({ onClose }) {
               type="text"
               name="fullName"
               placeholder="Full Name"
-              required
+              value={formData.fullName}
               onChange={handleChange}
+              required
               className="px-4 py-3 bg-white/5 border border-blue-500/30 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-400 transition"
             />
             <input
               type="tel"
               name="phone"
               placeholder="Phone Number"
-              required
+              value={formData.phone}
               onChange={handleChange}
+              required
               className="px-4 py-3 bg-white/5 border border-blue-500/30 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-400 transition"
             />
             <input
               type="email"
               name="email"
               placeholder="Email ID"
-              required
+              value={formData.email}
               onChange={handleChange}
+              required
               className="px-4 py-3 bg-white/5 border border-blue-500/30 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-400 transition"
             />
             <input
               type="tel"
               name="whatsapp"
-              placeholder="WhatsApp Number"
+              placeholder="WhatsApp Number (optional)"
+              value={formData.whatsapp}
               onChange={handleChange}
               className="px-4 py-3 bg-white/5 border border-blue-500/30 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-400 transition"
             />
@@ -143,16 +176,19 @@ export default function TechConsultModal({ onClose }) {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="text-gray-400 text-sm">Preferred Language</label>
+              <label className="text-gray-400 text-sm">Preferred Communication Language</label>
               <select
                 name="preferredLang"
                 value={formData.preferredLang}
                 onChange={handleChange}
+                required
                 className="mt-1 w-full px-4 py-3 bg-white/5 border border-blue-500/30 rounded-xl text-white focus:outline-none focus:border-blue-400 transition"
               >
                 {languages.map((lang) => (
-                    <option key={lang} className="bg-black">{lang}</option>
-                  ))}
+                  <option key={lang} value={lang} className="bg-black">
+                    {lang}
+                  </option>
+                ))}
               </select>
             </div>
             <div>
@@ -160,9 +196,10 @@ export default function TechConsultModal({ onClose }) {
               <input
                 type="text"
                 name="preferredTime"
-                placeholder="e.g. Fri 7–8 PM"
-                required
+                placeholder="e.g. Friday 7–8 PM"
+                value={formData.preferredTime}
                 onChange={handleChange}
+                required
                 className="mt-1 w-full px-4 py-3 bg-white/5 border border-blue-500/30 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-400 transition"
               />
             </div>
@@ -170,13 +207,20 @@ export default function TechConsultModal({ onClose }) {
 
           {/* Submit Button */}
           <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: loading ? 1 : 1.05 }}
+            whileTap={{ scale: loading ? 1 : 0.95 }}
             type="submit"
-            className="w-full mt-6 py-4 bg-linear-to-r from-blue-600 via-sky-500 to-teal-600 rounded-2xl font-bold text-white shadow-lg hover:shadow-purple-500/50 flex items-center justify-center gap-2"
+            disabled={loading}
+            className="w-full mt-6 py-4 bg-gradient-to-r from-blue-600 via-sky-500 to-teal-600 rounded-2xl font-bold text-white shadow-lg hover:shadow-purple-500/50 flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
           >
-            Confirm Booking
-            <ArrowRight className="w-5 h-5" />
+            {loading ? (
+              <>Submitting...</>
+            ) : (
+              <>
+                Confirm Booking
+                <ArrowRight className="w-5 h-5" />
+              </>
+            )}
           </motion.button>
 
           <p className="text-center text-gray-500 text-sm mt-4">
