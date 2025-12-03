@@ -22,12 +22,11 @@ const services = [
     title: "Product Buying Enquiries",
     route: "/admin/bookings/productsbuying-requests",
   },
-  // {
-  //   id: 5,
-  //   icon: Wrench,
-  //   title: "Technical Maintenance",
-  //   route: "/services/maintenance",
-  // },
+  {
+    id: 5,
+    title: "Install OwnCode Enquiries",
+    route: "/admin/bookings/installcode-enquaries",
+  },
   // {
   //   id: 6,
   //   icon: Bug,
