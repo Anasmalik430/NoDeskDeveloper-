@@ -4,9 +4,11 @@ import { ChevronLeft, ChevronRight, Sparkles, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { slides } from "./SlidesData";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function PremiumCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const router = useRouter();
 
   // Auto-play every 3 seconds
   useEffect(() => {
@@ -28,8 +30,20 @@ export default function PremiumCarousel() {
       {/* Background Image with Smooth Fade */}
       <div className="absolute inset-0">
         {slides.map((slide, index) => (
-          <div key={index} className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${ index === currentIndex ? "opacity-100" : "opacity-0" }`} >
-            <Image src={slide.image} alt={slide.title} className="object-cover" fill priority unoptimized />
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+              index === currentIndex ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <Image
+              src={slide.image}
+              alt={slide.title}
+              className="object-cover"
+              fill
+              priority
+              unoptimized
+            />
           </div>
         ))}
         {/* Dark + Gradient Overlay */}
@@ -53,13 +67,17 @@ export default function PremiumCarousel() {
           </p>
 
           {/* Highlight Badge */}
-          <div className="md:inline-block hidden  px-10 py-5 bg-white/10 backdrop-blur-2xl rounded-full border border-white/40 shadow-2xl mb-12 opacity-0 animate-fade-up animation-delay-600">
+          <button
+            onClick={() => router.push("/book-services")}
+            className="md:inline-block hidden  px-10 py-5 bg-white/10 backdrop-blur-2xl rounded-full border border-white/40 shadow-2xl mb-12 opacity-0 animate-fade-up animation-delay-600"
+          >
             <p className="text-sm md:text-lg font-bold text-white flex items-center gap-4">
               <Sparkles className="size-6 text-yellow-400 " />
-              {current.highlight}
+              {/* {current.highlight} */}
+              Our Services
               <Sparkles className="size-6 text-yellow-400 " />
             </p>
-          </div>
+          </button>
 
           {/* CTA Buttons */}
           <div className=" grid grid-cols-2  *:text-lg *:md:text-xl sm:flex *:px-8 *:py-4 *:sm:px-12 *:sm:py-5  sm:flex-row gap-4 sm:gap-6 justify-center items-center opacity-0 animate-fade-up animation-delay-900">
