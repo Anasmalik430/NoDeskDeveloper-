@@ -29,7 +29,7 @@ export default function Navbar() {
   return (
     <>
       <nav className={`z-50 border-b border-blue-300/70 transition-all duration-500 ${scrolled ? "bg-black/80 backdrop-blur-2xl border-b border-blue-500/30 shadow-xl shadow-blue-900/50": "bg-transparent"} ${pathname.startsWith('/admin') ? 'hidden' : ''}`}>
-        <div className="max-w-[1500px] mx-auto px-5 lg:px-8">
+        <div className="max-w-[1400px] mx-auto px-5 lg:px-8">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3 group">

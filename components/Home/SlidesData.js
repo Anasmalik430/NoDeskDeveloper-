@@ -76,7 +76,7 @@ export const getStartedLinks = [
     icon: Wrench,
     title: "Custom Service",
     desc: "Tailored solutions for unique needs",
-    href: "/contact",
+    href: "/book-services",
     linear: "from-pink-600 to-violet-600",
   },
 ];

@@ -69,7 +69,7 @@ export default function PremiumCarousel() {
           {/* Highlight Badge */}
           <button
             onClick={() => router.push("/book-services")}
-            className="md:inline-block hidden  px-10 py-5 bg-white/10 backdrop-blur-2xl rounded-full border border-white/40 shadow-2xl mb-12 opacity-0 animate-fade-up animation-delay-600"
+            className="md:inline-block hidden cursor-pointer  px-10 py-5 bg-white/10 backdrop-blur-2xl rounded-full border border-white/40 shadow-2xl mb-12 opacity-0 animate-fade-up animation-delay-600"
           >
             <p className="text-sm md:text-lg font-bold text-white flex items-center gap-4">
               <Sparkles className="size-6 text-yellow-400 " />
