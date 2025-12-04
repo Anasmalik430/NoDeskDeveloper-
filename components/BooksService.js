@@ -1,16 +1,7 @@
 "use client";
 import { useState } from "react";
-import {
-  User,
-  Mail,
-  Send,
-  Phone,
-  Briefcase,
-  IndianRupee,
-  ChevronDown,
-  MessageSquare,
-} from "lucide-react";
-import { Toaster } from "react-hot-toast";
+import { User, Mail, Send, Phone, Briefcase, IndianRupee, ChevronDown, MessageSquare, } from "lucide-react";
+import toast, { Toaster } from "react-hot-toast";
 import { API_BASE } from "@/lib/api";
 
 const services = [
@@ -43,8 +34,6 @@ export default function BookServicePage() {
     if (errors[name]) setErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
-
-
   const validate = () => {
     const err = {};
     if (!form.name.trim()) err.name = "Name is required";
@@ -56,35 +45,63 @@ export default function BookServicePage() {
     return Object.keys(err).length === 0;
   };
 
- const onSubmit = async (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) return;
 
     setIsSubmitting(true);
-    await new Promise((r) => setTimeout(r, 1600));
 
-    alert("Request received! We’ll contact you within 2 hours.");
+    const payload = {
+      name: form.name.trim(),
+      email: form.email.toLowerCase().trim(),
+      phone: form.phone.trim(),
+      service: form.service,
+      budget: form.budget.trim() || "Not specified",
+      description: form.description.trim(),
+    };
 
-    setForm({
-      name: "",
-      phone: "",
-      email: "",
-      service: "",
-      description: "",
-      budget: "",
-    });
-    setFileName("");
-    setErrors({});
-    setIsSubmitting(false);
+    try {
+      const res = await fetch(`${API_BASE}/contact`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await res.json();
+
+      if (res.ok) {
+        toast.success("Request received! We’ll contact you within 2 hours.");
+        
+        // Reset form
+        setForm({
+          name: "",
+          phone: "",
+          email: "",
+          service: "",
+          description: "",
+          budget: "",
+        });
+        setErrors({});
+      } else {
+        toast.error(result.message || "Something went wrong. Please try again.");
+      }
+    } catch (err) {
+      console.error("Submission error:", err);
+      toast.error("Network error! Please check your connection.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <>
-      <Toaster position="top-center" />
+      <Toaster position="top-center" toastOptions={{ duration: 5000 }} />
 
       <div className="min-h-screen bg-black text-white pt-24 pb-32 px-6">
         <div className="max-w-3xl mx-auto">
-          {/* Clean Header */}
+          {/* Header */}
           <div className="text-center mb-16">
             <h1 className="text-5xl md:text-7xl font-extrabold mb-4">
               <span className="bg-linear-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
@@ -96,81 +113,71 @@ export default function BookServicePage() {
             </p>
           </div>
 
-          {/* Minimal Professional Form Card */}
+          {/* Form Card */}
           <div className="bg-linear-to-br from-blue-900/20 via-transparent to-teal-900/10 backdrop-blur-xl rounded-2xl border border-blue-500/20 shadow-2xl p-8 md:p-12">
             <form onSubmit={onSubmit} className="space-y-8">
               {/* Name, Phone, Email */}
               <div className="grid md:grid-cols-3 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-cyan-300 mb-2">
-                    Full Name
-                  </label>
+                  <label className="block text-sm font-medium text-cyan-300 mb-2">Full Name</label>
                   <div className="relative">
                     <User className="absolute left-4 top-4 w-5 h-5 text-cyan-400" />
                     <input
                       name="name"
                       value={form.name}
                       onChange={handleChange}
+                      required
                       className="w-full pl-12 pr-4 py-4 bg-white/5 border border-blue-500/30 rounded-xl text-white placeholder-cyan-400/50 focus:outline-none focus:border-cyan-400 transition"
                       placeholder="John Doe"
                     />
                   </div>
-                  {errors.name && (
-                    <p className="text-red-400 text-xs mt-1">{errors.name}</p>
-                  )}
+                  {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name}</p>}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-cyan-300 mb-2">
-                    Phone
-                  </label>
+                  <label className="block text-sm font-medium text-cyan-300 mb-2">Phone</label>
                   <div className="relative">
                     <Phone className="absolute left-4 top-4 w-5 h-5 text-cyan-400" />
                     <input
                       name="phone"
                       value={form.phone}
                       onChange={handleChange}
+                      required
                       className="w-full pl-12 pr-4 py-4 bg-white/5 border border-blue-500/30 rounded-xl text-white placeholder-cyan-400/50 focus:outline-none focus:border-cyan-400 transition"
                       placeholder="+91 98765 43210"
                     />
                   </div>
-                  {errors.phone && (
-                    <p className="text-red-400 text-xs mt-1">{errors.phone}</p>
-                  )}
+                  {errors.phone && <p className="text-red-400 text-xs mt-1">{errors.phone}</p>}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-cyan-300 mb-2">
-                    Email
-                  </label>
+                  <label className="block text-sm font-medium text-cyan-300 mb-2">Email</label>
                   <div className="relative">
                     <Mail className="absolute left-4 top-4 w-5 h-5 text-cyan-400" />
                     <input
+                      type="email"
                       name="email"
                       value={form.email}
                       onChange={handleChange}
+                      required
                       className="w-full pl-12 pr-4 py-4 bg-white/5 border border-blue-500/30 rounded-xl text-white placeholder-cyan-400/50 focus:outline-none focus:border-cyan-400 transition"
                       placeholder="john@example.com"
                     />
                   </div>
-                  {errors.email && (
-                    <p className="text-red-400 text-xs mt-1">{errors.email}</p>
-                  )}
+                  {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
                 </div>
               </div>
-              
+
               <div className="grid md:grid-cols-2 gap-6">
-                {/* Service */}
                 <div>
-                  <label className="block text-sm font-medium text-cyan-300 mb-2">
-                    Service Required
-                  </label>
+                  <label className="block text-sm font-medium text-cyan-300 mb-2">Service Required</label>
                   <div className="relative">
                     <Briefcase className="absolute left-4 top-4 w-5 h-5 text-cyan-400" />
                     <select
                       name="service"
                       value={form.service}
                       onChange={handleChange}
+                      required
                       className="w-full pl-12 pr-10 py-4 bg-white/5 border border-blue-500/30 rounded-xl text-white focus:outline-none focus:border-cyan-400 transition appearance-none cursor-pointer"
                     >
                       <option value="">Select a service</option>
@@ -182,17 +189,11 @@ export default function BookServicePage() {
                     </select>
                     <ChevronDown className="absolute right-4 top-4 w-5 h-5 text-cyan-400 pointer-events-none" />
                   </div>
-                  {errors.service && (
-                    <p className="text-red-400 text-xs mt-1">
-                      {errors.service}
-                    </p>
-                  )}
+                  {errors.service && <p className="text-red-400 text-xs mt-1">{errors.service}</p>}
                 </div>
-                {/* Budget */}
+
                 <div>
-                  <label className="block text-sm font-medium text-cyan-300 mb-2">
-                    Budget Range
-                  </label>
+                  <label className="block text-sm font-medium text-cyan-300 mb-2">Budget Range</label>
                   <div className="relative">
                     <IndianRupee className="absolute left-4 top-4 w-5 h-5 text-cyan-400" />
                     <input
@@ -205,11 +206,9 @@ export default function BookServicePage() {
                   </div>
                 </div>
               </div>
-              {/* Description */}
+
               <div>
-                <label className="block text-sm font-medium text-cyan-300 mb-2">
-                  Project Description
-                </label>
+                <label className="block text-sm font-medium text-cyan-300 mb-2">Project Description</label>
                 <div className="relative">
                   <MessageSquare className="absolute left-4 top-4 w-5 h-5 text-cyan-400" />
                   <textarea
@@ -217,23 +216,18 @@ export default function BookServicePage() {
                     value={form.description}
                     onChange={handleChange}
                     rows={5}
+                    required
                     className="w-full pl-12 pr-4 py-4 bg-white/5 border border-blue-500/30 rounded-xl text-white placeholder-cyan-400/50 focus:outline-none focus:border-cyan-400 transition resize-none"
                     placeholder="Brief us about your project requirements..."
                   />
                 </div>
-                {errors.description && (
-                  <p className="text-red-400 text-xs mt-1">
-                    {errors.description}
-                  </p>
-                )}
+                {errors.description && <p className="text-red-400 text-xs mt-1">{errors.description}</p>}
               </div>
 
-              {/* Clean Submit Button */}
               <div className="pt-6">
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  onClick={() => console.log(form)}
                   className="w-full py-5 cursor-pointer bg-linear-to-r from-blue-600 to-cyan-600 rounded-xl font-bold text-xl text-white hover:from-blue-500 hover:to-cyan-500 transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-3"
                 >
                   {isSubmitting ? "Sending..." : "Submit Request"}
@@ -243,10 +237,8 @@ export default function BookServicePage() {
             </form>
           </div>
 
-          {/* Trust Footer */}
           <div className="text-center mt-10 text-cyan-300/70 text-sm">
-            Your information is 100% secure • We never spam • Average response
-            time: 1.5 hours
+            Your information is 100% secure • We never spam • Average response time: 1.5 hours
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Mail, Phone, DollarSign, FileText, Clock, Loader2 } from "lucide-react";
+import { Mail, Phone, DollarSign, FileText, Clock, Loader2, Coins, CoinsIcon } from "lucide-react";
 
 export const API_BASE = process.env.NEXT_PUBLIC_BASE_URL || "https://nodeskdevbackend.onrender.com/api";
 
@@ -78,7 +78,7 @@ export default function AdminContactEnquiries() {
                       <Phone className="w-4 h-4 text-purple-400" /> {item.phone}
                     </p>
                     <p className="flex items-center gap-2">
-                      <DollarSign className="w-4 h-4 text-purple-400" /> {item.budget}
+                      <CoinsIcon className="w-4 h-4 text-purple-400" /> {item.budget}
                     </p>
                   </div>
 
