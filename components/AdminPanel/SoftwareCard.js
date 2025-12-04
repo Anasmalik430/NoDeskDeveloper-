@@ -7,9 +7,9 @@ export default function SoftwareCard({ software }) {
   console.log("Software data in SoftwareCard:", software);
 
   return (
-    <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:border-white/30 transition-all hover:scale-[1.02] shadow-xl">
+    <div className="bg-white/5 border border-white/20 rounded-2xl overflow-hidden hover:border-white/30 transition-all hover:scale-[1.02] shadow-xl">
       {/* Screenshot */}
-      <div className="relative h-48 bg-gray-900">
+      <div className="relative h-60 bg-gray-900">
         <Image
           src={software.screenshots[0] || "/placeholder.jpg"}
           alt={software.name}
@@ -22,35 +22,37 @@ export default function SoftwareCard({ software }) {
             {software.category}
           </span>
         </div>
-         {/* Platforms */}
-        <div className="absolute bottom-4 right-4 flex gap-3 *:text-xs *:bg-slate-600 *:px-3 *:py-1 *:rounded-full lowercase">
-          <span className="">
-          {software.platforms.includes("Web") && "Web "}
-          </span>
-                    <span className="">
-          {software.platforms.includes("Android") && "Android "}
-          </span>
-                    <span className="">
-          {software.platforms.includes("iOS") && "iOS"}
-          </span>
+        {/* Platforms */}
+        <div className="absolute bottom-4 right-4 flex gap-3 *:text-[11px] *:tracking-wider *:bg-slate-600 *:px-3 *:py-1 *:rounded-full lowercase">
+          {software.platforms.includes("Web") && <span>Web</span>}
+          {software.platforms.includes("Android") && <span>Android</span>}
+          {software.platforms.includes("iOS") && <span>iOS</span>}
+          {software.platforms.includes("Desktop") && <span>Desktop</span>}
         </div>
       </div>
 
       {/* Content */}
-      <div className="p-6 space-y-4">
+      <div className="p-6 space-y-3">
         <h3 className="text-2xl font-bold text-white">{software.name}</h3>
 
-        <p className="text-gray-400 line-clamp-2">{software.description}</p>
+        <p className="text-gray-400 line-clamp-2 text-sm">
+          {software.description}
+        </p>
 
         {/* Tech Stack */}
         <div className="flex flex-wrap gap-2 items-center">
           {software.tech.slice(0, 3).map((t, i) => (
-            <span key={i} className="text-xs px-3 py-1 bg-blue-600/20 text-blue-400 rounded-full">
+            <span
+              key={i}
+              className="text-xs px-3 py-1 bg-blue-600/20 text-blue-400 rounded-full"
+            >
               {t}
             </span>
           ))}
           {software.tech.length > 4 && (
-            <span className="text-xs text-gray-500">+{software.tech.length - 3} more</span>
+            <span className="text-xs px-3 py-1 bg-blue-600/20 text-blue-400 rounded-full">
+              +{software.tech.length - 3} more
+            </span>
           )}
         </div>
 
@@ -66,18 +68,18 @@ export default function SoftwareCard({ software }) {
 
         <Link href={software.demoLink} target="_blank">Demo Link</Link> */}
 
-       
-
         {/* Price */}
         <div className="flex justify-between items-center pt-4 border-t border-white/10">
           <div>
-            <p className="text-gray-400 text-sm">Starting from</p>
-            <p className="text-3xl font-black text-green-400">₹{software.price.toLocaleString()}</p>
+            <p className="text-gray-400 text-xs">Starting from</p>
+            <p className="text-2xl font-black text-green-400">
+              ₹{software.price.toLocaleString()}
+            </p>
           </div>
 
           <Link
             href={`/admin/softwares/${software._id}`}
-            className="px-6 py-3 bg-linear-to-r from-green-600 to-blue-600 rounded-xl text-white font-semibold hover:scale-105 transition"
+            className="px-5 text-sm py-3 bg-linear-to-r from-green-600 to-blue-600 rounded-xl text-white font-semibold hover:scale-105 transition"
           >
             View Details
           </Link>

@@ -62,7 +62,7 @@ export default function AllSoftwaresPage() {
   return (
     <>
       {/* Grid */}
-      <div className="p-6">
+      <div className="p-8">
         {softwares.length === 0 ? (
           <div className="text-center py-20">
             <p className="text-gray-500 text-xl">No softwares added yet.</p>
