@@ -29,7 +29,7 @@ const InstallOwnCodeModal = ({
             <div className="grid md:grid-cols-2 gap-5">
               <div>
                 <label className="block text-sm text-slate-300 mb-1">
-                  Product Information (Codecanyon link/name)
+                  Product Information (Codecanyon link)
                 </label>
                 <input
                   type="text"
@@ -37,7 +37,7 @@ const InstallOwnCodeModal = ({
                   value={installForm.productLink}
                   onChange={handleInstallChange}
                   required
-                  placeholder="Link or item name"
+                  placeholder="Link"
                   className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg focus:border-purple-500 focus:outline-none transition"
                 />
               </div>
