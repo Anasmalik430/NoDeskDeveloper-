@@ -52,7 +52,11 @@ const services = [
     id: 9,
      title: "Tech Maintenance Enquiries",
     route: "/admin/bookings/tech-maintenance",
-    
+  },
+  {
+    id: 10,
+     title: "Contact Page Enquiries",
+    route: "/admin/bookings/ContactPageEnqs",
   },
 ];
 
