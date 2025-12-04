@@ -71,7 +71,7 @@ export default function AdminDevBookings() {
         {bookings.map((booking) => (
           <div
             key={booking._id}
-            className="relative bg-gradient-to-br from-slate-900/90 to-slate-800/90 backdrop-blur-xl border border-white/10 rounded-3xl p-6 overflow-hidden hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-300"
+            className="relative bg-linear-to-br from-slate-900/90 to-slate-800/90 backdrop-blur-xl border border-white/10 rounded-3xl p-6 overflow-hidden hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-300"
           >
             {/* Glow Effects */}
             <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl" />
@@ -135,7 +135,7 @@ export default function AdminDevBookings() {
                 onClick={() =>
                   router.push(`/admin/bookings/dev-bookings/${booking?._id}`)
                 }
-                className="w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-medium rounded-xl transition-all shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40"
+                className="w-full py-3 bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-medium rounded-xl transition-all shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40"
               >
                 View Details
               </button>

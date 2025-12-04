@@ -49,17 +49,7 @@ export default function AdminInstallOwnCode() {
   return (
     <div className="min-h-screen bg-black/90 p-8">
       <div className="max-w-7xl mx-auto">
-        <div className="flex items-center justify-between mb-8">
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 via-sky-400 to-teal-400 bg-clip-text text-transparent">
-            Install Own Code Enquiries
-          </h1>
-          <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-sky-500 to-teal-500 rounded-2xl blur-xl opacity-70" />
-            <div className="relative bg-gradient-to-br from-blue-600 via-sky-500 to-teal-400 p-3 rounded-2xl shadow-2xl ring-2 ring-blue-400/50">
-              <FolderCode className="w-7 h-7 text-white" strokeWidth={3} />
-            </div>
-          </div>
-        </div>
+       
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {requests.length === 0 ? (
@@ -70,7 +60,7 @@ export default function AdminInstallOwnCode() {
                 key={req._id}
                 className="group relative bg-black/80 border border-blue-500/30 rounded-2xl p-6 shadow-xl shadow-blue-900/50 hover:shadow-blue-900/70 transition-all duration-300 hover:scale-105"
               >
-                <span className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-sky-600/30 to-blue-600/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-60 transition-opacity" />
+                <span className="absolute inset-0 bg-linear-to-r from-blue-600/20 via-sky-600/30 to-blue-600/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-60 transition-opacity" />
                 <div className="relative">
                   <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
                     <FolderCode className="w-5 h-5 text-blue-400" />
@@ -99,7 +89,7 @@ export default function AdminInstallOwnCode() {
                   </p>
                   <button
                     onClick={() => router.push(`/admin/bookings/installcode-enquaries/${req._id}`)}
-                    className="w-full py-3 bg-gradient-to-r from-blue-600 via-sky-500 to-teal-400 rounded-2xl font-bold text-white shadow-2xl shadow-sky-500/40 hover:shadow-sky-500/70 transition-all duration-400 hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
+                    className="w-full py-3 bg-linear-to-r from-blue-600 via-sky-500 to-teal-400 rounded-2xl font-bold text-white shadow-2xl shadow-sky-500/40 hover:shadow-sky-500/70 transition-all duration-400 hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
                   >
                     <Eye className="w-5 h-5" />
                     View Details
