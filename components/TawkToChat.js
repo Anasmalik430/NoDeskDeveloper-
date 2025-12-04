@@ -1,11 +1,18 @@
-// components/TawkToChat.jsx
 'use client';
 
 import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 
 export default function TawkToChat() {
+  const pathname = usePathname();
+
   useEffect(() => {
-    // Tawk.to script ko load karne ka function
+    // Agar admin path hai toh return kar do, script load mat karo
+    if (pathname.startsWith('/admin')) {
+      return;
+    }
+
+    // This function loads Tawk.to script
     const loadTawkTo = () => {
       // Check if script already exists
       if (document.getElementById('tawk-to-script')) {
@@ -34,7 +41,6 @@ export default function TawkToChat() {
 
     // Cleanup function
     return () => {
-      // Optional: Remove script on component unmount
       const tawkScript = document.getElementById('tawk-to-script');
       if (tawkScript) {
         tawkScript.remove();
@@ -45,7 +51,7 @@ export default function TawkToChat() {
         tawkWidget.remove();
       }
     };
-  }, []);
+  }, [pathname]);
 
-  return null; // Ye component kuch render nahi karta
+  return null;
 }

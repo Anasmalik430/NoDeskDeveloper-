@@ -1,19 +1,14 @@
 "use client";
-
-import {
-  LayoutDashboard,
-  Users,
-  Package,
-  CalendarDays,
-  LogOut,
-} from "lucide-react";
+import { LayoutDashboard, Users, Package, CalendarDays, LogOut, Menu, X, } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
 import { API_BASE } from "@/lib/api";
 
 export default function AdminLayout({ children }) {
   const pathname = usePathname();
   const router = useRouter();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const menuItems = [
     { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -24,12 +19,12 @@ export default function AdminLayout({ children }) {
 
   const handleLogout = async () => {
     try {
-     const res =  await fetch(`${API_BASE}/logout`, {
+      const res = await fetch(`${API_BASE}/logout`, {
         method: "POST",
         credentials: "include",
       });
-      if(res.ok){
-        alert("Logged Out Successfully")
+      if (res.ok) {
+        alert("Logged Out Successfully");
         router.push("/");
       }
     } catch (error) {
@@ -47,12 +42,12 @@ export default function AdminLayout({ children }) {
       </div>
 
       <div className="relative flex">
-        {/* Sidebar */}
-        <aside className="w-72 fixed inset-y-0 left-0 z-50">
+        {/* Desktop Sidebar */}
+        <aside className="w-72 fixed inset-y-0 left-0 z-50 hidden lg:block">
           <div className="h-full bg-linear-to-b from-white/5 to-white/2 backdrop-blur-2xl border-r border-white/10 flex flex-col">
             {/* Logo */}
-            <div className="h-20 flex items-center justify-center border-b border-white/10 px-8">
-              <h1 className="text-2xl font-black bg-linear-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            <div className="h-20 flex items-center justify-center border-b border-white/10 px-8 py-13">
+              <h1 className="text-3xl font-black bg-linear-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                 Admin Panel
               </h1>
             </div>
@@ -115,8 +110,127 @@ export default function AdminLayout({ children }) {
           </div>
         </aside>
 
+        {/* Mobile Header */}
+        <div className="lg:hidden fixed top-0 left-0 right-0 z-50 h-16 bg-black/80 backdrop-blur-2xl border-b border-white/10 flex items-center justify-between px-4">
+          <h1 className="text-xl font-black bg-linear-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            Admin Panel
+          </h1>
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="p-2 rounded-xl bg-white/5 border border-white/10"
+          >
+            {mobileMenuOpen ? (
+              <X className="w-6 h-6 text-white" />
+            ) : (
+              <Menu className="w-6 h-6 text-white" />
+            )}
+          </button>
+        </div>
+
+        {/* Mobile Overlay Menu */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden fixed inset-0 z-40 bg-black/95 backdrop-blur-xl pt-16">
+            <div className="p-6 space-y-2">
+              {menuItems.map((item) => {
+                const Icon = item.icon;
+                const isActive = pathname === item.href;
+
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`
+                      flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-300 group relative
+                      ${
+                        isActive
+                          ? "bg-linear-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/40 shadow-lg shadow-blue-500/20"
+                          : "hover:bg-white/5 border border-transparent"
+                      }
+                    `}
+                  >
+                    <Icon
+                      className={`w-5 h-5 transition-colors ${
+                        isActive
+                          ? "text-blue-400"
+                          : "text-gray-400 group-hover:text-white"
+                      }`}
+                    />
+                    <span
+                      className={`font-semibold ${
+                        isActive
+                          ? "text-white"
+                          : "text-gray-300 group-hover:text-white"
+                      }`}
+                    >
+                      {item.label}
+                    </span>
+                  </Link>
+                );
+              })}
+              <button
+                onClick={handleLogout}
+                className="w-full flex items-center gap-4 px-5 py-4 rounded-2xl bg-white/5 hover:bg-red-500/20 border border-white/10 hover:border-red-500/40 transition-all group"
+              >
+                <LogOut className="w-5 h-5 text-gray-400 group-hover:text-red-400" />
+                <span className="font-medium text-gray-300 group-hover:text-white">
+                  Logout
+                </span>
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Mobile Bottom Navigation */}
+        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-2xl border-t border-white/10">
+          <div className="flex items-center justify-around px-2 py-3">
+            {menuItems.map((item) => {
+              const Icon = item.icon;
+              const isActive = pathname === item.href;
+
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`
+                    flex flex-col items-center gap-1 px-4 py-2 rounded-xl transition-all duration-300 relative
+                    ${
+                      isActive
+                        ? "bg-linear-to-r from-blue-500/20 to-purple-500/20"
+                        : ""
+                    }
+                  `}
+                >
+                  <Icon
+                    className={`w-6 h-6 transition-colors ${
+                      isActive ? "text-blue-400" : "text-gray-400"
+                    }`}
+                  />
+                  <span
+                    className={`text-xs font-medium ${
+                      isActive ? "text-white" : "text-gray-400"
+                    }`}
+                  >
+                    {item.label.split(" ")[0]}
+                  </span>
+                  {isActive && (
+                    <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-8 h-1 bg-blue-400 rounded-full" />
+                  )}
+                </Link>
+              );
+            })}
+            <button
+              onClick={handleLogout}
+              className="flex flex-col items-center gap-1 px-4 py-2 rounded-xl"
+            >
+              <LogOut className="w-6 h-6 text-gray-400" />
+              <span className="text-xs font-medium text-gray-400">Logout</span>
+            </button>
+          </div>
+        </div>
+
         {/* Main Content */}
-        <main className="flex-1 ml-72 min-h-screen">
+        <main className="flex-1 lg:ml-72 min-h-screen pt-16 lg:pt-0 pb-20 lg:pb-0">
           <div className="">{children}</div>
         </main>
       </div>
