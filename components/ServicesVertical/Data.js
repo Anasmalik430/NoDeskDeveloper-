@@ -60,7 +60,7 @@ export const serviceSlide = [
   },
   {
     icon: ShoppingBag,
-    title: "E-Commerce Solutions",
+    title: "E-Commerce",
     tagline: "Turn browsers into buyers with seamless shopping",
     description:
       "End-to-end e-commerce platforms with payment integration and inventory management.",

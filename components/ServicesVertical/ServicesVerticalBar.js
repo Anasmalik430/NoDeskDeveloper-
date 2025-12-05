@@ -70,18 +70,18 @@ export default function ServicesVerticalBar() {
                 {/* Icon Badge */}
                 <div className="flex  items-start gap-4">
                   <div
-                    className={`p-4 bg-linear-to-br ${service.iconBg} rounded-2xl shadow-2xl`}
+                    className={`hidden md:flex p-4 bg-linear-to-br ${service.iconBg} rounded-2xl shadow-2xl`}
                   >
-                    <Icon className="w-8 h-8 text-white" strokeWidth={2.5} />
+                    <Icon className="size-5 md:size-8 text-white" strokeWidth={2.5} />
                   </div>
                   <div className="">
                     {/* Title */}
-                    <h3 className="text-3xl font-black text-white -mb-3">
+                    <h3 className=" text-xl md:text-3xl font-black text-white -mb-3">
                       {service.title}
                     </h3>
                     {/* Tagline */}
                     <p style={{fontSize: "14px", marginTop: "1rem"}}
-                      className={`text-sm font-semibold bg-linear-to-r ${service.iconBg} bg-clip-text text-transparent italic text-nowrap`}
+                      className={`text-xs text-wrap md:text-sm font-semibold bg-linear-to-r ${service.iconBg} bg-clip-text text-transparent italic text-nowrap`}
                     >
                       {service.tagline}
                     </p>
@@ -89,19 +89,19 @@ export default function ServicesVerticalBar() {
                 </div>
 
                 {/* Description */}
-                <p style={{fontSize: "14px", marginLeft: "8px"}} className="text-gray-300 mb-6  leading-relaxed">
+                <p style={{fontSize: "12px", marginLeft: "8px"}} className="text-gray-300 mb-6  leading-relaxed">
                   {service.description}
                 </p>
 
                 {/* Features */}
-                <div className="flex flex-wrap gap-2 mt-4">
+                <div className="flex flex-wrap gap-2 mt-4 ">
                   {service.features.map((feature, idx) => (
                     <div key={idx} className="group relative">
                       <div
                         className={`absolute -inset-0.5 bg-linear-to-r ${service.iconBg} rounded-lg opacity-0 group-hover:opacity-50 blur transition-opacity duration-300`}
                       />
-                      <div className="relative flex justify-center items-center px-4 py-2 font-semibold rounded-full bg-white/5 border border-white/30 hover:bg-white/10 transition-all duration-300">
-                        <span className="text-[11px] font-medium text-gray-200">
+                      <div className="relative flex justify-center items-center px-2.5 md:px-4 py-2 font-semibold rounded-full bg-white/5 border border-white/30 hover:bg-white/10 transition-all duration-300">
+                        <span className="text-[8px] md:text-[11px] font-medium text-gray-200">
                           {feature}
                         </span>
                       </div>
