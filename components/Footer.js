@@ -8,9 +8,9 @@ import { FaWhatsapp } from "react-icons/fa";
 const footerLinks = {
   Company: [
     { name: "About Us", href: "/about" },
-    { name: "Careers", href: "/quickLinks/careers" },
-    { name: "Our Team", href: "/quickLinks/team" },
-    { name: "Blog", href: "/blog" },
+    { name: "Careers", href: "/careers" },
+    { name: "Our Team", href: "/developers" },
+    // { name: "Blog", href: "/blog" },
     { name: "How It Works", href: "/quickLinks/how-it-works" },
   ],
   Services: [
@@ -19,17 +19,17 @@ const footerLinks = {
     { name: "UI/UX Design", href: "/book-services" },
     { name: "Consulting", href: "/book-services" },
   ],
-  Resources: [
-    { name: "Documentation", href: "/resource/docs" },
-    { name: "Tutorials", href: "/resource/tutorials" },
-    { name: "Support", href: "/resource/support" },
-    { name: "FAQ", href: "/resource/faq" },
+  quickLinkss: [
+    { name: "Documentation", href: "/quickLinks/docs" },
+    { name: "Tutorials", href: "/quickLinks/tutorials" },
+    { name: "Support", href: "/contact" },
+    { name: "FAQ", href: "/quickLinks/faq" },
   ],
   Legal: [
-    { name: "Privacy Policy", href: "/legal/privacy" },
-    { name: "Terms of Service", href: "/legal/terms" },
-    { name: "Cookie Policy", href: "/legal/cookies" },
-    { name: "Licenses", href: "/legal/licenses" },
+    { name: "Privacy Policy", href: "/quickLinks/privacy-policy" },
+    { name: "Terms of Service", href: "/quickLinks/terms" },
+    { name: "Cookie Policy", href: "/quickLinks/cookies" },
+    { name: "Licenses", href: "/quickLinks/licenses" },
   ],
 };
 
