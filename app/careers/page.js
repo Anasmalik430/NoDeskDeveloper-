@@ -233,7 +233,7 @@ export default function CareersPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-cyan-300 mb-2">Upload Resume (PDF Only)</label>
+                <label className="block text-sm font-medium text-cyan-300 mb-2">Upload Resume (PDF Only & Max 10MB)</label>
                 
                 {!form.resume ? (
                   <div className="w-full">
