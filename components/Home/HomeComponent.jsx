@@ -47,7 +47,7 @@ export default function HomePage() {
         </section>
 
         {/* Why Choose Us - Premium Grid */}
-        <section className="py-16 pb-8 px-6 bg-linear-to-b from-transparent via-blue-900/10 to-transparent">
+        <section className="py-16 pb-0 px-6 bg-linear-to-b from-transparent via-blue-900/10 to-transparent">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-5xl md:text-6xl sm:pb-2 font-black text-center bg-linear-to-r from-blue-400 to-sky-400 bg-clip-text text-transparent mb-16">
               Why Choose{" "}
@@ -60,7 +60,7 @@ export default function HomePage() {
               {whyChooseUs.map((item, i) => (
                 <div
                   key={i}
-                  className="group w-fit cursor-pointer relative p-3 sm:p-6 bg-linear-to-br from-blue-900/30 via-sky-900/20 to-teal-900/30 backdrop-blur-3xl rounded-2xl sm:rounded-3xl border border-blue-500/40 hover:border-blue-400 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:skew-1 hover:shadow-blue-600/60"
+                  className="group w-fit cursor-pointer relative p-4 sm:p-6 bg-linear-to-br from-blue-900/30 via-sky-900/20 to-teal-900/30 backdrop-blur-3xl rounded-2xl sm:rounded-3xl border border-blue-500/40 hover:border-blue-400 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:skew-1 hover:shadow-blue-600/60"
                 >
                   <div className="absolute inset-0 bg-linear-to-br from-blue-600/20 to-sky-600/20 opacity-0 group-hover:opacity-100 blur-3xl transition-opacity duration-700"></div>
                   <div className="flex max-h-14 truncate sm:max-h-18 justify-between items-start gap-4 h-fit">
@@ -68,9 +68,9 @@ export default function HomePage() {
                       <item.icon className="size-9 text-white" />
                     </div>
                     <div className="sm:hidden">
-                      <item.icon className="size-10 text-white" />
+                      <item.icon className="size-8 text-white" />
                     </div>
-                    <h3 className="text-sm sm:text-xl flex-2 font-black text-white text-wrap">
+                    <h3 className="text-xs sm:text-xl flex-2 font-black text-white text-wrap">
                       {item.title}
                     </h3>
                   </div>
@@ -211,14 +211,14 @@ export default function HomePage() {
               ))}
             </div>
           </div>
-          <section className="py-24 pb-0 px-6 text-center">
+          <section className="py-24 pb-12 md:pb-0 px-6 text-center">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-4xl md:text-6xl font-black bg-linear-to-r from-blue-400 via-sky-400 to-teal-400 bg-clip-text text-transparent mb-8">
+              <h2 className="text-[26px] md:text-6xl font-black bg-linear-to-r from-blue-400 via-sky-400 to-teal-400 bg-clip-text text-transparent mb-8">
                 Ready to Build Something Amazing?
               </h2>
-              <Link href="/book-services" className="inline-flex items-center gap-4 px-12 py-7 bg-linear-to-r text-nowrap from-blue-600 via-sky-600 to-teal-600 rounded-2xl font-black text-lg shadow-2xl shadow-sky-600/70 hover:shadow-sky-500/90 transition-all duration-500 hover:scale-110 active:scale-95" >
+              <Link href="/book-services" className="inline-flex items-center gap-4 px-6 py-4 sm:px-12 sm:py-7 bg-linear-to-r text-nowrap from-blue-600 via-sky-600 to-teal-600 rounded-2xl font-black text-sm sm:text-lg shadow-2xl shadow-sky-600/70 hover:shadow-sky-500/90 transition-all duration-500 hover:scale-110 active:scale-95" >
                 Start Now! It’s Free
-                <Sparkles className="size-6 md:size-7 group-hover:animate-pulse" />
+                <Sparkles className="size-6 md:size-7 hidden md:block group-hover:animate-pulse" />
               </Link>
             </div>
           </section>

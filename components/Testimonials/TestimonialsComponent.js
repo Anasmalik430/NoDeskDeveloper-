@@ -80,7 +80,7 @@ export default function Testimonials() {
         <div style={{ animationDelay: "1.5s" }} className="absolute bottom-20 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"/>
       </div>
 
-      <div className="relative max-w-[1400px] mx-auto">
+      <div className="relative min-w-100 max-w-[1400px] mx-auto">
         {/* Main Container with Gradient Border */}
         <div className="relative p-1 rounded-[40px]">
           <div className=" rounded-[38px] p-8 md:p-12">
@@ -95,8 +95,8 @@ export default function Testimonials() {
             </div>
 
             {/* Scrollable Cards Container */}
-            <div className="relative -mx-8 md:-mx-12 px-8 md:px-12 mb-8">
-              <div ref={scrollRef} className="flex gap-6 overflow-x-auto scrollbar-hide pb-4" style={{ scrollSnapType: "x mandatory", WebkitOverflowScrolling: "touch", }}>
+            <div className="relative -mx-8 md:-mx-12 px-8 md:px-12 mb-8 ">
+              <div ref={scrollRef} className="flex gap-6 overflow-x-auto scrollbar-hide pb-4 " style={{ scrollSnapType: "x mandatory", WebkitOverflowScrolling: "touch", }}>
                 {testimonials.map((testimonial, index) => {
                   const isActive = index === activeIndex;
                   const distance = Math.abs(index - activeIndex);

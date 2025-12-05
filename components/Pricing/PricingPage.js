@@ -32,7 +32,7 @@ export default function PricingPage() {
       <div className="relative max-w-[1350px] mx-auto">
         {/* Header Section */}
         <div className="text-center mb-16 space-y-6">
-          <h1 className="text-5xl md:text-6xl font-black bg-linear-to-r from-blue-400 via-sky-400 to-teal-400 bg-clip-text text-transparent leading-tight">
+          <h1 className="text-4xl md:text-6xl font-black bg-linear-to-r from-blue-400 via-sky-400 to-teal-400 bg-clip-text text-transparent leading-tight">
             Choose Your Perfect Plan
           </h1>
 
