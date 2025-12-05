@@ -57,7 +57,7 @@ export default function HowItWorksTimeline() {
                 </div>
 
                 {/* Title */}
-                <h3 className="text-2xl font-bold text-white mb-3">
+                <h3 className="text-xl sm:text-2xl font-bold text-white mb-3">
                   {item.title}
                 </h3>
 
@@ -84,7 +84,7 @@ export default function HowItWorksTimeline() {
                           className="w-4 h-4 text-blue-400"
                           strokeWidth={2.5}
                         />
-                        <span className="text-sm font-medium text-gray-300">
+                        <span className="text-xs sm:text-sm font-medium text-gray-300">
                           {tag.label}
                         </span>
                       </div>
