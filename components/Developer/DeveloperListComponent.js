@@ -94,14 +94,14 @@ export default function DevelopersPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white pt-24 pb-16 px-6">
+    <div className="min-h-screen bg-black text-white pt-16 md:pt-24 pb-16 px-6">
       <div className="max-w-7xl mx-auto">
         {/* Hero */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-8 md:mb-12">
           <h1 className="text-5xl md:text-6xl font-black bg-linear-to-r from-blue-600 via-sky-500 to-teal-400 bg-clip-text text-transparent mb-4">
             Hire Verified Developers
           </h1>
-          <p className="text-xl text-blue-300/80 font-medium">
+          <p className="text-sm md:text-xl text-blue-300/80 font-medium">
             Handpicked talent, ready to build your vision
           </p>
         </div>
