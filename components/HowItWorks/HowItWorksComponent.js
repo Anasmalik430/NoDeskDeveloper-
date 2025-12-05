@@ -3,7 +3,7 @@ import { Sparkles } from "lucide-react";
 
 export default function HowItWorksComponent() {
   return (
-    <div className="min-h-screen bg-linear-to-b from-black via-gray-950 to-black py-20 px-5 lg:px-8">
+    <div className="min-h-screen bg-linear-to-b from-black via-gray-950 to-black py-12 sm:py-20 px-5 lg:px-8">
       {/* Animated Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
@@ -67,20 +67,20 @@ export default function HowItWorksComponent() {
 
             {/* Card */}
             <div className="relative h-full bg-linear-to-b from-white/10 to-white/5 backdrop-blur-xl border border-blue-500/30 rounded-3xl p-8">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-3 bg-linear-to-r from-blue-500 via-sky-600 to-teal-500 rounded-xl">
-                  <Sparkles className="w-6 h-6 text-white" strokeWidth={2.5} />
+              <div className="flex items-center gap-3 mb-4 sm:mb-6">
+                <div className="p-2.5 sm:p-3 bg-linear-to-r from-blue-500 via-sky-600 to-teal-500 rounded-xl">
+                  <Sparkles className="size-4 sm:size-6 text-white" strokeWidth={2.5} />
                 </div>
-                <h3 className="text-xl font-bold text-white">
+                <h3 className="text-lg sm:text-xl font-bold text-white">
                   Guided Workflow
                 </h3>
               </div>
 
-              <h2 className="text-3xl font-black text-white mb-4">
+              <h2 className="text-xl sm:text-3xl font-black text-white mb-4">
                 From Browse → Book → Build → Support
               </h2>
 
-              <p className="text-gray-400 mb-8">
+              <p className="text-gray-400 text-xs sm:text-sm mb-6 sm:mb-8">
                 Clear steps, milestone billing, and post-launch care. Everything
                 you need in one place.
               </p>
@@ -92,13 +92,13 @@ export default function HowItWorksComponent() {
                   return (
                     <div
                       key={idx}
-                      className="flex items-center gap-2 px-4 py-2.5 bg-white/5 border border-blue-500/30 rounded-xl hover:bg-white/10 transition-colors duration-300"
+                      className="flex items-center gap-1 sm:gap-2 px-3 sm:px-4 py-2.5 bg-white/5 border border-blue-500/30 rounded-xl hover:bg-white/10 transition-colors duration-300"
                     >
                       <Icon
-                        className="w-5 h-5 text-blue-400"
+                        className="size-4 sm:size-5 text-blue-400"
                         strokeWidth={2.5}
                       />
-                      <span className="text-sm font-medium text-gray-300">
+                      <span className="text-[10px] sm:text-sm font-medium text-gray-300">
                         {step.label}
                       </span>
                     </div>
@@ -124,9 +124,9 @@ export default function HowItWorksComponent() {
                     <div
                       className={`inline-flex p-3 bg-linear-to-r ${feature.color} rounded-xl mb-4 shadow-lg`}
                     >
-                      <Icon className="w-6 h-6 text-white" strokeWidth={2.5} />
+                      <Icon className="size-4 sm:size-6 text-white" strokeWidth={2.5} />
                     </div>
-                    <h4 className="text-base font-bold text-white leading-tight">
+                    <h4 className="text-[13px] sm:text-base font-bold text-white leading-tight">
                       {feature.title}
                     </h4>
                   </div>
