@@ -3,6 +3,7 @@ import { useState } from "react";
 import { User, Phone, Globe, MapPin, Building2, Briefcase, Link2, Upload, Send, FileText, X } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import { UploadButton } from "@uploadthing/react";
+import { API_BASE } from "@/lib/api";
 
 const roles = [
   "Full Stack Developer",
@@ -57,28 +58,38 @@ export default function CareersPage() {
     return Object.keys(err).length === 0;
   };
 
-  const handleSubmit = () => {
-    if (!validate()) return;
+  const handleSubmit = async () => {
+  if (!validate()) return;
 
-    setIsSubmitting(true);
+  setIsSubmitting(true);
 
-    const payload = {
-      name: form.name.trim(),
-      phone: form.phone.trim(),
-      country: form.country.trim(),
-      state: form.state.trim(),
-      city: form.city.trim(),
-      role: form.role,
-      resume: form.resume,
-      resumeName: form.resumeName,
-      profileLink: form.profileLink.trim() || "Not provided",
-    };
+  const payload = {
+    name: form.name.trim(),
+    phone: form.phone.trim(),
+    country: form.country.trim() || "India",
+    state: form.state.trim(),
+    city: form.city.trim(),
+    role: form.role,
+    resume: form.resume,
+    resumeName: form.resumeName,
+    profileLink: form.profileLink.trim() || "Not provided",
+  };
 
-    try {
-      console.log("Career Application Submitted:", payload);
+  try {
+    const res = await fetch(`${API_BASE}/career`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    const result = await res.json();
+
+    if (res.ok) {
+      toast.success("Application submitted successfully! We'll review it soon.");
       
-      toast.success("Application submitted successfully!");
-      
+      // Reset form
       setForm({
         name: "",
         phone: "",
@@ -91,13 +102,16 @@ export default function CareersPage() {
         profileLink: "",
       });
       setErrors({});
-    } catch (err) {
-      console.error("Submission error:", err);
-      toast.error("Something went wrong. Please try again.");
-    } finally {
-      setIsSubmitting(false);
+    } else {
+      toast.error(result.message || "Submission failed. Please try again.");
     }
-  };
+  } catch (err) {
+    console.error("Submission error:", err);
+    toast.error("Network error! Please check your connection.");
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   return (
     <>
@@ -304,7 +318,7 @@ export default function CareersPage() {
                   type="button"
                   onClick={handleSubmit}
                   disabled={isSubmitting}
-                  className="w-full py-5 cursor-pointer bg-linear-to-r from-blue-600 to-cyan-600 rounded-xl font-bold text-xl text-white hover:from-blue-500 hover:to-cyan-500 transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+                  className="w-full py-5  cursor-pointer bg-linear-to-r from-blue-600 to-cyan-600 rounded-xl font-bold text-xl text-white hover:from-blue-500 hover:to-cyan-500 transition-all duration-300 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-3"
                 >
                   {isSubmitting ? "Submitting..." : "Submit Application"}
                   {!isSubmitting && <Send className="w-5 h-5" />}
