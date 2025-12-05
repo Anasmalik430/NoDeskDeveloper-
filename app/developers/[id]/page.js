@@ -13,6 +13,7 @@ import {
   Globe,
   MapPin,
   Languages,
+  LanguagesIcon,
 } from "lucide-react";
 import Image from "next/image";
 
@@ -210,8 +211,8 @@ export default function DeveloperDetailClient() {
                       <Image
                         src={developer.photo}
                         alt={developer.name}
-                        width={96}
-                        height={96}
+                        width={1920}
+                        height={1080}
                         unoptimized
                         className="object-cover w-full h-full"
                       />
@@ -222,11 +223,11 @@ export default function DeveloperDetailClient() {
                   </div>
 
                   <div className="flex-1">
-                    <h1 className="text-3xl font-bold text-white mb-2">
+                    <h1 className="text-xl md:text-3xl font-bold text-white mb-2">
                       {developer.name}
                     </h1>
-                    <div className="flex items-center gap-2 text-sm text-gray-400 mb-4">
-                      <MapPin className="size-4" />
+                    <div className="flex items-center gap-1 md:gap-2 text-xs md:text-sm text-gray-400 mb-4">
+                      <MapPin className="size-3.5 md:size-4" />
                       <span>
                         {developer.state}, {developer.country}
                       </span>
@@ -234,7 +235,7 @@ export default function DeveloperDetailClient() {
 
                     <div className="flex items-center gap-2 flex-wrap">
                       <span
-                        className={`px-3 py-1.5 rounded-full text-xs font-medium border ${
+                        className={`px-3 py-1.5 rounded-full text-[11px] md:text-xs font-medium border ${
                           developer.level === "Expert"
                             ? "text-blue-400 bg-blue-500/10 border-blue-500/20"
                             : developer.level === "Beginner"
@@ -248,7 +249,7 @@ export default function DeveloperDetailClient() {
                       {developer.available && (
                         <div className="flex items-center gap-1.5 bg-green-500/10 px-3 py-1.5 rounded-full border border-green-500/20">
                           <div className="size-2 bg-green-400 rounded-full animate-pulse" />
-                          <span className="text-xs text-green-400 font-medium">
+                          <span className="text-[11px] md:text-xs text-green-400 font-medium">
                             Available
                           </span>
                         </div>
@@ -263,7 +264,7 @@ export default function DeveloperDetailClient() {
                     <div className="flex justify-center mb-2">
                       <Calendar className="size-5 text-blue-400" />
                     </div>
-                    <p className="text-2xl font-bold text-white mb-1">
+                    <p className="text-[16px] md:text-2xl font-bold text-white mb-1">
                       {developer.experience}+
                     </p>
                     <p className="text-xs text-gray-400">Years Exp</p>
@@ -273,7 +274,7 @@ export default function DeveloperDetailClient() {
                     <div className="flex justify-center mb-2">
                       <IndianRupee className="size-5 text-green-400" />
                     </div>
-                    <p className="text-2xl font-bold text-white mb-1">
+                    <p className="text-[16px] md:text-2xl font-bold text-white mb-1">
                       ₹{developer.hourlyRate}
                     </p>
                     <p className="text-xs text-gray-400">Per Hour</p>
@@ -281,12 +282,12 @@ export default function DeveloperDetailClient() {
 
                   <div className="bg-white/5 border border-white/10 rounded-2xl p-4 text-center hover:bg-white/10 transition-colors">
                     <div className="flex justify-center mb-2">
-                      <Award className="size-5 text-purple-400" />
+                      <LanguagesIcon className="size-5 text-purple-400" />
                     </div>
-                    <p className="text-2xl font-bold text-white mb-1">
-                      {developer.level}
+                    <p className="text-[16px] md:text-2xl font-bold text-white mb-1">
+                      {developer.preferredLanguage[0]}
                     </p>
-                    <p className="text-xs text-gray-400">Level</p>
+                    <p className="text-xs text-gray-400">Language</p>
                   </div>
                 </div>
 
@@ -311,7 +312,7 @@ export default function DeveloperDetailClient() {
                   </div>
 
                   <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-4 py-3">
-                    <Languages className="size-5 text-purple-400" />
+                    <LanguagesIcon className="size-5 text-purple-400" />
 
                     <div>
                       <p className="text-xs text-gray-400">Languages</p>
@@ -320,7 +321,7 @@ export default function DeveloperDetailClient() {
                         {developer.preferredLanguage?.map((lang) => (
                           <span
                             key={lang}
-                            className="px-3 py-1 bg-linear-to-tl from-purple-600/40 to-pink-600/40 backdrop-blur-md rounded-full text-xs font-medium text-white border border-purple-500/50 shadow-md"
+                            className="px-3 py-1 bg-linear-to-tl from-purple-600/40 to-pink-600/40 backdrop-blur-md rounded-full text-[10px] md:text-xs font-medium text-white border border-purple-500/50 shadow-md"
                           >
                             {lang}
                           </span>
@@ -339,7 +340,7 @@ export default function DeveloperDetailClient() {
                     {developer.skills.map((skill, index) => (
                       <span
                         key={index}
-                        className="px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-sm text-white transition-colors"
+                        className="px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-xs md:text-sm text-white transition-colors"
                       >
                         {skill}
                       </span>
@@ -359,7 +360,7 @@ export default function DeveloperDetailClient() {
               <div className="relative">
                 <div className="flex items-center gap-4 mb-6">
                   <TrendingUp className="size-5 text-blue-400" />
-                  <h2 className="text-2xl font-bold text-white">Book Now</h2>
+                  <h2 className="text-[16px] md:text-2xl font-bold text-white">Book Now</h2>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
