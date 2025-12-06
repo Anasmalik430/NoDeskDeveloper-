@@ -106,10 +106,10 @@ export default function AddDeveloperModal({ isOpen, onClose, onAdd }) {
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
         <div
           ref={modalRef}
-          className="w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-gradient-to-b from-gray-900/95 to-black/95 backdrop-blur-3xl border border-white/20 rounded-3xl shadow-2xl shadow-purple-600/30 p-8"
+          className="w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-linear-to-b from-gray-900/95 to-black/95 backdrop-blur-3xl border border-white/20 rounded-3xl shadow-2xl shadow-purple-600/30 p-8"
         >
           <div className="flex justify-between items-center mb-8">
-            <h2 className="text-3xl font-black bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            <h2 className="text-3xl font-black bg-linear-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
               Add New Developer
             </h2>
             <button
@@ -321,7 +321,7 @@ export default function AddDeveloperModal({ isOpen, onClose, onAdd }) {
               </button>
               <button
                 type="submit"
-                className="px-10 py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl font-bold text-white flex items-center gap-3 shadow-xl hover:shadow-purple-500/50 transition-all"
+                className="px-10 py-3 bg-linear-to-r from-blue-600 to-purple-600 rounded-xl font-bold text-white flex items-center gap-3 shadow-xl hover:shadow-purple-500/50 transition-all"
               >
                 <Check className="w-5 h-5" />
                 Add Developer
