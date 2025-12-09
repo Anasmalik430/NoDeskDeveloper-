@@ -30,6 +30,7 @@ export async function generateMetadata({ params }) {
       title,
       openGraph: {
         title,
+        description: `${developer?.name} - ${developer?.level} Developer with ${developer?.experience}+ years experience. Available for hire on Nodesk Developer.`, // ye addd kiya hai
         url: `https://www.nodeskdeveloper.com/developers/${id}`,
         siteName: "Nodesk Developer",
         images: [ogImage],
@@ -38,6 +39,7 @@ export async function generateMetadata({ params }) {
       twitter: {
         card: "summary_large_image",
         title,
+        description: `${developer?.name} - Experienced ${developer?.level} Developer`,  // ==== optional but added by me 
         images: [ogImage],
       },
 
