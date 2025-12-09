@@ -19,7 +19,7 @@ export default function AddDeveloperModal({ isOpen, onClose, onAdd }) {
     level: "Intermediate",
     country: "India",
     state: "",
-    preferredLanguage: "English",
+    preferredLanguage: "",
   });
 
   const [isUploading, setIsUploading] = useState(false);
@@ -85,7 +85,7 @@ export default function AddDeveloperModal({ isOpen, onClose, onAdd }) {
       level: "Intermediate",
       country: "India",
       state: "",
-      preferredLanguage: "English",
+      preferredLanguage: "",
     });
     onClose();
   };
@@ -298,7 +298,7 @@ export default function AddDeveloperModal({ isOpen, onClose, onAdd }) {
 
               <input
                 type="text"
-                placeholder="Languages (e.g., English, Hindi) *"
+                placeholder="Languages (comma separated: English, Hindi, Urdu) *"
                 required
                 value={formData.preferredLanguage}
                 onChange={(e) =>

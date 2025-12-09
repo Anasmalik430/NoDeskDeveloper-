@@ -9,7 +9,6 @@ import { useParams, useRouter } from "next/navigation";
 import { API_BASE } from "@/lib/api";
 import { countrielsList } from "@/components/AdminPanel/Data";
 
-
 export default function DeveloperDetailPage() {
   const { id } = useParams(); // ← yeh sahi tarika hai [id] folder se ID lene ka
 
@@ -27,10 +26,11 @@ export default function DeveloperDetailPage() {
         const result = await res.json();
 
         if (result.success) {
-          // Skills ko comma-separated string bana dete hain editing ke liye
+          // Skills + langs ko comma-separated string bana dete hain editing ke liye
           const devData = {
             ...result.data,
             skills: result.data.skills.join(", "),
+            preferredLanguage: Array.isArray(result.data.preferredLanguage) ? result.data.preferredLanguage.join(", ") : "",
           };
           setDeveloper(devData);
         } else {
@@ -68,9 +68,18 @@ export default function DeveloperDetailPage() {
       .map((s) => s.trim())
       .filter(Boolean);
 
+    // Preferred Languages → array banao (yeh missing tha!)
+    const languagesArray = developer.preferredLanguage
+      ? developer.preferredLanguage
+          .split(",")
+          .map((l) => l.trim())
+          .filter((l) => l.length > 0)
+      : [];
+
     const updatedData = {
       ...developer,
       skills: skillsArray,
+      preferredLanguage: languagesArray,
       experience: Number(developer.experience),
       hourlyRate: Number(developer.hourlyRate),
     };
