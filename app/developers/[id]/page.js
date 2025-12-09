@@ -2,24 +2,23 @@
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import {
-  Star,
   Calendar,
   IndianRupee,
-  Award,
   BadgeCheck,
   ArrowLeft,
   Sparkles,
   TrendingUp,
-  Globe,
   MapPin,
-  Languages,
   LanguagesIcon,
+  Award,
+  Star,
+  Globe,
+  Languages,
 } from "lucide-react";
 import Image from "next/image";
+import { API_BASE } from "@/lib/api";
 
-const API_BASE =
-  process.env.NEXT_PUBLIC_BASE_URL ||
-  "https://nodeskdevbackend.onrender.com/api";
+
 
 export default function DeveloperDetailClient() {
   const params = useParams();

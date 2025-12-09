@@ -30,6 +30,8 @@ export default function DevelopersPage() {
   const [selectedLevel, setSelectedLevel] = useState("All");
   const [sortByRate, setSortByRate] = useState("default");
 
+  console.log("developers:", developers)
+
   // Fetch developers from backend
   useEffect(() => {
     const fetchDevelopers = async () => {
