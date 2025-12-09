@@ -20,7 +20,7 @@ export async function generateMetadata({ params }) {
     }
 
     const title = `${product?.name} - Ready Made App`;
-    const description = product.description.slice(0, 50) || "Production-ready app";
+    const description = product.description.replace(/<[^>]*>/g, '').slice(0, 50) || "Production-ready app";
 
     const ogImage = product.screenshots?.[0] || "/productImage.webp";
 
