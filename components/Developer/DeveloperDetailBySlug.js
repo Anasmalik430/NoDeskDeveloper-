@@ -423,31 +423,32 @@ useEffect(() => {
                     name="description"
                     value={formData.description}
                     onChange={handleInputChange}
-                    placeholder="Project description"
+                    placeholder="Write a clear project description (features, pages, integrations) for an accurate hour estimate"
                     rows={3}
                     required
                     className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 transition-all resize-none"
                   />
-                  {/* Add this just below textarea */}
-                    <div className="mt-2 p-3 bg-blue-500/10 border border-blue-500/30 rounded-xl text-center">
+                  {/* Added just below textarea */}
+                  {formData.description.length > 10 &&
+                    <div style={{fontFamily: "monospace"}} className="mt-2 p-3 bg-blue-500/10 border border-blue-500/30 rounded-xl text-center">
                       {estimating ? (
                         <span className="text-blue-400 text-sm">Estimating hours...</span>
                       ) : estimatedHours ? (
-                        <span className="text-green-400 font-bold text-lg">
+                        <span className="text-green-400 font-bold text-[16px]">
                           Estimated: {estimatedHours} hours
                         </span>
                       ) : formData.description.length > 20 ? (
                         <span className="text-gray-500 text-sm">AI will estimate soon...</span>
                       ) : null}
                     </div>
-
+}
                   {/* Rate Display */}
-                  <div className="flex items-center justify-between py-3 px-4 bg-blue-500/10 border border-blue-500/20 rounded-xl">
+                  {/* <div className="flex items-center justify-between py-3 px-4 bg-blue-500/10 border border-blue-500/20 rounded-xl">
                     <span className="text-xs text-gray-400">Hourly Rate</span>
                     <span className="text-sm font-bold text-blue-400">
                       {loading ? "......." : convertINR(developer?.hourlyRate) || `₹${developer?.hourlyRate}`}/hr
                     </span>
-                  </div>
+                  </div> */}
 
                   <button
                     type="submit"
