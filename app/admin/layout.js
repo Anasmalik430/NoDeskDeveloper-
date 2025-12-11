@@ -1,20 +1,24 @@
 "use client";
-import { UnseenCountsProvider } from "@/src/context/UnseenCountsContext";
+import { UnseenCountsProvider, useUnseenCounts } from "@/src/context/UnseenCountsContext";
 import { LayoutDashboard, Users, Package, CalendarDays, LogOut, Menu, X, } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { API_BASE } from "@/lib/api";
 
-export default function AdminLayout({ children }) {
+function AdminLayoutContent({ children }) {
   const pathname = usePathname();
   const router = useRouter();
+  const { newCounts } = useUnseenCounts();
+
+  // Calculate total new enquiries across all services
+  const totalNewEnquiries = Object.values(newCounts).reduce((sum, count) => sum + count, 0);
 
   const menuItems = [
     { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
     { href: "/admin/all-developers", label: "All Developers", icon: Users },
     { href: "/admin/softwares", label: "Softwares", icon: Package },
-    { href: "/admin/bookings", label: "Bookings", icon: CalendarDays },
+    { href: "/admin/bookings", label: "Bookings", icon: CalendarDays, showBadge: true },
   ];
 
   const handleLogout = async () => {
@@ -57,6 +61,7 @@ export default function AdminLayout({ children }) {
               {menuItems.map((item) => {
                 const Icon = item.icon;
                 const isActive = pathname === item.href;
+                const showNewBadge = item.showBadge && totalNewEnquiries > 0;
 
                 return (
                   <Link
@@ -88,6 +93,13 @@ export default function AdminLayout({ children }) {
                       {item.label}
                     </span>
 
+                    {/* New Badge */}
+                    {showNewBadge && (
+                      <span className="ml-auto px-2 py-0.5 text-xs font-bold bg-red-500 text-white rounded-full animate-pulse">
+                        NEW
+                      </span>
+                    )}
+
                     {/* Hover Glow */}
                     <div className="absolute inset-0 rounded-2xl bg-linear-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 blur-xl transition-opacity" />
                   </Link>
@@ -109,8 +121,6 @@ export default function AdminLayout({ children }) {
             </div>
           </div>
         </aside>
-
-       
 
         {/* Mobile Bottom Navigation */}
         <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-2xl border-t border-white/10">
@@ -161,12 +171,18 @@ export default function AdminLayout({ children }) {
         </div>
 
         {/* Main Content */}
-        <main className="flex-1 lg:ml-72 min-h-screen  lg:pt-0 pb-20 lg:pb-0">
-          <UnseenCountsProvider>
-            <div className="">{children}</div>
-          </UnseenCountsProvider>
+        <main className="flex-1 lg:ml-72 min-h-screen lg:pt-0 pb-20 lg:pb-0">
+          <div className="">{children}</div>
         </main>
       </div>
     </div>
+  );
+}
+
+export default function AdminLayout({ children }) {
+  return (
+    <UnseenCountsProvider>
+      <AdminLayoutContent>{children}</AdminLayoutContent>
+    </UnseenCountsProvider>
   );
 }
