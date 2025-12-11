@@ -99,7 +99,7 @@ export default function ReadyMadeSoftwarePage() {
                 <div className="p-6 space-y-4">
                   <div className="flex justify-between">
                     <div className="h-5 bg-gray-700 rounded-lg w-2/3" />
-                    <div className="h-5 bg-gray-700 rounded-full w-14" />
+                    <div className="h-5 bg-gray-700 rounded-full w-14 " />
                   </div>
 
                   <div className="h-4 bg-gray-700 rounded w-full" />
