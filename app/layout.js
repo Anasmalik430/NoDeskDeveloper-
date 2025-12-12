@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`antialiased`}>
         <>
-          <Analytics />
+          {/* <Analytics /> */}
           <Navbar />
           <FollowCursor />
           <FloatingLinearOrb />

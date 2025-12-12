@@ -43,7 +43,7 @@ const sampleProducts = {
       playConsoleUpload: 300,
       iosConsoleUpload: 400,
     },
-    description: "A versatile script for automation tasks.",
+    description: "A versatile script for automation tasks. lorem152.....",
   },
   "another-script": {
     _id: "2",
@@ -225,27 +225,37 @@ export default function CodeNScriptDetail() {
       return;
     }
 
+    // Create addon prices object with only selected addons
+    const selectedAddonPrices = {};
+    addonsList.forEach((addon) => {
+      if (addons[addon.key]) {
+        selectedAddonPrices[addon.key] = addon.cost;
+      }
+    });
+
     // Skip backend submit, just simulate success
     alert("Request sent successfully! We will contact you soon.");
+    console.log("Form Data:", {formData, selectedAddonPrices});
+    // console.log("Selected Addon Prices:", selectedAddonPrices);
 
     // Reset form
-    setFormData({
-      name: "",
-      phone: "",
-      email: "",
-      description: "",
-      availableTime: "",
-    });
-    setAddons({
-      installation: false,
-      customization: false,
-      branding: false,
-      paymentGatewayIntegration: false,
-      deployment: false,
-      cloudSetup: false,
-      playConsoleUpload: false,
-      iosConsoleUpload: false,
-    });
+    // setFormData({
+    //   name: "",
+    //   phone: "",
+    //   email: "",
+    //   description: "",
+    //   availableTime: "",
+    // });
+    // setAddons({
+    //   installation: false,
+    //   customization: false,
+    //   branding: false,
+    //   paymentGatewayIntegration: false,
+    //   deployment: false,
+    //   cloudSetup: false,
+    //   playConsoleUpload: false,
+    //   iosConsoleUpload: false,
+    // });
   };
 
   return (

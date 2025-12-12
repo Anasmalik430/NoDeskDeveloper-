@@ -1,6 +1,6 @@
 "use client";
 import { UnseenCountsProvider, useUnseenCounts } from "@/src/context/UnseenCountsContext";
-import { LayoutDashboard, Users, Package, CalendarDays, LogOut, Menu, X, } from "lucide-react";
+import { LayoutDashboard, Users, Package, CalendarDays, LogOut, Menu, X, Computer, } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
@@ -19,6 +19,7 @@ function AdminLayoutContent({ children }) {
     { href: "/admin/all-developers", label: "All Developers", icon: Users },
     { href: "/admin/softwares", label: "Softwares", icon: Package },
     { href: "/admin/bookings", label: "Bookings", icon: CalendarDays, showBadge: true },
+    { href: "/admin/codeNscripts", label: "Code & Scripts", icon: Computer },
   ];
 
   const handleLogout = async () => {
