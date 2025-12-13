@@ -13,68 +13,7 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import useINRConverter from "@/utils/currencyConverter";
-
-// Hardcoded sample data since no backend
-const sampleProducts = {
-  "example-script": {
-    _id: "1",
-    slug: "example-script",
-    name: "Example Code Name",
-    images: [
-      "https://images.pexels.com/photos/45980/pexels-photo-45980.jpeg",
-      "https://images.pexels.com/photos/5661241/pexels-photo-5661241.jpeg",
-      "https://images.pexels.com/photos/30399211/pexels-photo-30399211.jpeg",
-      "https://images.pexels.com/photos/5833316/pexels-photo-5833316.jpeg",
-    ],
-    codeLanguages: ["Python", "JavaScript", "Node.js"],
-    codeLink: "https://github.com/example/code",
-    codePreview: "https://preview.example.com",
-    previousLink: "https://previous.example.com",
-    clientSideRequirements: "Modern browser, Node.js v18+, Internet connection",
-    installationType: ["Web", "Android"],
-    basePrice: 1500,
-    additionalCharges: {
-      installation: 500,
-      customization: 2000,
-      branding: 1000,
-      paymentGatewayIntegration: 1500,
-      deployment: 800,
-      cloudSetup: 1200,
-      playConsoleUpload: 300,
-      iosConsoleUpload: 400,
-    },
-    description: "A versatile script for automation tasks. lorem152.....",
-  },
-  "another-script": {
-    _id: "2",
-    slug: "another-script",
-    name: "Another Code Name",
-    images: [
-      "https://images.pexels.com/photos/1370296/pexels-photo-1370296.jpeg",
-      "https://images.pexels.com/photos/1454360/pexels-photo-1454360.jpeg",
-      "https://images.pexels.com/photos/3184328/pexels-photo-3184328.jpeg",
-    ],
-
-    codeLanguages: ["Java", "Kotlin"],
-    codeLink: "https://github.com/example/another",
-    codePreview: "https://preview.another.com",
-    previousLink: "https://previous.another.com",
-    clientSideRequirements: "Android SDK, Java 17+",
-    installationType: ["Android", "iOS"],
-    basePrice: 2500,
-    additionalCharges: {
-      installation: 700,
-      customization: 3000,
-      branding: 1500,
-      paymentGatewayIntegration: 2000,
-      deployment: 1000,
-      cloudSetup: 1500,
-      playConsoleUpload: 500,
-      iosConsoleUpload: 600,
-    },
-    description: "Mobile app script for e-commerce.",
-  },
-};
+import { API_BASE } from "@/lib/api";
 
 export default function CodeNScriptDetail() {
   const { slug } = useParams();
@@ -105,12 +44,23 @@ export default function CodeNScriptDetail() {
   useEffect(() => {
     if (!slug) return;
 
-    // Simulate fetch with hardcoded data
-    const foundProduct = sampleProducts[slug];
-    if (foundProduct) {
-      setProduct(foundProduct);
-    }
-    setLoading(false);
+    const fetchProduct = async () => {
+      try {
+        const res = await fetch(`${API_BASE}/code-n-script-card/slug/${slug}`);
+        const result = await res.json();
+        if (result.success) {
+          setProduct(result.data);
+        } else {
+          console.error("Product not found:", result.message);
+        }
+      } catch (err) {
+        console.error("Error fetching product:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
   }, [slug]);
 
   if (loading) {
@@ -225,37 +175,26 @@ export default function CodeNScriptDetail() {
       return;
     }
 
-    // Create addon prices object with only selected addons
-    const selectedAddonPrices = {};
-    addonsList.forEach((addon) => {
-      if (addons[addon.key]) {
-        selectedAddonPrices[addon.key] = addon.cost;
-      }
-    });
+    // Create selected addons array
+    const selectedAddonDetails = selectedAddons.map((addon) => ({
+      key: addon.key,
+      label: addon.label,
+      cost: addon.cost,
+    }));
 
-    // Skip backend submit, just simulate success
+    // Simulate success
     alert("Request sent successfully! We will contact you soon.");
-    console.log("Form Data:", {formData, selectedAddonPrices});
-    // console.log("Selected Addon Prices:", selectedAddonPrices);
 
-    // Reset form
-    // setFormData({
-    //   name: "",
-    //   phone: "",
-    //   email: "",
-    //   description: "",
-    //   availableTime: "",
-    // });
-    // setAddons({
-    //   installation: false,
-    //   customization: false,
-    //   branding: false,
-    //   paymentGatewayIntegration: false,
-    //   deployment: false,
-    //   cloudSetup: false,
-    //   playConsoleUpload: false,
-    //   iosConsoleUpload: false,
-    // });
+    
+    console.log("=============================================================");
+
+    // Console log as requested
+    console.log("Product Name:", product.name);
+    console.log("Tech Stack (Code Languages):", product.codeLanguages);
+    console.log("Images Array:", product.images);
+    console.log("Base Price:", basePrice);
+    console.log("Selected Addons Array:", selectedAddonDetails);
+    console.log("Form Data:", formData);
   };
 
   return (
