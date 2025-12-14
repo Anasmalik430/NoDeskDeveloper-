@@ -17,6 +17,7 @@ const services = [
   { id: 10, title: "Tech Maintenance Enquiries", route: "/admin/bookings/tech-maintenance", endpoint: "/technical-maintenances" },
   { id: 11, title: "Contact Page Enquiries", route: "/admin/bookings/ContactPageEnqs", endpoint: "/contacts" },
   { id: 12, title: "Career Enquiries", route: "/admin/bookings/CareerPageEnquiries", endpoint: "/careers" },
+  { id: 13, title: "CodeNscript Enquires", route: "/admin/bookings/codeNscriptEnquiries", endpoint: "/code-n-script-enquiries" },
 ];
 
 const LAST_SEEN_KEY = "admin_last_seen_timestamps";
