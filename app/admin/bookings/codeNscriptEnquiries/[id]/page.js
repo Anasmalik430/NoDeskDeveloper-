@@ -1,7 +1,20 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
-import { ArrowLeft, Loader2, Trash2, CheckCircle, ExternalLink, Eye, FileCode, Package, Image as ImageIcon, Clock, Tag, Banknote } from "lucide-react";
+import {
+  ArrowLeft,
+  Loader2,
+  Trash2,
+  CheckCircle,
+  ExternalLink,
+  Eye,
+  FileCode,
+  Package,
+  Image as ImageIcon,
+  Clock,
+  Tag,
+  Banknote,
+} from "lucide-react";
 import { API_BASE } from "@/lib/api";
 
 export default function AdminCodeNscriptEnquiryDetail() {
@@ -41,7 +54,7 @@ export default function AdminCodeNscriptEnquiryDetail() {
         body: JSON.stringify({ status }),
       });
       if (res.ok) {
-        setEnquiry(prev => ({ ...prev, status }));
+        setEnquiry((prev) => ({ ...prev, status }));
         alert("Status updated successfully!");
       }
     } catch (err) {
@@ -55,7 +68,9 @@ export default function AdminCodeNscriptEnquiryDetail() {
     if (!confirm("Delete this enquiry permanently?")) return;
     setDeleting(true);
     try {
-      await fetch(`${API_BASE}/code-n-script-enquiry/${id}`, { method: "DELETE" });
+      await fetch(`${API_BASE}/code-n-script-enquiry/${id}`, {
+        method: "DELETE",
+      });
       alert("Deleted successfully");
       router.push("/admin/bookings/codeNscriptEnquiries");
     } catch (err) {
@@ -78,19 +93,27 @@ export default function AdminCodeNscriptEnquiryDetail() {
       <div className="max-w-6xl mx-auto p-6 lg:p-10">
         {/* Header */}
         <div className="mb-8">
-         
-
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <h1 className="text-3xl font-bold text-white mb-2">{enquiry.name || "Untitled Script"}</h1>
+              <h1 className="text-3xl font-bold text-white mb-2">
+                {enquiry.name || "Untitled Script"}
+              </h1>
+              <p style={{fontFamily: "monospace"}} className="flex gap-2 text-lg">
+                {" "}
+                <span className="bg-linear-to-tl from-red-600 to-pink-400 bg-clip-text text-transparent">
+                  Client Name:
+                </span>{" "}
+                {enquiry?.clientName}
+              </p>
               <p className="text-gray-400 flex items-center gap-2">
                 <Clock className="w-4 h-4" />
-                Submitted on {new Date(enquiry.createdAt).toLocaleDateString('en-US', { 
-                  month: 'long', 
-                  day: 'numeric',
-                  year: 'numeric',
-                  hour: '2-digit',
-                  minute: '2-digit'
+                Submitted on{" "}
+                {new Date(enquiry.createdAt).toLocaleDateString("en-US", {
+                  month: "long",
+                  day: "numeric",
+                  year: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit",
                 })}
               </p>
             </div>
@@ -123,11 +146,15 @@ export default function AdminCodeNscriptEnquiryDetail() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-zinc-800/50 rounded-xl p-4 border border-zinc-700">
                   <p className="text-sm text-gray-400 mb-1">Base Price</p>
-                  <p className="text-2xl font-bold text-white">₹{enquiry.basePrice}</p>
+                  <p className="text-2xl font-bold text-white">
+                    ₹{enquiry.basePrice}
+                  </p>
                 </div>
                 <div className="bg-linear-to-br from-red-500/10 to-red-600/10 rounded-xl p-4 border border-red-500/20">
                   <p className="text-sm text-gray-400 mb-1">Total Price</p>
-                  <p className="text-2xl font-bold text-red-400">₹{enquiry.totalPrice || enquiry.basePrice}</p>
+                  <p className="text-2xl font-bold text-red-400">
+                    ₹{enquiry.totalPrice || enquiry.basePrice}
+                  </p>
                 </div>
               </div>
             </div>
@@ -154,30 +181,37 @@ export default function AdminCodeNscriptEnquiryDetail() {
                     </div>
                   </div>
                 )}
-                
-                {enquiry.installationType && enquiry.installationType.length > 0 && (
-                  <div>
-                    <p className="text-sm text-gray-400 mb-2">Installation Type</p>
-                    <div className="flex flex-wrap gap-2">
-                      {enquiry.installationType.map((type, idx) => (
-                        <span
-                          key={idx}
-                          className="px-3 py-1.5 bg-red-500/10 text-sm text-red-400 rounded-lg border border-red-500/20"
-                        >
-                          {type}
-                        </span>
-                      ))}
+
+                {enquiry.installationType &&
+                  enquiry.installationType.length > 0 && (
+                    <div>
+                      <p className="text-sm text-gray-400 mb-2">
+                        Installation Type
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {enquiry.installationType.map((type, idx) => (
+                          <span
+                            key={idx}
+                            className="px-3 py-1.5 bg-red-500/10 text-sm text-red-400 rounded-lg border border-red-500/20"
+                          >
+                            {type}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                )}
+                  )}
               </div>
             </div>
 
             {/* Description */}
             {enquiry.description && (
               <div className="bg-linear-to-br from-zinc-900 to-black border border-zinc-800 rounded-2xl p-6">
-                <h2 className="text-lg font-semibold text-white mb-4">Description</h2>
-                <p className="text-gray-300 leading-relaxed whitespace-pre-wrap">{enquiry.description}</p>
+                <h2 className="text-lg font-semibold text-white mb-4">
+                  Description
+                </h2>
+                <p className="text-gray-300 leading-relaxed whitespace-pre-wrap">
+                  {enquiry.description}
+                </p>
               </div>
             )}
 
@@ -216,7 +250,9 @@ export default function AdminCodeNscriptEnquiryDetail() {
           <div className="space-y-6">
             {/* Status Update Card */}
             <div className="bg-linear-to-br from-zinc-900 to-black border border-zinc-800 rounded-2xl p-6">
-              <h2 className="text-lg font-semibold text-white mb-4">Update Status</h2>
+              <h2 className="text-lg font-semibold text-white mb-4">
+                Update Status
+              </h2>
               <div className="space-y-3">
                 <select
                   value={status}
@@ -245,9 +281,13 @@ export default function AdminCodeNscriptEnquiryDetail() {
             </div>
 
             {/* Links Card */}
-            {(enquiry.codeLink || enquiry.codePreview || enquiry.previousLink) && (
+            {(enquiry.codeLink ||
+              enquiry.codePreview ||
+              enquiry.previousLink) && (
               <div className="bg-linear-to-br from-zinc-900 to-black border border-zinc-800 rounded-2xl p-6">
-                <h2 className="text-lg font-semibold text-white mb-4">Quick Links</h2>
+                <h2 className="text-lg font-semibold text-white mb-4">
+                  Quick Links
+                </h2>
                 <div className="space-y-2">
                   {enquiry.codeLink && (
                     <a
@@ -260,8 +300,12 @@ export default function AdminCodeNscriptEnquiryDetail() {
                         <FileCode className="w-5 h-5 text-red-400" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-white">Source Code</p>
-                        <p className="text-xs text-gray-400 truncate">View repository</p>
+                        <p className="text-sm font-medium text-white">
+                          Source Code
+                        </p>
+                        <p className="text-xs text-gray-400 truncate">
+                          View repository
+                        </p>
                       </div>
                       <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-red-400 transition-colors" />
                     </a>
@@ -278,8 +322,12 @@ export default function AdminCodeNscriptEnquiryDetail() {
                         <Eye className="w-5 h-5 text-blue-400" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-white">Live Preview</p>
-                        <p className="text-xs text-gray-400 truncate">View demo</p>
+                        <p className="text-sm font-medium text-white">
+                          Live Preview
+                        </p>
+                        <p className="text-xs text-gray-400 truncate">
+                          View demo
+                        </p>
                       </div>
                       <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-blue-400 transition-colors" />
                     </a>
@@ -296,8 +344,12 @@ export default function AdminCodeNscriptEnquiryDetail() {
                         <Package className="w-5 h-5 text-purple-400" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-white">Previous Work</p>
-                        <p className="text-xs text-gray-400 truncate">View reference</p>
+                        <p className="text-sm font-medium text-white">
+                          Previous Link
+                        </p>
+                        <p className="text-xs text-gray-400 truncate">
+                          View reference
+                        </p>
                       </div>
                       <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-purple-400 transition-colors" />
                     </a>
@@ -308,8 +360,12 @@ export default function AdminCodeNscriptEnquiryDetail() {
 
             {/* Danger Zone */}
             <div className="bg-linear-to-br from-red-950/20 to-black border border-red-900/30 rounded-2xl p-6">
-              <h2 className="text-lg font-semibold text-red-400 mb-2">Danger Zone</h2>
-              <p className="text-sm text-gray-400 mb-4">This action cannot be undone</p>
+              <h2 className="text-lg font-semibold text-red-400 mb-2">
+                Danger Zone
+              </h2>
+              <p className="text-sm text-gray-400 mb-4">
+                This action cannot be undone
+              </p>
               <button
                 onClick={handleDelete}
                 disabled={deleting}
