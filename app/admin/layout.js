@@ -1,58 +1,44 @@
 "use client";
 import { UnseenCountsProvider, useUnseenCounts } from "@/src/context/UnseenCountsContext";
-import { LayoutDashboard, Users, Package, CalendarDays, LogOut, Computer, Check, } from "lucide-react";
+import { LayoutDashboard, Users, Package, CalendarDays, LogOut, Computer, } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { API_BASE } from "@/lib/api";
 import { showToast } from "nextjs-toast-notify";
+import { useAuth } from "@/context/AuthContext";
+import { useEffect } from "react";
 
 function AdminLayoutContent({ children }) {
   const pathname = usePathname();
   const router = useRouter();
   const { newCounts } = useUnseenCounts();
+  const { user, loading, isAdmin, logout } = useAuth();
 
   // Calculate total new enquiries across all services
-  const totalNewEnquiries = Object.values(newCounts).reduce(
-    (sum, count) => sum + count,
-    0
-  );
+  const totalNewEnquiries = Object.values(newCounts).reduce( (sum, count) => sum + count, 0,);
+
+  useEffect(() => {
+    if (!loading && (!user || user.role !== "admin")) {
+      showToast.error("Access Denied: Admins Only", { position: "top-right" });
+      router.push("/");
+    }
+  }, [user, loading, router]);
 
   const menuItems = [
     { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
     { href: "/admin/all-developers", label: "All Developers", icon: Users },
     { href: "/admin/softwares", label: "Softwares", icon: Package },
-    {
-      href: "/admin/bookings",
-      label: "Bookings",
-      icon: CalendarDays,
-      showBadge: true,
-    },
+    { href: "/admin/bookings", label: "Bookings", icon: CalendarDays, showBadge: true },
     { href: "/admin/codeNscripts", label: "Code & Scripts", icon: Computer },
   ];
 
   const handleLogout = async () => {
-    try {
-      const res = await fetch(`${API_BASE}/logout`, {
-        method: "POST",
-        credentials: "include",
-      });
-      if (res.ok) {
-        showToast.success("Logged Out Successfully", {
-          duration: 2000,
-          progress: true,
-          position: "top-right",
-          transition: "bounceIn",
-          sound: true,
-        });
-        setTimeout(() => {
-          router.push("/");
-        }, 2000);
-      }
-    } catch (error) {
-      console.error("Logout error:", error);
-      router.push("/");
-    }
+    await logout(); 
+    showToast.success("Logged Out Successfully");
   };
+
+  if (loading) return <div className="min-h-screen bg-black" />;
+  if (!user || user.role !== "admin") return null;
 
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
@@ -68,9 +54,7 @@ function AdminLayoutContent({ children }) {
           <div className="h-full bg-linear-to-b from-white/5 to-white/2 backdrop-blur-2xl border-r border-white/10 flex flex-col">
             {/* Logo */}
             <div className="h-20 flex items-center justify-center border-b border-white/10 px-8 py-13">
-              <h1 className="text-3xl font-black bg-linear-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                Admin Panel
-              </h1>
+              <h1 className="text-3xl font-black bg-linear-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Admin Panel</h1>
             </div>
 
             {/* Navigation */}
@@ -84,30 +68,9 @@ function AdminLayoutContent({ children }) {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`
-                      flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-300 group relative
-                      ${
-                        isActive
-                          ? "bg-linear-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/40 shadow-lg shadow-blue-500/20"
-                          : "hover:bg-white/5 border border-transparent"
-                      }
-                    `}
-                  >
-                    <Icon
-                      className={`w-5 h-5 transition-colors ${
-                        isActive
-                          ? "text-blue-400"
-                          : "text-gray-400 group-hover:text-white"
-                      }`}
-                    />
-                    <span
-                      className={`font-semibold ${
-                        isActive
-                          ? "text-white"
-                          : "text-gray-300 group-hover:text-white"
-                      }`}
-                    >
-                      {item.label}
+                    className={`flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-300 group relative ${ isActive ? "bg-linear-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/40 shadow-lg shadow-blue-500/20" : "hover:bg-white/5 border border-transparent" }`}>
+                    <Icon className={`w-5 h-5 transition-colors ${ isActive ? "text-blue-400" : "text-gray-400 group-hover:text-white" }`} />
+                    <span className={`font-semibold ${ isActive ? "text-white" : "text-gray-300 group-hover:text-white" }`} > {item.label}
                     </span>
 
                     {/* New Badge */}
@@ -126,14 +89,9 @@ function AdminLayoutContent({ children }) {
 
             {/* Logout */}
             <div className="p-6 border-t border-white/10">
-              <button
-                onClick={handleLogout}
-                className="w-full flex items-center justify-center gap-3 px-5 py-4 rounded-2xl bg-white/5 hover:bg-red-500/20 border border-white/10 hover:border-red-500/40 transition-all group"
-              >
+              <button onClick={handleLogout} className="w-full flex items-center justify-center gap-3 px-5 py-4 rounded-2xl bg-white/5 hover:bg-red-500/20 border border-white/10 hover:border-red-500/40 transition-all group" >
                 <LogOut className="w-5 h-5 text-gray-400 group-hover:text-red-400" />
-                <span className="font-medium text-gray-300 group-hover:text-white">
-                  Logout
-                </span>
+                <span className="font-medium text-gray-300 group-hover:text-white">Logout</span>
               </button>
             </div>
           </div>
@@ -150,26 +108,9 @@ function AdminLayoutContent({ children }) {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`
-                    flex flex-col items-center gap-1 px-4 py-2 rounded-xl transition-all duration-300 relative
-                    ${
-                      isActive
-                        ? "bg-linear-to-r from-blue-500/20 to-purple-500/20"
-                        : ""
-                    }
-                  `}
-                >
-                  <Icon
-                    className={`w-6 h-6 transition-colors ${
-                      isActive ? "text-blue-400" : "text-gray-400"
-                    }`}
-                  />
-                  <span
-                    className={`text-xs font-medium ${
-                      isActive ? "text-white" : "text-gray-400"
-                    }`}
-                  >
-                    {item.label.split(" ")[0]}
+                  className={`flex flex-col items-center gap-1 px-4 py-2 rounded-xl transition-all duration-300 relative${isActive? "bg-linear-to-r from-blue-500/20 to-purple-500/20": ""}`}>
+                  <Icon className={`w-6 h-6 transition-colors ${ isActive ? "text-blue-400" : "text-gray-400"}`}/>
+                  <span className={`text-xs font-medium ${ isActive ? "text-white" : "text-gray-400" }`} > {item.label.split(" ")[0]}
                   </span>
                   {isActive && (
                     <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-8 h-1 bg-blue-400 rounded-full" />
@@ -177,10 +118,7 @@ function AdminLayoutContent({ children }) {
                 </Link>
               );
             })}
-            <button
-              onClick={handleLogout}
-              className="flex flex-col items-center gap-1 px-4 py-2 rounded-xl"
-            >
+            <button onClick={handleLogout}className="flex flex-col items-center gap-1 px-4 py-2 rounded-xl">
               <LogOut className="w-6 h-6 text-gray-400" />
               <span className="text-xs font-medium text-gray-400">Logout</span>
             </button>

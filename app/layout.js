@@ -5,6 +5,7 @@ import FooterComponent from "@/components/Footer";
 import FollowCursor from "@/components/MiniComponents/FollowCursor";
 import TawkToChat from "@/components/TawkToChat";
 import { Analytics } from "@vercel/analytics/next";
+import { AuthProvider } from "@/context/AuthContext";
 
 export const metadata = {
   title: "NoDeskDeveloper - Connect, Build, Grow",
@@ -16,7 +17,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`antialiased`}>
-        <>
+        <AuthProvider>
           {/* <Analytics /> */}
           <Navbar />
           <FollowCursor />
@@ -24,7 +25,7 @@ export default function RootLayout({ children }) {
           {children}
           <FooterComponent />
           {/* <TawkToChat /> */}
-        </>
+        </AuthProvider>
       </body>
     </html>
   );
