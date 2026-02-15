@@ -41,6 +41,7 @@ const socialLinks = [
 ];
 
 export default function FooterComponent() {
+  const currentYear = new Date().getFullYear();
   const [email, setEmail] = useState("");
   const [hoveredSocial, setHoveredSocial] = useState(null);
   const pathname = usePathname()
@@ -61,12 +62,12 @@ export default function FooterComponent() {
           style={{ animationDelay: "1s" }}
         />
         <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-teal-500/5 rounded-full blur-3xl animate-pulse"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-150 bg-teal-500/5 rounded-full blur-3xl animate-pulse"
           style={{ animationDelay: "2s" }}
         />
       </div>
 
-      <div className="relative max-w-[1350px] mx-auto px-5 lg:px-8 pt-20 pb-8">
+      <div className="relative max-w-337.5 mx-auto px-5 lg:px-8 pt-20 pb-8">
         {/* Top Section - Newsletter & Brand */}
         <div className="grid lg:grid-cols-2 gap-12 mb-16 pb-16 border-b border-blue-500/20">
           {/* Brand Section */}
@@ -112,16 +113,16 @@ export default function FooterComponent() {
                 <div className="p-2 rounded-lg bg-blue-500/10 group-hover:bg-blue-500/20 transition-colors duration-300">
                   <Phone className="w-4 h-4" />
                 </div>
-                <span className="text-sm">+91 8121923831</span>
+                <span className="text-sm">+91 9690170502</span>
               </Link>
               <Link
-                href="https://api.whatsapp.com/send?phone=+918121923831&text=Hello%20Team,%20I%20need%20your%20service"
+                href="https://api.whatsapp.com/send?phone=+919690170502&text=Hello%20Team,%20I%20need%20your%20service"
                 className="flex items-center gap-3 text-gray-400 hover:text-blue-400 transition-colors duration-300 group w-fit"
               >
                 <div className="p-2 rounded-lg bg-blue-500/10 group-hover:bg-blue-500/20 transition-colors duration-300">
                   <FaWhatsapp  className="w-4 h-4" />
                 </div>
-                <span className="text-sm">+91 8121923831</span>
+                <span className="text-sm">+91 9690170502</span>
               </Link>
               <div className="flex items-center gap-3 text-gray-400">
                 <div className="p-2 rounded-lg bg-blue-500/10">
@@ -218,7 +219,7 @@ export default function FooterComponent() {
         {/* Bottom Section */}
         <div className="pt-8 border-t border-blue-500/20 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-gray-500 text-sm text-center md:text-left">
-            © 2025 NoDeskDeveloper. All rights reserved.
+            © {currentYear} NoDeskDeveloper. All rights reserved.
           </p>
 
           <div className="flex items-center gap-2 text-gray-500 text-sm">

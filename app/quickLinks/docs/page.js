@@ -204,7 +204,7 @@ export default function Documentation() {
                   Open Support Ticket
                 </Link>
                 <a
-                  href="https://wa.me/918121923831"
+                  href="https://wa.me/919690170502"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-8 py-4 bg-green-600 rounded-xl font-bold hover:scale-105 transition-all flex items-center justify-center gap-3"

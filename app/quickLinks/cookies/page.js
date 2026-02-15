@@ -64,14 +64,14 @@ export default function CookiePolicy() {
                 Cookie Policy
               </span>
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4">
+            <h1 className="text-4xl md:text-7xl font-bold tracking-tight mb-4">
               No Nonsense.{" "}
               <span className="bg-linear-to-r from-blue-400 to-teal-400 bg-clip-text text-transparent">
                 No Tracking.
               </span>
             </h1>
             <p className="text-gray-400 text-lg">
-              Last updated: December 05, 2025
+              Last updated: January 05, 2026
             </p>
           </div>
 

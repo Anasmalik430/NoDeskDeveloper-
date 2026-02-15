@@ -39,13 +39,28 @@ export default function AddDeveloperModal({ isOpen, onClose, onAdd }) {
     };
   }, [isOpen, onClose]);
 
+  // ========================================================================
   const handleUploadSuccess = (result) => {
-    const url = result?.info?.secure_url;
-    if (url) {
-      setFormData((prev) => ({ ...prev, photo: url }));
+    if (result?.event === "success") {
+      const { info } = result;
+      let finalUrl = info?.secure_url;
+
+      // Agar user ne crop kiya hai, toh coordinates ke hisaab se URL transform karein
+      if (info.coordinates && info.coordinates.custom) {
+        const [coords] = info.coordinates.custom;
+        const [x, y, w, h] = coords;
+
+        finalUrl = info.secure_url.replace(
+          "/upload/",
+          `/upload/c_crop,x_${x},y_${y},w_${w},h_${h}/`,
+        );
+      }
+
+      setFormData((prev) => ({ ...prev, photo: finalUrl }));
     }
     setIsUploading(false);
   };
+  // ========================================================================
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -132,6 +147,14 @@ export default function AddDeveloperModal({ isOpen, onClose, onAdd }) {
                 onSuccess={handleUploadSuccess}
                 onQueuesStart={() => setIsUploading(true)}
                 onQueuesEnd={() => setIsUploading(false)}
+                options={{
+                  multiple: false,
+                  cropping: true,
+                  showSkipCropButton: false, // User ko crop karne ke liye force karega (professional look ke liye)
+                  croppingAspectRatio: 1, // Square crop (1:1) jo profile photos ke liye best hai
+                  sources: ["local", "url", "camera"],
+                  defaultSource: "local",
+                }}
               >
                 {({ open }) => (
                   <div

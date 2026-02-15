@@ -63,9 +63,23 @@ export default function DeveloperDetailPage() {
   }, [id]);
 
   const handleUploadSuccess = (result) => {
-    const url = result?.info?.secure_url;
-    if (url) {
-      setDeveloper((prev) => ({ ...prev, photo: url }));
+    if (result?.event === "success") {
+      const { info } = result;
+      let finalUrl = info?.secure_url;
+
+      // Check if user cropped the image
+      if (info.coordinates && info.coordinates.custom) {
+        const [coords] = info.coordinates.custom;
+        const [x, y, w, h] = coords;
+
+        // Inject cropping parameters into the URL
+        finalUrl = info.secure_url.replace(
+          "/upload/",
+          `/upload/c_crop,x_${x},y_${y},w_${w},h_${h}/`,
+        );
+      }
+
+      setDeveloper((prev) => ({ ...prev, photo: finalUrl }));
     }
     setIsUploading(false);
   };
@@ -217,9 +231,16 @@ export default function DeveloperDetailPage() {
               onSuccess={handleUploadSuccess}
               onQueuesStart={() => setIsUploading(true)}
               onQueuesEnd={() => setIsUploading(false)}
+              options={{
+                multiple: false,
+                cropping: true,
+                croppingAspectRatio: 1, // Profile photo ke liye 1:1 ratio best hai
+                showSkipCropButton: false,
+                sources: ["local", "url", "camera"],
+              }}
             >
               {({ open }) => (
-                <div
+                <div 
                   onClick={() => open()}
                   className="border-2 w-fit border-dashed border-white/20 rounded-2xl p-8 text-center cursor-pointer hover:border-blue-500/60 hover:bg-white/5 transition-all"
                 >

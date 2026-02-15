@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function Tutorials() {
   const tutorials = [
     {
-      title: "How to Hire a Developer Under ₹1000/hr in 2025",
+      title: "How to Hire a Developer Under ₹1000/hr in 2026",
       desc: "Step-by-step guide to finding top talent without breaking the bank",
       time: "5 min read",
       tag: "Hiring"
@@ -36,7 +36,7 @@ export default function Tutorials() {
       tag: "Startup"
     },
     {
-      title: "Best Tech Stack for Indian Startups in 2025",
+      title: "Best Tech Stack for Indian Startups in 2026",
       desc: "Next.js + Node + Firebase + Tailwind — the winning combo",
       time: "5 min read",
       tag: "Tech Stack"
