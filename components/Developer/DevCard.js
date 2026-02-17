@@ -148,7 +148,7 @@ const DevCard = ({ filteredDevelopers }) => {
           <div
             key={dev._id}
             onClick={() => router.push(`/developers/${dev?._id}`)}
-            className="group relative bg-linear-to-br from-blue-900/30 via-sky-900/20 to-teal-900/30 backdrop-blur-2xl border border-blue-500/40 rounded-3xl overflow-hidden shadow-2xl shadow-blue-900/60 hover:shadow-blue-600/80 hover:border-blue-400 transition-all duration-500"
+            className="group cursor-pointer relative bg-linear-to-br from-blue-900/30 via-sky-900/20 to-teal-900/30 backdrop-blur-2xl border border-blue-500/40 rounded-3xl overflow-hidden shadow-2xl shadow-blue-900/60 hover:shadow-blue-600/80 hover:border-blue-400 transition-all duration-500"
           >
             {/* Animated Background Glow */}
             <div className="absolute inset-0 bg-linear-to-br from-blue-600/20 via-sky-600/20 to-teal-600/20 blur-3xl" />

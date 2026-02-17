@@ -10,14 +10,12 @@ const techOptions = [
   "React",
   "Next.js",
   "React Native",
-  "Laravel",
+  "Framer Motion",
   "Flutter",
   "Node.js",
   "Python",
-  "Angular",
   "TypeScript",
   "MongoDB",
-  "Vue.js",
   "Firebase",
 ];
 const experienceLevels = ["All", "Beginner", "Intermediate", "Expert"];
@@ -179,7 +177,7 @@ export default function DevelopersPage() {
             <select
               value={sortByRate}
               onChange={(e) => setSortByRate(e.target.value)}
-              className="px-5 py-3 bg-black/30 border border-gray-600/30 rounded-xl text-white focus:outline-none focus:border-blue-400 lg:w-auto w-full"
+              className="px-5 py-3 cursor-pointer bg-black/30 border border-gray-600/30 rounded-xl text-white focus:outline-none focus:border-blue-400 lg:w-auto w-full"
             >
               <option value="default">Default Order</option>
               <option value="low">Rate: Low to High</option>
@@ -192,7 +190,7 @@ export default function DevelopersPage() {
               <button
                 key={level}
                 onClick={() => setSelectedLevel(level)}
-                className={`px-4 py-1.5 rounded-full text-[11px] md:text-sm transition-all ${
+                className={`px-4 py-1.5 cursor-pointer rounded-full text-[11px] md:text-sm transition-all ${
                   selectedLevel === level
                     ? "bg-linear-to-r from-blue-600 to-purple-600 text-white"
                     : "bg-white/5 text-gray-300 hover:bg-white/10"
@@ -208,7 +206,7 @@ export default function DevelopersPage() {
               <button
                 key={tech}
                 onClick={() => setSelectedTech(tech)}
-                className={`px-4 py-1.5 rounded-full text-[11px] md:text-sm font-medium transition-all ${
+                className={`px-4 py-1.5 cursor-pointer rounded-full text-[11px] md:text-sm font-medium transition-all ${
                   selectedTech === tech
                     ? "bg-blue-500/30 text-blue-300 border border-blue-400/50"
                     : "bg-white/5 text-gray-300 hover:bg-white/10"
