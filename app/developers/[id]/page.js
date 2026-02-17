@@ -31,7 +31,7 @@ export async function generateMetadata({ params }) {
       openGraph: {
         title,
         description: `${developer?.name} - ${developer?.level} Developer with ${developer?.experience}+ years experience. Available for hire on Nodesk Developer.`, // ye addd kiya hai
-        url: `https://www.nodeskdeveloper.com/developers/${id}`,
+        url: `https://www.nodeskdeveloper.vercel.app/developers/${id}`,
         siteName: "Nodesk Developer",
         images: [ogImage],
       },

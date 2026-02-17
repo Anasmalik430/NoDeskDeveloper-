@@ -16,7 +16,7 @@ const ProductCard = ({ filteredProducts }) => {
       await navigator.share({
         title: product.name,
         text: product.description?.replace(/<[^>]*>/g, "").slice(0, 100),
-        url: `https://www.nodeskdeveloper.com/software/${product.slug}`,
+        url: `https://www.nodeskdeveloper.vercel.app/software/${product.slug}`,
       });
     } else {
       alert(`Share ${product.name}`);

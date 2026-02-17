@@ -98,13 +98,13 @@ export default function FooterComponent() {
             {/* Contact Info */}
             <div className="space-y-3">
               <Link
-                href="mailto:hello@nodeskdeveloper.com"
+                href="mailto:developeranas738@gmail.com"
                 className="flex items-center gap-3 text-gray-400 hover:text-blue-400 transition-colors duration-300 group w-fit"
               >
                 <div className="p-2 rounded-lg bg-blue-500/10 group-hover:bg-blue-500/20 transition-colors duration-300">
                   <Mail className="w-4 h-4" />
                 </div>
-                <span className="text-sm">hello@nodeskdeveloper.com</span>
+                <span className="text-sm">suport@nodeskdeveloper.com</span>
               </Link>
               <Link
                 href="tel:+1234567890"

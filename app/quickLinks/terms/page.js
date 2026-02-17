@@ -8,7 +8,7 @@ export default function TermsOfService() {
     {
       title: "Acceptance of Terms",
       items: [
-        "By using NoDeskDeveloper.com, you agree to these Terms of Service",
+        "By using NoDeskDeveloper.in, you agree to these Terms of Service",
         "We may update these terms at any time — continued use means acceptance",
         "You must be 18+ years old to use our platform",
       ],

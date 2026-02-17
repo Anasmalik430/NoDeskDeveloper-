@@ -13,7 +13,7 @@ export default function CodeNScriptCard({ product }) {
       await navigator.share({
         title: product.name,
         text: product.description?.replace(/<[^>]*>/g, "").slice(0, 50),
-        url: `https://www.nodeskdeveloper.com/services/codeNscript/${product.slug}`,
+        url: `https://www.nodeskdeveloper.vercel.app/services/codeNscript/${product.slug}`,
       });
     } else {
       alert(`Share ${product.name}`);
