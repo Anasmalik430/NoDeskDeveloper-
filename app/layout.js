@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`antialiased`}>
         <AuthProvider>
-          {/* <Analytics /> */}
+          <Analytics />
           <Navbar />
           <FollowCursor />
           <FloatingLinearOrb />
