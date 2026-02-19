@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
           <FloatingLinearOrb />
           {children}
           <FooterComponent />
-          {/* <TawkToChat /> */}
+          <TawkToChat />
         </AuthProvider>
       </body>
     </html>

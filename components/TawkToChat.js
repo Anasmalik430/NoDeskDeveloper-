@@ -7,49 +7,45 @@ export default function TawkToChat() {
   const pathname = usePathname();
 
   useEffect(() => {
-    // Agar admin path hai toh return kar do, script load mat karo
+    // 1. Agar admin path hai, toh widget ko hide/remove karo aur exit
     if (pathname.startsWith('/admin')) {
+      if (window.Tawk_API && window.Tawk_API.hide) {
+        window.Tawk_API.hide();
+      }
       return;
     }
 
-    // This function loads Tawk.to script
-    const loadTawkTo = () => {
-      // Check if script already exists
-      if (document.getElementById('tawk-to-script')) {
-        return;
-      }
+    // 2. Agar admin nahi hai, toh widget show karo
+    if (window.Tawk_API && window.Tawk_API.show) {
+      window.Tawk_API.show();
+    }
 
-      var Tawk_API = Tawk_API || {};
-      var Tawk_LoadStart = new Date();
-      
+    // 3. Load script function
+    const loadTawkTo = () => {
+      if (document.getElementById('tawk-to-script')) return;
+
+      window.Tawk_API = window.Tawk_API || {};
+      window.Tawk_LoadStart = new Date();
+
       const script = document.createElement('script');
       script.id = 'tawk-to-script';
       script.async = true;
-      script.src = 'https://embed.tawk.to/692d6c7fa794f2197c4c968f/1jbcmvllu';
+      script.src = 'https://embed.tawk.to/6996bb9473d8cb1c357e5bb7/1jhqcpiv3'; // Updated Link
       script.charset = 'UTF-8';
       script.setAttribute('crossorigin', '*');
-      
+
       const firstScript = document.getElementsByTagName('script')[0];
-      firstScript.parentNode.insertBefore(script, firstScript);
-      
-      // Make Tawk_API globally accessible
-      window.Tawk_API = Tawk_API;
-      window.Tawk_LoadStart = Tawk_LoadStart;
+      if (firstScript && firstScript.parentNode) {
+        firstScript.parentNode.insertBefore(script, firstScript);
+      }
     };
 
     loadTawkTo();
 
-    // Cleanup function
+    // Cleanup: Jab component unmount ho (optional but good practice)
     return () => {
-      const tawkScript = document.getElementById('tawk-to-script');
-      if (tawkScript) {
-        tawkScript.remove();
-      }
-      // Remove Tawk widget
-      const tawkWidget = document.getElementById('tawk-bubble');
-      if (tawkWidget) {
-        tawkWidget.remove();
-      }
+       // Note: Aksar Next.js mein hum widget ko sirf hide karte hain 
+       // kyunki script baar-baar reload karna heavy ho sakta hai.
     };
   }, [pathname]);
 
