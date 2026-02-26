@@ -94,9 +94,9 @@ export default function DevelopersPage() {
             <h1 className="text-5xl md:text-6xl font-black bg-linear-to-r from-blue-600 via-sky-500 to-teal-400 bg-clip-text text-transparent mb-4">
               Hire Verified Developers
             </h1>
-            <p className="text-sm md:text-xl text-blue-300/80 font-medium">
+            <h2 className="text-sm md:text-xl text-blue-300/80 font-medium">
               Handpicked talent, ready to build your vision
-            </p>
+            </h2>
           </div>
 
           {/* Filters bhi dikhega loading mein */}
@@ -155,9 +155,9 @@ export default function DevelopersPage() {
           <h1 className="text-5xl md:text-6xl font-black bg-linear-to-r from-blue-600 via-sky-500 to-teal-400 bg-clip-text text-transparent mb-4">
             Hire Verified Developers
           </h1>
-          <p className="text-sm md:text-xl text-blue-300/80 font-medium">
+          <h2 className="text-sm md:text-xl text-blue-300/80 font-medium">
             Handpicked talent, ready to build your vision
-          </p>
+          </h2>
         </div>
 
         {/* Filters (same design) */}
@@ -191,8 +191,8 @@ export default function DevelopersPage() {
                 key={level}
                 onClick={() => setSelectedLevel(level)}
                 className={`px-4 py-1.5 cursor-pointer rounded-full text-[11px] md:text-sm transition-all ${selectedLevel === level
-                    ? "bg-linear-to-r from-blue-600 to-purple-600 text-white"
-                    : "bg-white/5 text-gray-300 hover:bg-white/10"
+                  ? "bg-linear-to-r from-blue-600 to-purple-600 text-white"
+                  : "bg-white/5 text-gray-300 hover:bg-white/10"
                   }`}
               >
                 {level}
@@ -206,8 +206,8 @@ export default function DevelopersPage() {
                 key={tech}
                 onClick={() => setSelectedTech(tech)}
                 className={`px-4 py-1.5 cursor-pointer rounded-full text-[11px] md:text-sm font-medium transition-all ${selectedTech === tech
-                    ? "bg-blue-500/30 text-blue-300 border border-blue-400/50"
-                    : "bg-white/5 text-gray-300 hover:bg-white/10"
+                  ? "bg-blue-500/30 text-blue-300 border border-blue-400/50"
+                  : "bg-white/5 text-gray-300 hover:bg-white/10"
                   }`}
               >
                 {tech}

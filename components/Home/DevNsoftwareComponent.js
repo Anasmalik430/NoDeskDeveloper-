@@ -38,7 +38,7 @@ export default function DevelopersSoftwareSection() {
             {/* Developer Cards Grid */}
             <div className="grid md:grid-cols-2 gap-4">
               {developers.slice(0, 4).map((profile, idx) => (
-                <div key={idx} className="group/card space-y-4 relative bg-white/2 hover:bg-white/5 border border-white/10 hover:border-blue-500/30 rounded-2xl p-5 transition-all duration-300 hover:scale-[1.02]" >
+                <div key={idx} className="group/card cursor-pointer space-y-4 relative bg-white/2 hover:bg-white/5 border border-white/10 hover:border-blue-500/30 rounded-2xl p-5 transition-all duration-300 hover:scale-[1.02]" >
                   <div className="flex justify-between  ">
                     <h3 className="text-white font-bold text-lg">{profile.name}</h3>
                     <span className="text-[10px] font-semibold text-blue-400 bg-blue-900/50 flex justify-center items-center h-fit px-2 py-1 rounded-full">
@@ -103,7 +103,7 @@ export default function DevelopersSoftwareSection() {
               {softwareProducts.slice(0, 4).map((software, idx) => {
                 const Icon = software.icon;
                 const techStack = [
-                  "Laravel + Vue",
+                  "Next.js + Supabase",
                   "Flutter + Firebase",
                   "React + Node",
                   "MERN Stack",

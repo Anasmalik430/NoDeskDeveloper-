@@ -41,6 +41,24 @@ export default function HomePage() {
           />
         </div>
 
+        {/* JSON-LD Schema for Local Business/Agency */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Service",
+              "serviceType": "Web & App Development",
+              "provider": {
+                "@type": "LocalBusiness",
+                "name": "NoDeskDeveloper",
+                "areaServed": "India",
+                "description": "Custom web apps, mobile app development, UI/UX design, and software consulting services."
+              }
+            })
+          }}
+        />
+
         {/* Hero Section */}
         <section className="relative">
           <MotivationalCarousel />
@@ -50,9 +68,9 @@ export default function HomePage() {
         <section className="py-16 pb-0 px-6 bg-linear-to-b from-transparent via-blue-900/10 to-transparent">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-5xl md:text-6xl sm:pb-2 font-black text-center bg-linear-to-r from-blue-400 to-sky-400 bg-clip-text text-transparent mb-16">
-              Why Choose{" "}
+              Why Choose Our{" "}
               <span className="bg-linear-to-br text-4xl md:text-6xl from-blue-600 via-sky-500 to-teal-600 text-transparent bg-clip-text">
-                NoDeskDeveloper?
+                Web & App Development Services?
               </span>
             </h2>
 
@@ -124,9 +142,9 @@ export default function HomePage() {
               <span className="bg-linear-to-r from-cyan-400 via-blue-400 to-sky-400 bg-clip-text text-transparent">
                 Hire{" "}
                 <span className="bg-linear-to-br  from-blue-600 via-sky-500 to-teal-600 text-transparent bg-clip-text">
-                  Experts
+                  Best Web Developers
                 </span>{" "}
-                for Any Service
+                in India
               </span>
             </h2>
             {/* Loop Of Logos of Teck */}

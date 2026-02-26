@@ -1,123 +1,155 @@
 "use client";
 
 import Link from "next/link";
-import { Cookie, Check, Shield, Settings } from "lucide-react";
+import {
+  Cookie,
+  Shield,
+  EyeOff,
+  Settings,
+  Info,
+  Mail,
+  ArrowRight,
+} from "lucide-react";
 
 export default function CookiePolicy() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "Cookie Policy - NoDeskDeveloper",
+    description:
+      "Information about how NoDeskDeveloper uses cookies to enhance user experience while respecting privacy.",
+    publisher: {
+      "@type": "Organization",
+      name: "NoDeskDeveloper",
+    },
+  };
+
   const sections = [
     {
-      title: "What Are Cookies?",
-      items: [
-        "Cookies are tiny text files stored on your device",
-        "They help us remember your preferences and improve your experience",
-        "We use both session cookies (temporary) and persistent cookies",
-      ],
+      title: "1. What are Cookies?",
+      icon: Info,
+      content:
+        "Cookies are small data packets stored on your device that help us recognize you across sessions. They are essential for remembering your preferences and providing a seamless technical workflow during project management.",
     },
     {
-      title: "Types of Cookies We Use",
-      items: [
-        "Essential Cookies — Required for login, forms, and basic site functions",
-        "Analytics Cookies — Help us understand how visitors use our site (fully anonymized)",
-        "Performance Cookies — Measure page load speed and errors",
-        "No advertising or tracking cookies — We don’t run ads or sell your data",
-      ],
+      title: "2. Essential Cookies",
+      icon: Settings,
+      content:
+        "These are non-negotiable for site functionality. They handle secure logins, form submissions, and maintain your session state. Without these, our platform cannot provide its core services to you.",
     },
     {
-      title: "How We Use Cookies",
-      items: [
-        "Keep you logged in during your session",
-        "Remember your preferences (e.g., dark mode)",
-        "Analyze traffic anonymously via Vercel Analytics & Umami (privacy-first)",
-        "Improve site speed and fix bugs faster",
-      ],
+      title: "3. Privacy-First Analytics",
+      icon: EyeOff,
+      content:
+        "We use anonymized analytics to measure site performance and page load speeds. Importantly, we do not use tracking pixels or intrusive marketing cookies. Your personal identity remains hidden from all analytical tools we employ.",
     },
     {
-      title: "Your Control Over Cookies",
-      items: [
-        "You can disable cookies anytime in your browser settings",
-        "Most features will still work without non-essential cookies",
-        "Clearing cookies will log you out and reset preferences",
-        "We respect “Do Not Track” (DNT) signals",
-      ],
+      title: "4. Third-Party Interactions",
+      icon: Shield,
+      content:
+        "Our payment gateways (PhonePe/Stripe) may set secure cookies to manage transaction security. These are governed by their respective privacy policies. NoDeskDeveloper does not share your data with third-party advertisers.",
     },
     {
-      title: "Third-Party Cookies",
-      items: [
-        "We don’t allow Google Ads, Facebook Pixel, or any marketing trackers",
-        "Only privacy-respecting analytics (no personal data shared)",
-        "Payment partners may set secure cookies during checkout — handled under their policies",
-      ],
+      title: "5. Managing Preferences",
+      icon: Cookie,
+      content:
+        "You have full control. You can clear or disable cookies via your browser settings at any time. Note that disabling essential cookies may impact the performance of our escrow and project matching features.",
     },
   ];
 
   return (
     <>
-      <div className="min-h-screen bg-black text-white flex flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <div className="min-h-screen bg-black text-white selection:bg-blue-500/30 overflow-x-hidden">
+        {/* Animated Background */}
+        <div className="fixed inset-0 pointer-events-none overflow-hidden opacity-20">
+          <div className="absolute top-[-5%] left-[-5%] w-[40%] h-[40%] bg-blue-600/15 blur-[100px] rounded-full animate-pulse" />
+          <div className="absolute bottom-[-5%] right-[-5%] w-[40%] h-[40%] bg-teal-600/15 blur-[100px] rounded-full animate-pulse delay-700" />
+        </div>
 
-        {/* Content */}
-        <div className="relative z-10 max-w-4xl mx-auto px-6 py-16 flex-1">
-          {/* Hero */}
+        <div className="relative z-10 max-w-4xl mx-auto px-6 py-12">
+          {/* Header Section */}
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 rounded-full px-5 py-2.5 mb-8">
-              <Cookie className="w-4 h-4 text-blue-400" />
-              <span className="text-sm font-medium text-blue-300">
-                Cookie Policy
+            <div className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 rounded-full px-4 py-1.5 mb-6 backdrop-blur-md">
+              <Cookie className="w-3.5 h-3.5 text-blue-400" />
+              <span className="text-blue-300 font-bold text-[10px] tracking-wider uppercase">
+                Efficiency Policy
               </span>
             </div>
-            <h1 className="text-4xl md:text-7xl font-bold tracking-tight mb-4">
-              No Nonsense.{" "}
-              <span className="bg-linear-to-r from-blue-400 to-teal-400 bg-clip-text text-transparent">
-                No Tracking.
+            <h1 className="text-3xl md:text-5xl font-black tracking-tight mb-6 leading-tight">
+              Cookie{" "}
+              <span className="bg-linear-to-r from-blue-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent">
+                Transparency
               </span>
             </h1>
-            
+            <p className="text-sm md:text-base text-gray-400 max-w-xl mx-auto font-medium leading-relaxed">
+              We use minimal cookies to ensure your experience on
+              NoDeskDeveloper is fast, secure, and privacy-respecting. No
+              trackers, no nonsense.
+            </p>
           </div>
 
-          {/* Sections */}
-          <div className="space-y-12">
+          {/* Sections Grid */}
+          <div className="grid gap-4">
             {sections.map((section, index) => (
               <div
                 key={index}
-                className="group bg-white/5 border border-white/10 rounded-2xl p-8 backdrop-blur-xl hover:bg-white/8 transition-all duration-400"
+                className="group relative p-px rounded-2xl overflow-hidden transition-all duration-500"
               >
-                <div className="flex items-start gap-5">
-                  <div className="p-3 bg-linear-to-br hidden md:block from-blue-600 to-teal-600 rounded-xl shadow-lg group-hover:scale-110 transition-transform duration-300">
-                    {index === 0 && <Cookie className="w-6 h-6 text-white" />}
-                    {index === 1 && <Settings className="w-6 h-6 text-white" />}
-                    {index >= 2 && <Shield className="w-6 h-6 text-white" />}
-                  </div>
-                  <div className="flex-1">
-                    <h2 className="text-2xl font-bold mb-6 text-white">
-                      {section.title}
-                    </h2>
-                    <ul className="space-y-4">
-                      {section.items.map((item, i) => (
-                        <li key={i} className="flex items-start gap-4">
-                          <Check className="w-5 h-5 text-green-400 shrink-0 mt-0.5" />
-                          <span className="text-gray-300 leading-relaxed">
-                            {item}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
+                <div className="absolute inset-0 bg-linear-to-br from-white/10 via-transparent to-white/5 opacity-50" />
+                <div className="relative bg-black/60 backdrop-blur-2xl p-6 md:p-8 rounded-[15px] border border-white/5">
+                  <div className="flex flex-col md:flex-row gap-6 items-start">
+                    <div className="size-11 rounded-xl bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-blue-600/10 transition-colors border border-white/10 text-blue-400">
+                      <section.icon className="w-5 h-5 group-hover:text-blue-300 transition-colors" />
+                    </div>
+                    <div>
+                      <h2 className="text-lg md:text-xl font-bold mb-2 text-white group-hover:text-blue-200 transition-colors">
+                        {section.title}
+                      </h2>
+                      <p className="text-gray-400 leading-relaxed text-sm md:text-base font-medium">
+                        {section.content}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Closing */}
-          <div className="mt-16 text-center">
-            <p className="text-gray-400 text-lg mb-8">
-              We use the bare minimum — only what’s needed to make your
-              experience fast and smooth.
-            </p>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-linear-to-r from-blue-600 to-teal-600 rounded-xl font-semibold hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-blue-500/30"
-            >
-              Questions? Contact Us
-            </Link>
+          {/* Contact Support Container */}
+          <div className="mt-16">
+            <div className="relative p-8 md:p-12 rounded-[32px] overflow-hidden text-center border border-blue-500/20 bg-linear-to-b from-blue-600/5 to-transparent backdrop-blur-sm">
+              <div className="size-14 bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-2xl shadow-blue-500/40">
+                <Mail className="w-6 h-6 text-white" />
+              </div>
+              <h3 className="text-2xl md:text-4xl font-black mb-4 text-white leading-tight">
+                Privacy Concerns?
+              </h3>
+              <p className="text-base text-gray-400 mb-8 max-w-lg mx-auto font-medium">
+                If you have questions about how we handle cookies or data
+                tracking, our support team is available to help.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link
+                  href="/contact"
+                  className="group px-8 py-4 bg-white text-black rounded-xl font-bold text-base flex items-center justify-center gap-2 hover:bg-blue-50 transition-all shadow-xl shadow-white/5"
+                >
+                  Contact Support
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+                <a
+                  href="https://wa.me/919690170502"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-8 py-4 bg-green-600/10 border border-green-500/20 text-green-400 rounded-xl font-bold text-base hover:bg-green-600 hover:text-white transition-all flex items-center justify-center gap-2"
+                >
+                  WhatsApp Consult
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>

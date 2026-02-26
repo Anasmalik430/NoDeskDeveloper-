@@ -11,8 +11,23 @@ import {
 import Link from "next/link";
 
 export default function AboutUsPage() {
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    mainEntity: {
+      "@type": "Organization",
+      name: "NoDeskDeveloper",
+      description:
+        "Trusted all-in-one technology partner offering IT solutions, hiring verified developers, and custom development.",
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+      />
       <div className="min-h-screen bg-black text-white overflow-hidden relative">
         {/* Hero */}
         <section className="py-20 pb-4 md:pb-20 px-6 text-center">
@@ -99,7 +114,10 @@ export default function AboutUsPage() {
                     "Provide reliable support & maintenance",
                     "Build long-term trust & partnerships",
                   ].map((item, i) => (
-                    <li key={i} className="flex items-center md:items-start gap-2 md:gap-4">
+                    <li
+                      key={i}
+                      className="flex items-center md:items-start gap-2 md:gap-4"
+                    >
                       <CheckCircle2 className="size-4 md:size-7 text-cyan-400 shrink-0 mt-1" />
                       <span>{item}</span>
                     </li>
@@ -170,14 +188,19 @@ export default function AboutUsPage() {
                   desc: "3000+ happy clients • 5000+ projects delivered",
                 },
               ].map((item, i) => (
-                <div key={i} className="text-center border-2 border-white/20 p-5 rounded-xl bg-white/5 hover:skew-1 transition-all duration-200 ease-in-out">
+                <div
+                  key={i}
+                  className="text-center border-2 border-white/20 p-5 rounded-xl bg-white/5 hover:skew-1 transition-all duration-200 ease-in-out"
+                >
                   <div className="size-20 md:size-24 rounded-full bg-linear-to-br from-cyan-500 to-blue-600 flex items-center justify-center mx-auto mb-6 shadow-2xl">
                     <item.icon className="size-10 md:size-12 text-white" />
                   </div>
                   <h3 className="text-2xl md:text-3xl font-black text-white mb-4">
                     {item.title}
                   </h3>
-                  <p className="text-sm md:text-xl text-cyan-200">{item.desc}</p>
+                  <p className="text-sm md:text-xl text-cyan-200">
+                    {item.desc}
+                  </p>
                 </div>
               ))}
             </div>
@@ -197,7 +220,9 @@ export default function AboutUsPage() {
                   key={i}
                   className="bg-linear-to-br from-blue-900/40 to-cyan-900/30 backdrop-blur-xl rounded-3xl p-8 border border-cyan-500/30"
                 >
-                  <div className="text-4xl md:text-6xl text-cyan-400/30 mb-0 md:mb-4">“</div>
+                  <div className="text-4xl md:text-6xl text-cyan-400/30 mb-0 md:mb-4">
+                    “
+                  </div>
                   <p className="text-sm md:text-xl text-cyan-100 italic mb-2 md:mb-6 leading-relaxed">
                     &#34;{t.text}&#34;
                   </p>
@@ -235,7 +260,8 @@ export default function AboutUsPage() {
                 href="/book-service"
                 className="px-6 py-4 md:px-12 md:py-7 border-2 border-cyan-500 rounded-2xl font-bold  text-sm md:text-xl hover:bg-cyan-500/10 transition-all duration-300 hover:scale-105"
               >
-                Book <span className="hidden md:block">a Free Consultation</span>
+                Book{" "}
+                <span className="hidden md:block">a Free Consultation</span>
                 <span className="md:hidden">Consult</span>
               </Link>
             </div>

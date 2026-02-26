@@ -58,8 +58,28 @@ export async function generateMetadata({ params }) {
 //   }));
 // }
 
-const DeveloperDetailPage = () => {
-  return <DeveloperDetailBySlug />;
+const DeveloperDetailPage = async ({ params }) => {
+  const { slug } = await params;
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfilePage",
+            "mainEntity": {
+              "@type": "Person",
+              "name": "Developer Profile",
+              "url": `https://www.nodeskdeveloper.vercel.app/developer/${slug}`,
+            },
+          }),
+        }}
+      />
+      <DeveloperDetailBySlug />
+    </>
+  );
 };
 
 export default DeveloperDetailPage;

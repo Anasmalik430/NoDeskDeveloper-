@@ -111,8 +111,20 @@ const item = {
 };
 
 export default function BookServices() {
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "Book IT Services",
+    description:
+      "Book customized IT services including hiring developers, readymade code solutions, technical maintenance, and more.",
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+      />
       <section className="min-h-screen bg-black text-white py-24 px-5 lg:px-8">
         <div className="max-w-7xl mx-auto">
           {/* Hero Heading */}

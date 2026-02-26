@@ -1,6 +1,18 @@
 "use client";
 import { useState } from "react";
-import { User, Phone, Globe, MapPin, Building2, Briefcase, Link2, Upload, Send, FileText, X } from "lucide-react";
+import {
+  User,
+  Phone,
+  Globe,
+  MapPin,
+  Building2,
+  Briefcase,
+  Link2,
+  Upload,
+  Send,
+  FileText,
+  X,
+} from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import { UploadButton } from "@uploadthing/react";
 import { API_BASE } from "@/lib/api";
@@ -20,6 +32,13 @@ const roles = [
 ];
 
 export default function CareersPage() {
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "Careers at NoDeskDeveloper",
+    description:
+      "Join our growing team of web developers, app developers, and UI/UX designers.",
+  };
   const [form, setForm] = useState({
     name: "",
     phone: "",
@@ -59,62 +78,68 @@ export default function CareersPage() {
   };
 
   const handleSubmit = async () => {
-  if (!validate()) return;
+    if (!validate()) return;
 
-  setIsSubmitting(true);
+    setIsSubmitting(true);
 
-  const payload = {
-    name: form.name.trim(),
-    phone: form.phone.trim(),
-    country: form.country.trim() || "India",
-    state: form.state.trim(),
-    city: form.city.trim(),
-    role: form.role,
-    resume: form.resume,
-    resumeName: form.resumeName,
-    profileLink: form.profileLink.trim() || "Not provided",
-  };
+    const payload = {
+      name: form.name.trim(),
+      phone: form.phone.trim(),
+      country: form.country.trim() || "India",
+      state: form.state.trim(),
+      city: form.city.trim(),
+      role: form.role,
+      resume: form.resume,
+      resumeName: form.resumeName,
+      profileLink: form.profileLink.trim() || "Not provided",
+    };
 
-  try {
-    const res = await fetch(`${API_BASE}/career`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
-
-    const result = await res.json();
-
-    if (res.ok) {
-      toast.success("Application submitted successfully! We'll review it soon.");
-      
-      // Reset form
-      setForm({
-        name: "",
-        phone: "",
-        country: "",
-        state: "",
-        city: "",
-        role: "",
-        resume: "",
-        resumeName: "",
-        profileLink: "",
+    try {
+      const res = await fetch(`${API_BASE}/career`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
       });
-      setErrors({});
-    } else {
-      toast.error(result.message || "Submission failed. Please try again.");
+
+      const result = await res.json();
+
+      if (res.ok) {
+        toast.success(
+          "Application submitted successfully! We'll review it soon.",
+        );
+
+        // Reset form
+        setForm({
+          name: "",
+          phone: "",
+          country: "",
+          state: "",
+          city: "",
+          role: "",
+          resume: "",
+          resumeName: "",
+          profileLink: "",
+        });
+        setErrors({});
+      } else {
+        toast.error(result.message || "Submission failed. Please try again.");
+      }
+    } catch (err) {
+      console.error("Submission error:", err);
+      toast.error("Network error! Please check your connection.");
+    } finally {
+      setIsSubmitting(false);
     }
-  } catch (err) {
-    console.error("Submission error:", err);
-    toast.error("Network error! Please check your connection.");
-  } finally {
-    setIsSubmitting(false);
-  }
-};
+  };
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+      />
       <Toaster position="top-center" toastOptions={{ duration: 5000 }} />
 
       <div className="min-h-screen bg-black text-white pt-24 pb-32 px-6">
@@ -126,7 +151,8 @@ export default function CareersPage() {
               </span>
             </h1>
             <p className="text-sm md:text-lg text-cyan-200/70 font-medium">
-              Be part of something extraordinary. Apply now and let&#39;s build the future together.
+              Be part of something extraordinary. Apply now and let&#39;s build
+              the future together.
             </p>
           </div>
 
@@ -134,7 +160,9 @@ export default function CareersPage() {
             <div className="space-y-8">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-cyan-300 mb-2">Full Name</label>
+                  <label className="block text-sm font-medium text-cyan-300 mb-2">
+                    Full Name
+                  </label>
                   <div className="relative">
                     <User className="absolute left-4 top-4 w-5 h-5 text-cyan-400" />
                     <input
@@ -145,11 +173,15 @@ export default function CareersPage() {
                       placeholder="John Doe"
                     />
                   </div>
-                  {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name}</p>}
+                  {errors.name && (
+                    <p className="text-red-400 text-xs mt-1">{errors.name}</p>
+                  )}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-cyan-300 mb-2">Phone Number</label>
+                  <label className="block text-sm font-medium text-cyan-300 mb-2">
+                    Phone Number
+                  </label>
                   <div className="relative">
                     <Phone className="absolute left-4 top-4 w-5 h-5 text-cyan-400" />
                     <input
@@ -160,13 +192,17 @@ export default function CareersPage() {
                       placeholder="+91 98765 43210"
                     />
                   </div>
-                  {errors.phone && <p className="text-red-400 text-xs mt-1">{errors.phone}</p>}
+                  {errors.phone && (
+                    <p className="text-red-400 text-xs mt-1">{errors.phone}</p>
+                  )}
                 </div>
               </div>
 
               <div className="grid md:grid-cols-3 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-cyan-300 mb-2">Country</label>
+                  <label className="block text-sm font-medium text-cyan-300 mb-2">
+                    Country
+                  </label>
                   <div className="relative">
                     <Globe className="absolute left-4 top-4 w-5 h-5 text-cyan-400" />
                     <input
@@ -177,11 +213,17 @@ export default function CareersPage() {
                       placeholder="India"
                     />
                   </div>
-                  {errors.country && <p className="text-red-400 text-xs mt-1">{errors.country}</p>}
+                  {errors.country && (
+                    <p className="text-red-400 text-xs mt-1">
+                      {errors.country}
+                    </p>
+                  )}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-cyan-300 mb-2">State</label>
+                  <label className="block text-sm font-medium text-cyan-300 mb-2">
+                    State
+                  </label>
                   <div className="relative">
                     <MapPin className="absolute left-4 top-4 w-5 h-5 text-cyan-400" />
                     <input
@@ -192,11 +234,15 @@ export default function CareersPage() {
                       placeholder="Maharashtra"
                     />
                   </div>
-                  {errors.state && <p className="text-red-400 text-xs mt-1">{errors.state}</p>}
+                  {errors.state && (
+                    <p className="text-red-400 text-xs mt-1">{errors.state}</p>
+                  )}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-cyan-300 mb-2">City</label>
+                  <label className="block text-sm font-medium text-cyan-300 mb-2">
+                    City
+                  </label>
                   <div className="relative">
                     <Building2 className="absolute left-4 top-4 w-5 h-5 text-cyan-400" />
                     <input
@@ -207,12 +253,16 @@ export default function CareersPage() {
                       placeholder="Mumbai"
                     />
                   </div>
-                  {errors.city && <p className="text-red-400 text-xs mt-1">{errors.city}</p>}
+                  {errors.city && (
+                    <p className="text-red-400 text-xs mt-1">{errors.city}</p>
+                  )}
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-cyan-300 mb-2">Select Role</label>
+                <label className="block text-sm font-medium text-cyan-300 mb-2">
+                  Select Role
+                </label>
                 <div className="relative">
                   <Briefcase className="absolute left-4 top-4 w-5 h-5 text-cyan-400" />
                   <select
@@ -229,12 +279,16 @@ export default function CareersPage() {
                     ))}
                   </select>
                 </div>
-                {errors.role && <p className="text-red-400 text-xs mt-1">{errors.role}</p>}
+                {errors.role && (
+                  <p className="text-red-400 text-xs mt-1">{errors.role}</p>
+                )}
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-cyan-300 mb-2">Upload Resume (PDF Only & Max 10MB)</label>
-                
+                <label className="block text-sm font-medium text-cyan-300 mb-2">
+                  Upload Resume (PDF Only & Max 10MB)
+                </label>
+
                 {!form.resume ? (
                   <div className="w-full">
                     <UploadButton
@@ -254,27 +308,32 @@ export default function CareersPage() {
                       }}
                       onUploadError={(error) => {
                         console.error("Upload error:", error);
-                        toast.error("Failed to upload resume. Please try again.");
+                        toast.error(
+                          "Failed to upload resume. Please try again.",
+                        );
                       }}
                       appearance={{
-                        button: "w-full py-4 px-6 bg-white/5 border border-blue-500/30 rounded-xl text-cyan-400 hover:border-cyan-400 transition cursor-pointer ut-ready:bg-white/5 ut-uploading:bg-cyan-600/20 ut-uploading:border-cyan-400",
+                        button:
+                          "w-full py-4 px-6 bg-white/5 border border-blue-500/30 rounded-xl text-cyan-400 hover:border-cyan-400 transition cursor-pointer ut-ready:bg-white/5 ut-uploading:bg-cyan-600/20 ut-uploading:border-cyan-400",
                         container: "w-full",
                         allowedContent: "hidden",
                       }}
                       content={{
                         button({ ready, isUploading }) {
-                          if (isUploading) return (
-                            <div className="flex items-center justify-center gap-3">
-                              <Upload className="w-5 h-5 animate-pulse" />
-                              <span>Uploading...</span>
-                            </div>
-                          );
-                          if (ready) return (
-                            <div className="flex items-center justify-center gap-3">
-                              <Upload className="w-5 h-5" />
-                              <span>Click to upload resume</span>
-                            </div>
-                          );
+                          if (isUploading)
+                            return (
+                              <div className="flex items-center justify-center gap-3">
+                                <Upload className="w-5 h-5 animate-pulse" />
+                                <span>Uploading...</span>
+                              </div>
+                            );
+                          if (ready)
+                            return (
+                              <div className="flex items-center justify-center gap-3">
+                                <Upload className="w-5 h-5" />
+                                <span>Click to upload resume</span>
+                              </div>
+                            );
                           return "Getting ready...";
                         },
                       }}
@@ -284,7 +343,9 @@ export default function CareersPage() {
                   <div className="w-full py-4 px-6 bg-cyan-600/10 border border-cyan-500/50 rounded-xl flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <FileText className="w-5 h-5 text-cyan-400" />
-                      <span className="text-white truncate max-w-xs">{form.resumeName}</span>
+                      <span className="text-white truncate max-w-xs">
+                        {form.resumeName}
+                      </span>
                     </div>
                     <button
                       type="button"
@@ -295,12 +356,16 @@ export default function CareersPage() {
                     </button>
                   </div>
                 )}
-                
-                {errors.resume && <p className="text-red-400 text-xs mt-1">{errors.resume}</p>}
+
+                {errors.resume && (
+                  <p className="text-red-400 text-xs mt-1">{errors.resume}</p>
+                )}
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-cyan-300 mb-2">Profile Link (Optional)</label>
+                <label className="block text-sm font-medium text-cyan-300 mb-2">
+                  Profile Link (Optional)
+                </label>
                 <div className="relative">
                   <Link2 className="absolute left-4 top-4 w-5 h-5 text-cyan-400" />
                   <input
@@ -328,7 +393,8 @@ export default function CareersPage() {
           </div>
 
           <div className="text-center mt-10 text-cyan-300/70 text-sm">
-            Your information is 100% secure • We review all applications carefully • Average response time: 2-3 days
+            Your information is 100% secure • We review all applications
+            carefully • Average response time: 2-3 days
           </div>
         </div>
       </div>

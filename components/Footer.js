@@ -21,7 +21,6 @@ const footerLinks = {
   ],
   quickLinkss: [
     { name: "Documentation", href: "/quickLinks/docs" },
-    { name: "Tutorials", href: "/quickLinks/tutorials" },
     { name: "Support", href: "/contact" },
     { name: "FAQ", href: "/quickLinks/faq" },
   ],
@@ -104,7 +103,7 @@ export default function FooterComponent() {
                 <div className="p-2 rounded-lg bg-blue-500/10 group-hover:bg-blue-500/20 transition-colors duration-300">
                   <Mail className="w-4 h-4" />
                 </div>
-                <span className="text-sm">suport@nodeskdeveloper.com</span>
+                <span className="text-sm">support@nodeskdeveloper.in</span>
               </Link>
               <Link
                 href="tel:+1234567890"
