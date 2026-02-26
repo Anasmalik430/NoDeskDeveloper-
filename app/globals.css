@@ -19,15 +19,16 @@
   }
 }
 
-.prodfeatures::-webkit-scrollbar{
+.prodfeatures::-webkit-scrollbar {
   /* border: 0.2px solid white; */
   width: 10px;
   padding: 2px;
   background-color: #212529;
-    border-radius: 20px;
+  border-radius: 20px;
 
 }
-.prodfeatures::-webkit-scrollbar-thumb{
+
+.prodfeatures::-webkit-scrollbar-thumb {
   background-color: #343a40;
   border-radius: 20px;
 }
@@ -41,19 +42,42 @@ body {
 
 /* React-Quill Dark Theme Fix */
 .ql-toolbar.ql-snow {
-  border-color: rgba(255,255,255,0.1) !important;
-  background: rgba(0,0,0,0.4);
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  background: rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(10px);
 }
+
 .ql-container.ql-snow {
-  border-color: rgba(255,255,255,0.1) !important;
-  background: rgba(255,255,255,0.05);
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  background: rgba(255, 255, 255, 0.05);
   color: white;
 }
+
 .ql-editor {
   min-height: 180px;
   color: white;
 }
+
 .ql-editor.ql-blank::before {
   color: #9ca3af !important;
+}
+
+/* Professional Shimmer Effect */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0.03) 25%,
+      rgba(255, 255, 255, 0.08) 50%,
+      rgba(255, 255, 255, 0.03) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite linear;
 }

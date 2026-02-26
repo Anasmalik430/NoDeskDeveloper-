@@ -1,6 +1,6 @@
 "use client";
 import { API_BASE } from "@/lib/api";
-import { MousePointer2 } from "lucide-react";
+import { MousePointer2, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -56,7 +56,7 @@ export default function ServicesGrid() {
             const total = items.length;
             newTotal[service.id] = total;
 
-            const lastSeenTime = lastSeen[service.id] ? new  Date(lastSeen[service.id]).getTime() : 0;
+            const lastSeenTime = lastSeen[service.id] ? new Date(lastSeen[service.id]).getTime() : 0;
             const unseen = items.filter(item => new Date(item.createdAt).getTime() > lastSeenTime).length;
             newNew[service.id] = unseen;
           } else {
@@ -99,21 +99,11 @@ export default function ServicesGrid() {
   };
 
   return (
-    <>
-      <div className="border-b border-white/10 backdrop-blur-xl bg-white/2 flex justify-between items-start md:items-center *:py-[22px] *:px-6">
-        <div className="px-8 py-10">
-          <h1 className="text-2xl md:text-3xl font-black bg-linear-to-tl from-cyan-700 via-emerald-600 to-green-700 bg-clip-text text-transparent">
-            All Bookings
-          </h1>
-          <p className="text-gray-400 mt-1 text-xs md:text-sm flex">
-            Manage <span className="hidden md:block px-1">and showcase </span> all bookings
-          </p>
-        </div>
-      </div>
-
-      <div className="min-h-screen bg-black p-6 md:p-10">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="pb-24 lg:pb-12">
+      <div className="space-y-8 md:space-y-12">
+        {/* Categories Grid */}
+        <div className="relative">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {services.map((service) => {
               const newCount = newCounts[service.id] ?? 0;
               const total = totalCounts[service.id] ?? 0;
@@ -123,38 +113,43 @@ export default function ServicesGrid() {
                 <div
                   key={service.id}
                   onClick={() => handleCardClick(service)}
-                  className="relative group cursor-pointer transform transition-all duration-300 hover:scale-[1.02]"
+                  className="group relative bg-white/[0.03] backdrop-blur-3xl border border-white/10 rounded-3xl p-6 transition-all duration-500 hover:border-cyan-500/40 hover:shadow-[0_0_40px_rgba(34,211,238,0.1)] cursor-pointer overflow-hidden flex flex-col justify-between min-h-[160px]"
                 >
-                  <div className="relative overflow-hidden rounded-3xl p-7 bg-linear-to-br from-slate-900/60 to-slate-950/60 border border-slate-800/50 backdrop-blur-xl shadow-2xl transition-all duration-500 hover:border-cyan-500/40 hover:shadow-cyan-500/10">
-                    {/* Subtle hover glow */}
-                    <div className="absolute inset-0 bg-linear-to-br from-cyan-500/10 to-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                  <div className="absolute -right-6 -bottom-6 h-24 w-24 bg-cyan-500/5 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
-                    <div className="relative z-10 flex flex-col">
-                      <div className="flex justify-between items-start mb-2">
-                        <h3 className="text-white font-semibold text-[14px] leading-tight">
-                          {service.title}
-                        </h3>
-                        <MousePointer2 className="size-5 text-cyan-400 opacity-0 group-hover:opacity-80 duration-300  group-hover:rotate-90 transition-all drop-shadow-blue-200 ease-in" />
-                      </div>
-
-                      <div className="flex gap-3 items-center">
-                        {/* Total Count - Minimal & professional */}
-                        <div className={`px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-500/40 text-cyan-300 text-[9px] h-fit font-semibold ${hasNew ? "hidden" : "text-cyan-400"} transition-colors`}>
-                         Total  {total} {total === 1 ? "enquiry" : "enquiries"}
-                        </div>
-
-                        {/* New Badge - Eye-catching red with pulse */}
-                        {hasNew && (
-                          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-500/20 border border-red-500/40 text-red-300 text-[9px] font-semibold ">
-                            <span className="relative flex h-2 w-2">
-                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                              <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
-                            </span>
-                            {newCount === 1 ? "1 NEW" : `${newCount} NEW`}
-                          </div>
-                        )}
+                  <div className="relative z-10 space-y-4">
+                    <div className="flex justify-between items-start">
+                      <h3 className="text-sm font-bold text-white tracking-tight group-hover:text-cyan-400 transition-colors leading-snug max-w-[80%]">
+                        {service.title}
+                      </h3>
+                      <div className="p-2 bg-white/5 rounded-lg group-hover:bg-cyan-500/20 group-hover:rotate-45 transition-all">
+                        <MousePointer2 className="w-4 h-4 text-gray-400 group-hover:text-cyan-400" />
                       </div>
                     </div>
+
+                    <div className="flex flex-wrap items-center gap-2">
+                      <div className="flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full">
+                        <span className="text-[9px] font-black uppercase tracking-wider text-gray-500">Total</span>
+                        <span className="text-xs font-bold text-white leading-none">{total}</span>
+                      </div>
+
+                      {hasNew && (
+                        <div className="flex items-center gap-2 px-3 py-1 bg-red-500/10 border border-red-500/20 rounded-full animate-pulse">
+                          <span className="relative flex h-1.5 w-1.5">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500"></span>
+                          </span>
+                          <span className="text-[9px] font-black uppercase text-red-400">
+                            {newCount} New
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="relative z-10 mt-auto pt-4 flex items-center justify-between text-[10px] font-black uppercase tracking-[0.2em] text-gray-500 group-hover:text-gray-300 transition-colors">
+                    <span>Explore List</span>
+                    <div className="h-px flex-1 bg-white/5 mx-3" />
                   </div>
                 </div>
               );
@@ -162,10 +157,13 @@ export default function ServicesGrid() {
           </div>
 
           {loading && Object.keys(newCounts).length === 0 && (
-            <div className="text-center text-gray-500 py-12 text-sm">Loading latest updates...</div>
+            <div className="flex flex-col items-center justify-center py-20 space-y-4">
+              <Loader2 className="w-10 h-10 text-cyan-500 animate-spin" />
+              <p className="text-gray-500 text-xs font-bold uppercase tracking-widest">Hydrating data streams...</p>
+            </div>
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 }

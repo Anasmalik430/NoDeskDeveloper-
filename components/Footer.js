@@ -120,16 +120,16 @@ export default function FooterComponent() {
                 className="flex items-center gap-3 text-gray-400 hover:text-blue-400 transition-colors duration-300 group w-fit"
               >
                 <div className="p-2 rounded-lg bg-blue-500/10 group-hover:bg-blue-500/20 transition-colors duration-300">
-                  <FaWhatsapp  className="w-4 h-4" />
+                  <FaWhatsapp className="w-4 h-4" />
                 </div>
                 <span className="text-sm">+91 9690170502</span>
               </Link>
-              <div className="flex items-center gap-3 text-gray-400">
+              {/* <div className="flex items-center gap-3 text-gray-400">
                 <div className="p-2 rounded-lg bg-blue-500/10">
                   <MapPin className="w-4 h-4" />
                 </div>
                 <span className="text-sm">San Francisco, CA 94102</span>
-              </div>
+              </div> */}
             </div>
           </div>
 
@@ -167,7 +167,7 @@ export default function FooterComponent() {
             </div>
 
             {/* Social Links */}
-            <div className="flex items-center gap-4">
+            <div className="flex flex-wrap items-center gap-4">
               {socialLinks.map(({ Icon, href, label }, idx) => (
                 <a
                   key={label}
@@ -185,6 +185,15 @@ export default function FooterComponent() {
                   <Icon className="relative w-5 h-5 text-gray-400 group-hover/social:text-white transition-colors duration-300" />
                 </a>
               ))}
+
+              {/* MSME Badge */}
+              <div className="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-white/5 border border-blue-500/20 hover:border-blue-500/50 transition-all duration-300 group/msme cursor-default">
+
+                <div className="flex flex-col space-y-0.5">
+                  <span className="text-[12px] font-black uppercase tracking-[0.2em] text-white">MSME</span>
+                  <span className="text-[7px] font-bold text-blue-300/40 tracking-widest leading-none">REGISTERED</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>

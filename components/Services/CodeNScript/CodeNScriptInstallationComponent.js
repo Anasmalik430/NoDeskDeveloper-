@@ -20,7 +20,7 @@ export default function CodeNScriptInstallationComponent() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
 
-  
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -38,7 +38,7 @@ export default function CodeNScriptInstallationComponent() {
       }
     };
     fetchProducts();
-  }, []);  
+  }, []);
 
   const filteredProducts = useMemo(() => {
     return products.filter((p) => {
@@ -55,17 +55,17 @@ export default function CodeNScriptInstallationComponent() {
       return matchesCategory && matchesSearch;
     });
   }, [products, selectedCategory, searchTerm]);
-//  ======================================================== //
-//  =================== Loading Skeleton =================== //
-//  ======================================================== //
+  //  ======================================================== //
+  //  =================== Loading Skeleton =================== //
+  //  ======================================================== //
   if (loading) {
     return (
       <div className=" text-white pt-24 pb-24 px-6">
         <div className="max-w-7xl mx-auto">
           {/* Hero skeleton */}
           <div className="text-center mb-8 md:mb-12 space-y-4">
-            <div className="h-12 md:h-16 bg-gray-800 rounded-2xl w-3/4 mx-auto animate-pulse" />
-            <div className="h-6 md:h-8 bg-gray-800 rounded-xl w-1/2 max-w-2xl mx-auto animate-pulse" />
+            <div className="h-12 md:h-16 bg-white/5 rounded-2xl w-3/4 mx-auto shimmer" />
+            <div className="h-6 md:h-8 bg-white/5 rounded-xl w-1/2 max-w-2xl mx-auto shimmer" />
           </div>
 
           {/* Filter bar skeleton */}
@@ -74,39 +74,39 @@ export default function CodeNScriptInstallationComponent() {
               {[...Array(8)].map((_, i) => (
                 <div
                   key={i}
-                  className="h-8 w-20 bg-white/10 rounded-full animate-pulse"
+                  className="h-8 w-20 bg-white/10 rounded-full shimmer"
                 />
               ))}
             </div>
             <div className="relative">
-              <div className="h-10 bg-white/10 rounded-xl animate-pulse" />
+              <div className="h-10 bg-white/10 rounded-xl shimmer" />
             </div>
           </div>
 
           {/* Showing count skeleton */}
           <div className="my-6 ml-3">
-            <div className="h-6 w-48 bg-gray-700 rounded-lg animate-pulse" />
+            <div className="h-6 w-48 bg-white/5 rounded-lg shimmer" />
           </div>
 
           {/* Product cards skeleton */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[...Array(3)].map((_, i) => (
+            {[...Array(6)].map((_, i) => (
               <div
                 key={i}
-                className="bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border border-blue-500/20 animate-pulse"
+                className="bg-white/5 backdrop-blur-xl rounded-3xl overflow-hidden border border-blue-500/20"
               >
-                <div className="h-40 bg-gray-800" />
+                <div className="h-40 bg-white/5 shimmer" />
                 <div className="p-6 space-y-4">
                   <div className="flex justify-between">
-                    <div className="h-5 bg-gray-700 rounded-lg w-2/3" />
-                    <div className="h-5 bg-gray-700 rounded-full w-14 " />
+                    <div className="h-5 bg-white/5 rounded-lg w-2/3 shimmer" />
+                    <div className="h-5 bg-white/5 rounded-full w-14 shimmer" />
                   </div>
-                  <div className="h-4 bg-gray-700 rounded w-full" />
+                  <div className="h-4 bg-white/5 rounded w-full shimmer" />
                   <div className="flex gap-2">
                     {[...Array(3)].map((_, j) => (
                       <div
                         key={j}
-                        className="h-5 w-16 bg-gray-700 rounded-lg"
+                        className="h-5 w-16 bg-white/5 rounded-lg shimmer"
                       />
                     ))}
                   </div>
@@ -114,17 +114,17 @@ export default function CodeNScriptInstallationComponent() {
                     {[...Array(4)].map((_, k) => (
                       <div
                         key={k}
-                        className="h-5 w-20 bg-gray-700 rounded-md"
+                        className="h-5 w-20 bg-white/5 rounded-md shimmer"
                       />
                     ))}
                   </div>
-                  <div className="pt-4 border-t border-gray-700 space-y-3">
-                    <div className="h-5 bg-gray-700 rounded-lg" />
-                    <div className="h-5 bg-gray-700 rounded-lg" />
+                  <div className="pt-4 border-t border-white/5 space-y-3">
+                    <div className="h-5 bg-white/5 rounded-lg shimmer" />
+                    <div className="h-5 bg-white/5 rounded-lg shimmer" />
                   </div>
                   <div className="flex gap-3">
-                    <div className="h-6 flex-1 bg-gray-700 rounded-xl" />
-                    <div className="h-6 flex-1 bg-gray-700 rounded-xl" />
+                    <div className="h-10 flex-1 bg-white/5 rounded-xl shimmer" />
+                    <div className="h-10 flex-1 bg-white/5 rounded-xl shimmer" />
                   </div>
                 </div>
               </div>
@@ -154,11 +154,10 @@ export default function CodeNScriptInstallationComponent() {
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-5 py-2 rounded-full font-semibold text-[11px] md:text-sm transition-all duration-300 ${
-                  selectedCategory === cat
+                className={`px-5 py-2 rounded-full font-semibold text-[11px] md:text-sm transition-all duration-300 ${selectedCategory === cat
                     ? "bg-linear-to-r from-blue-600 to-sky-500 text-white shadow-lg shadow-blue-500/50"
                     : "bg-white/5 text-blue-300 hover:bg-white/10 border border-blue-500/30"
-                }`}
+                  }`}
               >
                 {cat}
               </button>

@@ -1,19 +1,19 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Loader2, IndianRupee, Link2 } from "lucide-react";
+import { Loader2, IndianRupee, Link2, Package, TrendingUp } from "lucide-react";
 import { API_BASE } from "@/lib/api";
 import AddcodeNscriptModal from "@/components/Modals/AddcodeNscriptModal";
-import Link from "next/link";
+import { useCodeModal } from "./layout";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function AdminCodeNscriptPage() {
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isModalOpen, setIsModalOpen } = useCodeModal();
   const router = useRouter();
 
-  // Fetch function alag se banao taaki modal use kar sake
   const fetchCards = async () => {
     setLoading(true);
     try {
@@ -31,160 +31,140 @@ export default function AdminCodeNscriptPage() {
     fetchCards();
   }, []);
 
-  // Modal success ke baad refresh + close
   const handleAddSuccess = () => {
-    fetchCards(); // ye ab defined hai
-    setIsModalOpen(false); // extra safety
+    fetchCards();
+    setIsModalOpen(false);
   };
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-black">
-        <Loader2 className="w-12 h-12 text-teal-500 animate-spin" />
+      <div className="flex flex-col items-center justify-center min-h-[400px] bg-black">
+        <Loader2 className="w-10 h-10 text-teal-500 animate-spin" />
+        <p className="text-gray-500 text-xs font-bold uppercase tracking-widest mt-4">Compiling assets...</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-black/95  ">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-0 px-9 py-6">
-          <div className="space-y-1.5">
-            <h1 className="text-xl lg:text-3xl font-bold text-white tracking-tight">
-              Code & Script Products
-            </h1>
-            <p className="text-slate-400 text-xs">
-              Manage your digital products and scripts
-            </p>
-          </div>
-          <div className="flex items-center gap-4">
-            <div className="px-4 py-2 bg-slate-800/50 border border-slate-700/50 rounded-lg backdrop-blur-sm">
-              <p className="text-sm text-slate-400">
-                Total Products:{" "}
-                <span className="text-teal-400 font-semibold">
-                  {cards.length}
-                </span>
-              </p>
-            </div>
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="px-6 py-3 bg-linear-to-r from-teal-500 to-cyan-500 hover:from-teal-400 hover:to-cyan-400 rounded-xl font-bold text-white shadow-lg transition hover:scale-105"
-            >
-              + Add New Product
-            </button>
-            
-          </div>
-        </div>
-       {/* ============================================================== */}
-{/*========================== Card Here ==========================*/}
-{/* ============================================================== */}
-<div className="p-8">
-  {cards.length === 0 ? (
-    <p className="text-center text-white/60 text-lg">
-      No products added yet
-    </p>
-  ) : (
-    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-      {cards.map((card) => (
-        <div
-          key={card._id}
-          className="group relative bg-linear-to-br from-slate-900/95 to-slate-950/95 border border-teal-500/30 rounded-3xl overflow-hidden shadow-2xl backdrop-blur-sm hover:shadow-teal-500/20 transition-all duration-500 hover:-translate-y-1"
-        >
-          {/* Glow Effect */}
-          <div className="absolute -inset-0.5 bg-linear-to-r from-teal-500 to-cyan-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500" />
-          
-          {/* Card Content */}
-          <div className="relative">
-            {/* Image Section with Badges */}
-            <div className="relative h-52 overflow-hidden">
-              <Image
-                src={card.images[0] || "/productImage.webp"}
-                width={1920}
-                height={1080}
-                alt={card.name}
-                loading="lazy"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-              />
-              <div className="absolute inset-0 bg-linear-to-t from-slate-950 via-slate-950/40 to-transparent" />
-              
-              {/* Product Type Badge - Top Right */}
-              <span className="absolute top-4 right-4 px-3 py-1.5 bg-teal-500/90 backdrop-blur-md text-white text-xs font-semibold rounded-lg shadow-lg">
-                {card.productType}
-              </span>
-
-              {/* Installation Types - Bottom Right */}
-              <div className="absolute bottom-4 right-4  flex flex-wrap gap-2 justify-end">
-                {card.installationType.map((e, i) => (
-                  <span 
-                    key={i} 
-                    className="px-3 py-1 bg-slate-900/90 backdrop-blur-md border border-teal-500/40 text-teal-300 text-[10px] font-semibold rounded-lg shadow-lg"
-                  >
-                    {e}
-                  </span>
-                ))}
+    <div className="pb-24 lg:pb-12">
+      <div className="space-y-8 md:space-y-12">
+        {/* Content Section */}
+        <div className="relative">
+          {cards.length === 0 ? (
+            <div className="flex flex-col items-center justify-center py-32 space-y-6 bg-white/[0.02] rounded-3xl border border-dashed border-white/10 backdrop-blur-xl">
+              <div className="p-6 bg-teal-500/5 rounded-full ring-1 ring-teal-500/20">
+                <Package className="w-16 h-16 text-teal-500/40" />
               </div>
-            </div>
-
-            {/* Content Section */}
-            <div className="p-6 space-y-5">
-              {/* Title and Code Link */}
-              <div className="flex justify-between items-center">
-                <h3 className="text-xl font-bold text-white tracking-tight line-clamp-1">
-                  {card.name}
-                </h3>
-                <Link href={card?.codeLink} className="flex items-center gap-2 text-teal-400 text-sm font-medium hover:text-teal-300 transition-colors group/link" >
-                  <Link2 className="w-4 h-4 group-hover/link:rotate-45 transition-transform" />
-                  <span className="truncate text-xs">View Code</span>
-                </Link>
+              <div className="text-center space-y-2">
+                <h3 className="text-2xl font-bold text-white">No products found</h3>
+                <p className="text-gray-500 max-w-xs mx-auto">Start building your digital catalog by adding your first script or software.</p>
               </div>
-
-              {/* Tech Stack */}
-              <div className="flex gap-2 items-end">
-                <div className="flex flex-wrap gap-2">
-                  {card.codeLanguages.slice(0, 4).map((e, i) => (
-                    <span 
-                      key={i} 
-                      className="px-2.5 py-1 bg-slate-800/60 border border-slate-700 text-gray-300 text-[10px] font-mono rounded-2xl h-fit"
-                    >
-                      {e}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Base Price - Bottom */}
-              <div className="flex items-end justify-between gap-2 ">
-                <span className="text-gray-400 text-base font-medium">Base Price</span>
-                <span className="flex items-center gap-1.5 text-cyan-300 text-base font-bold">
-                  <IndianRupee className="w-4 h-4" />
-                  {card.basePrice}
-                </span>
-              </div>
-
-              {/* Update Button */}
               <button
-                onClick={() => router.push(`/admin/codeNscripts/${card._id}`)}
-                className="w-full py-3.5 bg-linear-to-r from-teal-600 to-cyan-600 hover:from-teal-500 hover:to-cyan-500 rounded-xl font-semibold text-white shadow-lg shadow-teal-500/25 hover:shadow-teal-500/40 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+                onClick={() => setIsModalOpen(true)}
+                className="text-teal-400 font-bold hover:text-teal-300 transition-colors uppercase tracking-widest text-xs py-2 px-4 rounded-lg bg-teal-500/10 border border-teal-500/20"
               >
-                Update Details
+                + Create First Entry
               </button>
             </div>
-          </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {cards.map((card, index) => (
+                <div
+                  key={card._id}
+                  className="group relative bg-white/[0.03] backdrop-blur-3xl border border-white/10 rounded-[2.5rem] overflow-hidden transition-all duration-500 hover:border-teal-500/40 hover:shadow-[0_0_50px_rgba(20,184,166,0.15)] flex flex-col"
+                >
+                  {/* Decorative Gradient Background */}
+                  <div className="absolute top-0 right-0 -mr-20 -mt-20 w-40 h-40 bg-teal-500/10 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
+                  {/* Image Section */}
+                  <div className="relative h-56 overflow-hidden">
+                    <Image
+                      src={card.images[0] || "/productImage.webp"}
+                      width={800}
+                      height={600}
+                      alt={card.name}
+                      priority={index < 3}
+                      className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
+
+                    {/* Floating Badges */}
+                    <div className="absolute top-4 left-4 right-4 flex justify-between items-start">
+                      <span className="px-3 py-1.5 bg-black/60 backdrop-blur-md border border-white/10 text-white text-[10px] font-black uppercase tracking-widest rounded-xl shadow-2xl">
+                        {card.productType}
+                      </span>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          window.open(card?.codeLink, '_blank');
+                        }}
+                        className="p-2.5 bg-white/10 backdrop-blur-md hover:bg-teal-500 hover:text-white transition-all rounded-xl border border-white/20 shadow-2xl group/link"
+                      >
+                        <Link2 className="w-4 h-4 group-hover/link:rotate-45 transition-transform" />
+                      </button>
+                    </div>
+
+                    <div className="absolute bottom-4 left-4 flex flex-wrap gap-1.5">
+                      {card.installationType.map((type, i) => (
+                        <span key={i} className="px-2 py-1 bg-teal-500/80 backdrop-blur-sm text-white text-[9px] font-bold rounded-lg uppercase tracking-tight">
+                          {type}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Content Section */}
+                  <div className="p-7 space-y-6 flex-1 flex flex-col">
+                    <div className="space-y-2">
+                      <h3 className="text-xl font-bold text-white tracking-tight group-hover:text-teal-400 transition-colors line-clamp-1">
+                        {card.name}
+                      </h3>
+                      <div className="flex flex-wrap gap-1.5">
+                        {card.codeLanguages.slice(0, 4).map((lang, i) => (
+                          <span key={i} className="text-[10px] text-gray-400 font-mono bg-white/5 px-2 py-0.5 rounded-md border border-white/[0.05]">
+                            {lang}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="pt-6 border-t border-white/[0.05] mt-auto flex items-center justify-between">
+                      <div className="space-y-0.5">
+                        <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold leading-none">Investment Price</p>
+                        <div className="flex items-center gap-1.5 text-2xl font-black text-white">
+                          <IndianRupee className="w-4 h-4 text-teal-400" />
+                          <span>{card.basePrice}</span>
+                        </div>
+                      </div>
+
+                      <button
+                        onClick={() => router.push(`/admin/codeNscripts/${card._id}`)}
+                        className="group/btn flex items-center justify-center p-4 bg-white/5 hover:bg-teal-500/20 rounded-2xl border border-white/10 hover:border-teal-500/40 transition-all active:scale-95"
+                        title="Update Product"
+                      >
+                        <TrendingUp className="w-5 h-5 text-gray-400 group-hover/btn:text-teal-400" />
+                      </button>
+                    </div>
+
+                    <button
+                      onClick={() => router.push(`/admin/codeNscripts/${card._id}`)}
+                      className="w-full py-4 px-6 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] text-gray-400 hover:text-white transition-all mt-2"
+                    >
+                      Update Details
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
-      ))}
-    </div>
-  )}
-</div>
       </div>
-      {/* // Add this just before the last </div> or at the end of return */}
-      {isModalOpen && (
-        <AddcodeNscriptModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          onSuccess={handleAddSuccess} // ab ye sahi function pass ho raha hai
-        />
-      )}
+
+      <AddcodeNscriptModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSuccess={handleAddSuccess}
+      />
     </div>
   );
 }

@@ -79,9 +79,7 @@ export default function TermsOfService() {
                 Transparent
               </span>
             </h1>
-            {/* <p className="text-gray-400 text-lg">
-              Last updated: January 05, 2026
-            </p> */}
+            
           </div>
 
           {/* Sections */}

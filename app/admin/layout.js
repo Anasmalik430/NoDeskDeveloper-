@@ -15,7 +15,7 @@ function AdminLayoutContent({ children }) {
   const { user, loading, isAdmin, logout } = useAuth();
 
   // Calculate total new enquiries across all services
-  const totalNewEnquiries = Object.values(newCounts).reduce( (sum, count) => sum + count, 0,);
+  const totalNewEnquiries = Object.values(newCounts).reduce((sum, count) => sum + count, 0,);
 
   useEffect(() => {
     if (!loading && (!user || user.role !== "admin")) {
@@ -33,7 +33,7 @@ function AdminLayoutContent({ children }) {
   ];
 
   const handleLogout = async () => {
-    await logout(); 
+    await logout();
     showToast.success("Logged Out Successfully");
   };
 
@@ -41,24 +41,41 @@ function AdminLayoutContent({ children }) {
   if (!user || user.role !== "admin") return null;
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-hidden">
-      {/* Animated Background */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 -left-40 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-0 -right-40 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl animate-pulse" />
+    <div className="min-h-screen bg-black text-white selection:bg-indigo-500/30">
+      {/* Animated Background Layers */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="absolute top-[-10%] -left-[10%] w-[40%] h-[40%] bg-indigo-600/10 rounded-full blur-[120px] animate-pulse" />
+        <div className="absolute bottom-[-10%] -right-[10%] w-[40%] h-[40%] bg-blue-600/10 rounded-full blur-[120px] animate-pulse" />
       </div>
 
-      <div className="relative flex">
+      <div className="relative flex min-h-screen z-10">
         {/* Desktop Sidebar */}
-        <aside className="w-72 fixed inset-y-0 left-0 z-50 hidden lg:block">
-          <div className="h-full bg-linear-to-b from-white/5 to-white/2 backdrop-blur-2xl border-r border-white/10 flex flex-col">
-            {/* Logo */}
-            <div className="h-20 flex items-center justify-center border-b border-white/10 px-8 py-13">
-              <h1 className="text-3xl font-black bg-linear-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">Admin Panel</h1>
+        <aside className="w-80 fixed inset-y-0 left-0 z-50 hidden lg:block p-6">
+          <div className="h-full bg-white/[0.02] backdrop-blur-3xl border border-white/10 rounded-[2.5rem] flex flex-col shadow-2xl shadow-black/50 overflow-hidden">
+            {/* Logo Section */}
+            <div className="h-32 flex items-center justify-center relative group">
+              <div className="absolute inset-0 bg-linear-to-b from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              <div className="relative flex flex-col items-center">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-linear-to-tr from-indigo-500 to-blue-500 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/20 ring-1 ring-white/20">
+                    <LayoutDashboard className="w-6 h-6 text-white" />
+                  </div>
+                  <h1 className="text-2xl font-black bg-linear-to-r from-indigo-400 via-blue-400 to-sky-400 bg-clip-text text-transparent tracking-tighter">
+                    Admin<span className="text-white/20 ml-1">Panel</span>
+                  </h1>
+                </div>
+                <div className="mt-2 px-3 py-0.5 rounded-full bg-white/5 border border-white/10">
+                  <span className="text-[10px] font-black uppercase tracking-[0.2em] text-indigo-400/80">Management Suite</span>
+                </div>
+              </div>
             </div>
 
-            {/* Navigation */}
-            <nav className="flex-1 px-6 py-8 space-y-2">
+            {/* Navigation Section */}
+            <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto scrollbar-hide">
+              <div className="px-4 mb-4">
+                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-500">Main Menu</p>
+              </div>
+
               {menuItems.map((item) => {
                 const Icon = item.icon;
                 const isActive = pathname === item.href;
@@ -68,66 +85,106 @@ function AdminLayoutContent({ children }) {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-300 group relative ${ isActive ? "bg-linear-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/40 shadow-lg shadow-blue-500/20" : "hover:bg-white/5 border border-transparent" }`}>
-                    <Icon className={`w-5 h-5 transition-colors ${ isActive ? "text-blue-400" : "text-gray-400 group-hover:text-white" }`} />
-                    <span className={`font-semibold ${ isActive ? "text-white" : "text-gray-300 group-hover:text-white" }`} > {item.label}
+                    className={`flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-500 group relative overflow-hidden ${isActive
+                      ? "bg-white/5 border border-white/10 shadow-xl"
+                      : "hover:bg-white/[0.03] border border-transparent hover:border-white/5"
+                      }`}
+                  >
+                    {/* Active Indicator Glow */}
+                    {isActive && (
+                      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1.5 h-8 bg-linear-to-b from-indigo-400 to-blue-400 rounded-r-full shadow-[0_0_15px_rgba(129,140,248,0.8)]" />
+                    )}
+
+                    <div className={`p-2 rounded-xl transition-all duration-300 ${isActive ? "bg-indigo-500/20 text-indigo-400" : "bg-transparent text-gray-500 group-hover:text-white"
+                      }`}>
+                      <Icon className="w-5 h-5 flex-shrink-0" />
+                    </div>
+
+                    <span className={`font-bold tracking-tight transition-colors ${isActive ? "text-white text-base" : "text-gray-400 group-hover:text-white text-sm"
+                      }`}>
+                      {item.label}
                     </span>
 
                     {/* New Badge */}
                     {showNewBadge && (
-                      <span className="ml-auto px-2 py-0.5 text-xs font-bold bg-red-500 text-white rounded-full animate-pulse">
-                        NEW
+                      <span className="ml-auto flex items-center justify-center min-w-[32px] h-5 text-[9px] font-black bg-red-500 text-white rounded-lg animate-pulse ring-2 ring-red-500/20">
+                        {totalNewEnquiries > 9 ? "9+" : totalNewEnquiries}
                       </span>
                     )}
 
-                    {/* Hover Glow */}
-                    <div className="absolute inset-0 rounded-2xl bg-linear-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 blur-xl transition-opacity" />
+                    {/* Hover Glow Layer */}
+                    <div className="absolute inset-0 bg-linear-to-r from-indigo-500/0 via-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
                   </Link>
                 );
               })}
             </nav>
 
-            {/* Logout */}
-            <div className="p-6 border-t border-white/10">
-              <button onClick={handleLogout} className="w-full flex items-center justify-center gap-3 px-5 py-4 rounded-2xl bg-white/5 hover:bg-red-500/20 border border-white/10 hover:border-red-500/40 transition-all group" >
-                <LogOut className="w-5 h-5 text-gray-400 group-hover:text-red-400" />
-                <span className="font-medium text-gray-300 group-hover:text-white">Logout</span>
+            {/* Logout Section */}
+            <div className="p-4 border-t border-white/5">
+              <button
+                onClick={handleLogout}
+                className="w-full group/logout cursor-pointer flex items-center gap-4 px-5 py-5 rounded-[2rem] bg-indigo-500/10 hover:bg-red-500/10 border border-indigo-500/20 hover:border-red-500/20 transition-all duration-500 relative overflow-hidden"
+              >
+                <div className="p-2.5 rounded-xl bg-indigo-500/20 text-indigo-400 group-hover/logout:bg-red-500/20 group-hover/logout:text-red-400 transition-all duration-300">
+                  <LogOut className="w-5 h-5" />
+                </div>
+                <div className="flex flex-col items-start">
+                  <span className="font-black text-xs uppercase tracking-widest text-white group-hover/logout:text-red-100 transition-colors">Sign Out</span>
+                  <span className="text-[9px] text-indigo-400/60 group-hover/logout:text-red-400/60 font-medium italic">End active session</span>
+                </div>
               </button>
             </div>
           </div>
         </aside>
 
         {/* Mobile Bottom Navigation */}
-        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-2xl border-t border-white/10">
-          <div className="flex items-center justify-around px-2 py-3">
+        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 p-4 pb-6">
+          <div className="bg-black/40 backdrop-blur-3xl border border-white/10 rounded-[2rem] flex items-center justify-around px-2 py-2 shadow-2xl shadow-black">
             {menuItems.map((item) => {
               const Icon = item.icon;
               const isActive = pathname === item.href;
+              const hasBadge = item.showBadge && totalNewEnquiries > 0;
 
               return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`flex flex-col items-center gap-1 px-4 py-2 rounded-xl transition-all duration-300 relative${isActive? "bg-linear-to-r from-blue-500/20 to-purple-500/20": ""}`}>
-                  <Icon className={`w-6 h-6 transition-colors ${ isActive ? "text-blue-400" : "text-gray-400"}`}/>
-                  <span className={`text-xs font-medium ${ isActive ? "text-white" : "text-gray-400" }`} > {item.label.split(" ")[0]}
+                  className={`flex flex-col items-center justify-center gap-1.5 min-w-[64px] py-2.5 rounded-2xl transition-all duration-500 relative ${isActive ? "bg-white/10 ring-1 ring-white/10" : "text-gray-500 active:scale-95"
+                    }`}
+                >
+                  <div className="relative">
+                    <Icon className={`w-5 h-5 transition-all duration-300 ${isActive ? "text-indigo-400 scale-110" : "text-current"
+                      }`} />
+                    {hasBadge && (
+                      <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-black animate-pulse" />
+                    )}
+                  </div>
+
+                  <span className={`text-[9px] font-black uppercase tracking-tighter transition-colors ${isActive ? "text-white" : "text-current"
+                    }`}>
+                    {item.label.split(" ")[0]}
                   </span>
+
                   {isActive && (
-                    <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-8 h-1 bg-blue-400 rounded-full" />
+                    <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-4 h-1 bg-indigo-400 rounded-full shadow-[0_0_10px_rgba(129,140,248,0.8)]" />
                   )}
                 </Link>
               );
             })}
-            <button onClick={handleLogout}className="flex flex-col items-center gap-1 px-4 py-2 rounded-xl">
-              <LogOut className="w-6 h-6 text-gray-400" />
-              <span className="text-xs font-medium text-gray-400">Logout</span>
+
+            <button
+              onClick={handleLogout}
+              className="flex flex-col items-center justify-center gap-1.5 min-w-[64px] py-2.5 text-gray-500 active:scale-95 transition-all"
+            >
+              <LogOut className="w-5 h-5" />
+              <span className="text-[9px] font-black uppercase tracking-tighter">Exit</span>
             </button>
           </div>
         </div>
 
-        {/* Main Content */}
-        <main className="flex-1 lg:ml-72 min-h-screen lg:pt-0 pb-20 lg:pb-0">
-          <div className="">{children}</div>
+        {/* Main Content Area */}
+        <main className="flex-1 lg:ml-80 min-h-screen relative z-10">
+          <div className="h-full">{children}</div>
         </main>
       </div>
     </div>

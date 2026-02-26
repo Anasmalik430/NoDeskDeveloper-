@@ -122,24 +122,24 @@ const DevCard = ({ filteredDevelopers }) => {
   };
 
   const shareDeveloper = async (dev) => {
-  if (!navigator.share) {
-    alert("Share not supported on this browser");
-    return;
-  }
-
-  try {
-    await navigator.share({
-      title: `${dev?.name} - ${dev?.level} Developer (${dev?.experience}+ years exp)`,
-      text: `${dev?.level} Developer with ${dev?.experience}+ years experience. Skilled in ${dev.skills.slice(0, 3).join(", ")} and more.`,
-      url: `https://www.nodeskdeveloper.vercel.app/developer/${dev?.slug}`, // yahan change kiya
-    });
-  } catch (err) {
-    if (err.name !== "AbortError") {
-      console.error("Share failed:", err);
-      // Optional: fallback alert
+    if (!navigator.share) {
+      alert("Share not supported on this browser");
+      return;
     }
-  }
-};
+
+    try {
+      await navigator.share({
+        title: `${dev?.name} - ${dev?.level} Developer (${dev?.experience}+ years exp)`,
+        text: `${dev?.level} Developer with ${dev?.experience}+ years experience. Skilled in ${dev.skills.slice(0, 3).join(", ")} and more.`,
+        url: `https://www.nodeskdeveloper.vercel.app/developer/${dev?.slug}`, // yahan change kiya
+      });
+    } catch (err) {
+      if (err.name !== "AbortError") {
+        console.error("Share failed:", err);
+        // Optional: fallback alert
+      }
+    }
+  };
 
   return (
     <>
@@ -209,13 +209,12 @@ const DevCard = ({ filteredDevelopers }) => {
 
                   {/* Level Badge */}
                   <span
-                    className={`inline-block text-xs px-3 py-1 rounded-full mt-2 ${
-                      dev.level === "Expert"
+                    className={`inline-block text-xs px-3 py-1 rounded-full mt-2 ${dev.level === "Expert"
                         ? "text-blue-400 bg-blue-900/50"
                         : dev.level === "Beginner"
-                        ? "text-green-400 bg-green-900/50"
-                        : "text-yellow-400 bg-yellow-900/50"
-                    }`}
+                          ? "text-green-400 bg-green-900/50"
+                          : "text-yellow-400 bg-yellow-900/50"
+                      }`}
                   >
                     {dev.level}
                   </span>
@@ -289,13 +288,12 @@ const DevCard = ({ filteredDevelopers }) => {
               {/* Availability */}
               <div className="flex items-center gap-2 mb-4 p-2 bg-sky-900/20 rounded-lg border border-sky-500/30">
                 <BadgeCheck
-                  className={`size-5 ${
-                    dev.availability === "Full-time"
+                  className={`size-5 ${dev.availability === "Full-time"
                       ? "text-blue-400"
                       : dev.availability === "Part-time"
-                      ? "text-yellow-400"
-                      : "text-green-400"
-                  }`}
+                        ? "text-yellow-400"
+                        : "text-green-400"
+                    }`}
                 />
                 <span className="text-xs text-blue-300">Availability:</span>
                 <span className="text-sm font-bold text-white">
@@ -307,14 +305,20 @@ const DevCard = ({ filteredDevelopers }) => {
               <div className="flex gap-3">
                 <div className="flex-1">
                   <button
-                    onClick={() => router.push(`/developers/${dev?._id}`)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      router.push(`/developers/${dev?._id}`);
+                    }}
                     className="w-full px-4 py-2 bg-linear-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all"
                   >
                     Book Developer
                   </button>
                 </div>
                 <button
-                  onClick={() => handleBookClick(dev)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleBookClick(dev);
+                  }}
                   className="px-4 py-2 bg-transparent border border-blue-500/50 text-white rounded-lg hover:bg-blue-900/30 transition-colors"
                 >
                   Enquire
