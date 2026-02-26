@@ -135,11 +135,11 @@ export default function CodeNScriptDetailPage() {
     if (!confirm("Are you sure? This cannot be undone.")) return;
 
     try {
-     const res = await fetch(`${API_BASE}/code-n-script-card/${product._id}`, { method: "DELETE" });
+      const res = await fetch(`${API_BASE}/code-n-script-card/${product._id}`, { method: "DELETE" });
       const result = await res.json();
       if (result.success) {
         alert("Product deleted!");
-        
+
         router.back()
       }
     } catch (err) {
@@ -470,19 +470,21 @@ export default function CodeNScriptDetailPage() {
           </div>
 
           {/* Buttons */}
-          <div className="flex justify-between items-center pt-8 border-t border-white/10">
+          <div className="flex flex-col sm:flex-row sm:justify-between items-center gap-4 pt-12 border-t border-white/10">
             <button
               type="button"
               onClick={handleDelete}
-              className="px-8 py-4 text-xs md:text-sm bg-red-600/20 hover:bg-red-600/30 text-red-400 rounded-xl flex items-center gap-3"
+              className="w-full sm:w-auto px-8 py-4 text-sm md:text-base bg-red-600/20 hover:bg-red-600/30 text-red-400 font-semibold rounded-xl flex items-center justify-center gap-3 transition-all hover:scale-[1.02] active:scale-95"
             >
-              <Trash2 className="size-4" /> Delete
+              <Trash2 className="size-5" />
+              Delete Product
             </button>
             <button
               type="submit"
-              className="px-10 py-4 text-xs md:text-sm bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold rounded-xl flex items-center gap-3"
+              className="w-full sm:w-auto px-10 py-4 text-sm md:text-base bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold rounded-xl flex items-center justify-center gap-3 shadow-xl hover:shadow-purple-500/50 transition-all hover:scale-[1.02] active:scale-95"
             >
-              <Save className="size-4" /> Update
+              <Save className="size-5" />
+              Update Now
             </button>
           </div>
         </form>

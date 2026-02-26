@@ -100,9 +100,9 @@ export default function DeveloperDetailPage() {
     // Preferred Languages → array banao (yeh missing tha!)
     const languagesArray = developer.preferredLanguage
       ? developer.preferredLanguage
-          .split(",")
-          .map((l) => l.trim())
-          .filter((l) => l.length > 0)
+        .split(",")
+        .map((l) => l.trim())
+        .filter((l) => l.length > 0)
       : [];
 
     const updatedData = {
@@ -240,7 +240,7 @@ export default function DeveloperDetailPage() {
               }}
             >
               {({ open }) => (
-                <div 
+                <div
                   onClick={() => open()}
                   className="border-2 w-fit border-dashed border-white/20 rounded-2xl p-8 text-center cursor-pointer hover:border-blue-500/60 hover:bg-white/5 transition-all"
                 >
@@ -399,25 +399,23 @@ export default function DeveloperDetailPage() {
                     available: !prev.available,
                   }))
                 }
-                className={`relative w-14 h-7 rounded-full transition-colors ${
-                  developer.available ? "bg-green-500" : "bg-gray-600"
-                }`}
+                className={`relative w-14 h-7 rounded-full transition-colors ${developer.available ? "bg-green-500" : "bg-gray-600"
+                  }`}
               >
                 <span
-                  className={`absolute top-1 left-1 w-5 h-5 bg-white rounded-full transition-transform ${
-                    developer.available ? "translate-x-7" : "translate-x-0"
-                  }`}
+                  className={`absolute top-1 left-1 w-5 h-5 bg-white rounded-full transition-transform ${developer.available ? "translate-x-7" : "translate-x-0"
+                    }`}
                 />
               </button>
             </div>
           </div>
 
           {/* Buttons */}
-          <div className="flex justify-between items-center pt-8 border-t border-white/10">
+          <div className="flex flex-col sm:flex-row sm:justify-between items-center gap-4 pt-12 border-t border-white/10">
             <button
               type="button"
               onClick={handleDelete}
-              className="px-8 py-4 bg-red-600/20 hover:bg-red-600/30 text-red-400 font-semibold rounded-xl flex items-center gap-3 transition-all hover:scale-105"
+              className="w-full sm:w-auto px-8 py-4 bg-red-600/20 hover:bg-red-600/30 text-red-400 font-semibold rounded-xl flex items-center justify-center gap-3 transition-all hover:scale-[1.02] active:scale-95"
             >
               <Trash2 className="w-5 h-5" />
               Delete Developer
@@ -425,7 +423,7 @@ export default function DeveloperDetailPage() {
 
             <button
               type="submit"
-              className="px-10 py-4 bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold rounded-xl flex items-center gap-3 shadow-xl hover:shadow-purple-500/50 transition-all hover:scale-105"
+              className="w-full sm:w-auto px-10 py-4 bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold rounded-xl flex items-center justify-center gap-3 shadow-xl hover:shadow-purple-500/50 transition-all hover:scale-[1.02] active:scale-95"
             >
               <Save className="w-5 h-5" />
               Update Now

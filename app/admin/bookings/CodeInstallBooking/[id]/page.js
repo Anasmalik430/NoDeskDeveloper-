@@ -126,17 +126,16 @@ export default function AdminCodeInstallBookingDetails() {
               </p>
               <p className="flex items-center gap-3">
                 <span
-                  className={`px-3 py-1 rounded-full text-sm ${
-                    booking.status === "Pending"
+                  className={`px-3 py-1 rounded-full text-sm ${booking.status === "Pending"
                       ? "bg-yellow-500/20 text-yellow-300"
                       : booking.status === "Confirmed"
-                      ? "bg-blue-500/20 text-blue-300"
-                      : booking.status === "In Progress"
-                      ? "bg-purple-500/20 text-purple-300"
-                      : booking.status === "Completed"
-                      ? "bg-green-500/20 text-green-300"
-                      : "bg-red-500/20 text-red-300"
-                  }`}
+                        ? "bg-blue-500/20 text-blue-300"
+                        : booking.status === "In Progress"
+                          ? "bg-purple-500/20 text-purple-300"
+                          : booking.status === "Completed"
+                            ? "bg-green-500/20 text-green-300"
+                            : "bg-red-500/20 text-red-300"
+                    }`}
                 >
                   {booking.status}
                 </span>
@@ -153,23 +152,23 @@ export default function AdminCodeInstallBookingDetails() {
             </p>
           </div>
 
-          <div className="mt-10 flex flex-col sm:flex-row gap-4">
+          <div className="mt-12 flex flex-col sm:flex-row gap-4 pt-10 border-t border-blue-500/20">
             <select
               value={status}
               onChange={(e) => setStatus(e.target.value)}
-              className="px-5 py-3 bg-slate-800/70 border border-blue-500/40 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-cyan-500"
+              className="w-full sm:w-auto px-5 py-3 bg-slate-800/70 border border-blue-500/40 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer"
             >
-              <option>Pending</option>
-              <option>Confirmed</option>
-              <option>In Progress</option>
-              <option>Completed</option>
-              <option>Cancelled</option>
+              <option className="bg-black text-white">Pending</option>
+              <option className="bg-black text-white">Confirmed</option>
+              <option className="bg-black text-white">In Progress</option>
+              <option className="bg-black text-white">Completed</option>
+              <option className="bg-black text-white">Cancelled</option>
             </select>
 
             <button
               onClick={handleUpdate}
               disabled={updating || status === booking.status}
-              className="px-8 py-3 bg-linear-to-r from-blue-600 to-cyan-500 rounded-xl font-bold text-white flex items-center justify-center gap-2 disabled:opacity-50"
+              className="w-full sm:w-auto px-8 py-3 bg-linear-to-r from-blue-600 to-cyan-500 rounded-xl font-bold text-white flex items-center justify-center gap-2 disabled:opacity-50 transition-all hover:scale-[1.02] active:scale-95 shadow-lg shadow-blue-500/20"
             >
               {updating ? (
                 <Loader2 className="w-5 h-5 animate-spin" />
@@ -182,7 +181,7 @@ export default function AdminCodeInstallBookingDetails() {
             <button
               onClick={handleDelete}
               disabled={deleting}
-              className="px-8 py-3 bg-linear-to-r from-red-600 to-red-500 rounded-xl font-bold text-white flex items-center justify-center gap-2 disabled:opacity-50"
+              className="w-full sm:w-auto px-8 py-3 bg-linear-to-r from-red-600 to-red-500 rounded-xl font-bold text-white flex items-center justify-center gap-2 disabled:opacity-50 transition-all hover:scale-[1.02] active:scale-95 shadow-lg shadow-red-500/20"
             >
               {deleting ? (
                 <Loader2 className="w-5 h-5 animate-spin" />

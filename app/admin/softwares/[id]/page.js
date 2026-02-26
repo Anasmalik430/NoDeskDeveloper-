@@ -217,7 +217,7 @@ export default function SoftwareDetailPage() {
               className="px-6 py-4 bg-white/5 border border-white/10 rounded-xl" required />
             <select name="category" value={project.category} onChange={handleChange}
               className="px-6 py-4 bg-white/5 border border-white/10 rounded-xl">
-              {["Food","E-commerce","Health","Education","Finance","Social","Other"].map(c => (
+              {["Food", "E-commerce", "Health", "Education", "Finance", "Social", "Other"].map(c => (
                 <option key={c} value={c} className="bg-black">{c}</option>
               ))}
             </select>
@@ -271,9 +271,9 @@ export default function SoftwareDetailPage() {
 
           {/* Pricing Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {["price","customization","deployment","branding","payment","gateway","whatsapp","multiLanguage"].map(field => (
+            {["price", "customization", "deployment", "branding", "payment", "gateway", "whatsapp", "multiLanguage"].map(field => (
               <input key={field} type="number" name={field} value={project[field]} onChange={handleChange}
-                placeholder={field.charAt(0).toUpperCase() + field.slice(1).replace(/([A-Z])/g,' $1') + " (₹)"}
+                placeholder={field.charAt(0).toUpperCase() + field.slice(1).replace(/([A-Z])/g, ' $1') + " (₹)"}
                 className="px-6 py-4 bg-white/5 border border-white/10 rounded-xl" min="0" />
             ))}
           </div>
@@ -286,14 +286,21 @@ export default function SoftwareDetailPage() {
           </label>
 
           {/* Buttons */}
-          <div className="flex justify-between items-center pt-8 border-t border-white/10">
-            <button type="button" onClick={handleDelete}
-              className="px-8 py-4 bg-red-600/20 hover:bg-red-600/30 text-red-400 rounded-xl flex items-center gap-3">
-              <Trash2 className="w-5 h-5" /> Delete Project
+          <div className="flex flex-col sm:flex-row sm:justify-between items-center gap-4 pt-12 border-t border-white/10">
+            <button
+              type="button"
+              onClick={handleDelete}
+              className="w-full sm:w-auto px-8 py-4 bg-red-600/20 hover:bg-red-600/30 text-red-400 font-semibold rounded-xl flex items-center justify-center gap-3 transition-all hover:scale-[1.02] active:scale-95"
+            >
+              <Trash2 className="w-5 h-5" />
+              Delete Project
             </button>
-            <button type="submit"
-              className="px-10 py-4 bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold rounded-xl flex items-center gap-3">
-              <Save className="w-5 h-5" /> Update Project
+            <button
+              type="submit"
+              className="w-full sm:w-auto px-10 py-4 bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-bold rounded-xl flex items-center justify-center gap-3 shadow-xl hover:shadow-purple-500/50 transition-all hover:scale-[1.02] active:scale-95"
+            >
+              <Save className="w-5 h-5" />
+              Update Project
             </button>
           </div>
 

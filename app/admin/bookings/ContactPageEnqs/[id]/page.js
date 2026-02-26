@@ -110,23 +110,23 @@ export default function AdminContactDetail() {
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col sm:flex-row gap-4 pt-10 border-t border-purple-500/20">
             <select
               value={status}
               onChange={(e) => setStatus(e.target.value)}
-              className="px-6 py-3 bg-slate-800/70 border border-purple-500/40 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="w-full sm:w-auto px-6 py-3 bg-slate-800/70 border border-purple-500/40 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-purple-500 cursor-pointer"
             >
-              <option value="pending">Pending</option>
-              <option value="contacted">Contacted</option>
-              <option value="in-progress">In Progress</option>
-              <option value="completed">Completed</option>
-              <option value="rejected">Rejected</option>
+              <option value="pending" className="bg-black text-white">Pending</option>
+              <option value="contacted" className="bg-black text-white">Contacted</option>
+              <option value="in-progress" className="bg-black text-white">In Progress</option>
+              <option value="completed" className="bg-black text-white">Completed</option>
+              <option value="rejected" className="bg-black text-white">Rejected</option>
             </select>
 
             <button
               onClick={handleUpdate}
               disabled={updating || status === contact.status}
-              className="px-8 py-3 bg-linear-to-r from-purple-600 to-pink-600 rounded-xl font-bold text-white flex items-center justify-center gap-2 disabled:opacity-50"
+              className="w-full sm:w-auto px-8 py-3 bg-linear-to-r from-purple-600 to-pink-600 rounded-xl font-bold text-white flex items-center justify-center gap-2 disabled:opacity-50 transition-all hover:scale-[1.02] active:scale-95 shadow-lg shadow-purple-500/20"
             >
               {updating ? <Loader2 className="w-5 h-5 animate-spin" /> : <CheckCircle className="w-5 h-5" />}
               Update Status
@@ -135,7 +135,7 @@ export default function AdminContactDetail() {
             <button
               onClick={handleDelete}
               disabled={deleting}
-              className="px-8 py-3 bg-linear-to-r from-red-600 to-red-500 rounded-xl font-bold text-white flex items-center justify-center gap-2 disabled:opacity-50"
+              className="w-full sm:w-auto px-8 py-3 bg-linear-to-r from-red-600 to-red-500 rounded-xl font-bold text-white flex items-center justify-center gap-2 disabled:opacity-50 transition-all hover:scale-[1.02] active:scale-95 shadow-lg shadow-red-500/20"
             >
               {deleting ? <Loader2 className="w-5 h-5 animate-spin" /> : <Trash2 className="w-5 h-5" />}
               Delete Enquiry

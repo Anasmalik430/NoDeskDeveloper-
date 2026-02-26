@@ -183,7 +183,7 @@ function AdminLayoutContent({ children }) {
         </div>
 
         {/* Main Content Area */}
-        <main className="flex-1 lg:ml-80 min-h-screen relative z-10">
+        <main className="flex-1 lg:ml-80 min-h-screen relative z-10 pb-32 lg:pb-0">
           <div className="h-full">{children}</div>
         </main>
       </div>
