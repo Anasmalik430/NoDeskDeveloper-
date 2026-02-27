@@ -1,14 +1,18 @@
 "use client";
-import { aboutServices, testimonials } from "@/components/Data";
+import { motion } from "framer-motion";
 import {
   Zap,
-  Star,
   Shield,
   Sparkles,
   ArrowRight,
   CheckCircle2,
+  Lock,
+  Code2,
+  Globe,
+  Star,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function AboutUsPage() {
   const schemaData = {
@@ -18,8 +22,20 @@ export default function AboutUsPage() {
       "@type": "Organization",
       name: "NoDeskDeveloper",
       description:
-        "Trusted all-in-one technology partner offering IT solutions, hiring verified developers, and custom development.",
+        "Premium technology partner specializing in high-end development, verified talent hiring, and professional software solutions.",
     },
+  };
+
+  const fadeInUp = {
+    initial: { opacity: 0, y: 30 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true },
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+  };
+
+  const staggerContainer = {
+    initial: {},
+    whileInView: { transition: { staggerChildren: 0.1 } },
   };
 
   return (
@@ -28,244 +44,247 @@ export default function AboutUsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
       />
-      <div className="min-h-screen bg-black text-white overflow-hidden relative">
-        {/* Hero */}
-        <section className="py-20 pb-4 md:pb-20 px-6 text-center">
-          <div className="max-w-6xl mx-auto">
-            <div className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-linear-to-r from-cyan-500/20 to-blue-600/20 border border-cyan-500/50 backdrop-blur-xl mb-10">
-              <Sparkles className="w-6 h-6 text-cyan-400" />
-              <span className="text-cyan-300 font-bold text-xs md:text-lg">
-                Trusted by 3000+ Businesses Across India
-              </span>
-            </div>
+      <div className="min-h-screen bg-black text-white selection:bg-blue-500/30">
+        {/* Balanced Hero (SEO H1) */}
+        <section className="relative pt-24 pb-16 px-6 overflow-hidden">
+          <div className="absolute inset-0 z-0">
+            <div className="absolute top-0 left-1/4 w-[400px] h-[400px] bg-blue-600/5 rounded-full blur-[100px]" />
+            <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-purple-600/5 rounded-full blur-[100px]" />
+          </div>
 
-            <h1 className="text-3xl md:text-8xl font-black mb-8 leading-tight">
-              <span className="bg-linear-to-r from-blue-400 via-cyan-400 to-sky-400 bg-clip-text text-transparent">
-                Your All-in-One
+          <div className="relative z-10 max-w-6xl mx-auto text-center">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8 }}
+              className="inline-flex items-center gap-2 px-5 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-2xl mb-8"
+            >
+              <Sparkles className="w-4 h-4 text-blue-400" />
+              <span className="text-blue-300 font-bold text-[10px] md:text-xs tracking-widest uppercase">
+                India's Premium Tech Platform
+              </span>
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7 }}
+              className="text-4xl md:text-7xl font-black mb-8 leading-[1.1] tracking-tight"
+            >
+              <span className="bg-linear-to-b from-white to-gray-400 bg-clip-text text-transparent">
+                Accelerating the
               </span>
               <br />
-              <span className="bg-linear-to-r from-cyan-300 via-sky-400 to-blue-400 bg-clip-text text-transparent">
-                Technology Partner
+              <span className="bg-linear-to-r from-blue-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent italic">
+                Digital Economy.
               </span>
-            </h1>
+            </motion.h1>
 
-            <p className="text-sm md:text-2xl text-cyan-200/90 font-medium max-w-4xl mx-auto leading-relaxed">
-              From hiring verified developers to launching ready-made apps —
-              <span className="text-cyan-400 font-bold">
-                {" "}
-                NoDeskDeveloper delivers everything
-              </span>{" "}
-              your business needs under one roof.
-            </p>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
+              className="text-sm md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed font-medium"
+            >
+              NoDeskDeveloper is a complete technology ecosystem designed for
+              high-growth businesses. We specialize in delivering top-tier
+              digital products, hand-picked engineering talent, and strategic
+              technical consulting.
+            </motion.p>
           </div>
         </section>
 
-        {/* Who We Are + Vision/Mission */}
-        <section className="py-20 pb-0 md:pb-20 px-6 ">
-          <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-4 md:gap-16  *:p-8 *:bg-white/10 *:rounded-2xl">
-            <div className="space-y-4 md:space-y-8">
-              <h2 className="text-2xl md:text-5xl font-black bg-linear-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-                Who We Are
-              </h2>
-              <p className="text-sm md:text-xl text-cyan-100 leading-relaxed">
-                NodeskDeveloper is your{" "}
-                <span className="text-cyan-400 font-bold">
-                  trusted all-in-one technology partner
-                </span>
-                , offering end-to-end IT solutions — from hiring verified
-                developers to ready-made software, code installation, custom
-                development, consultancy, maintenance, and digital growth
-                support.
-              </p>
-              <p className="text-xs md:text-lg text-cyan-200">
-                We help businesses, startups, and agencies get reliable tech
-                solutions with
-                <span className="font-bold text-white">
-                  {" "}
-                  transparent pricing, expert support, and lightning-fast
-                  delivery
-                </span>
-                .
-              </p>
-            </div>
+        {/* Platform Mastery Section (SEO H2) */}
+        <section className="py-20 px-6 relative bg-white/[0.01]">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-12 items-center text-center lg:text-left">
+              <motion.div
+                {...fadeInUp}
+                className="space-y-6 order-2 lg:order-1"
+              >
+                <div className="space-y-2">
+                  <h2 className="text-blue-400 font-black tracking-widest uppercase text-[10px] md:text-xs">
+                    Engineered for Success
+                  </h2>
+                  <h3 className="text-3xl md:text-5xl font-black text-white leading-tight">
+                    Our Digital{" "}
+                    <span className="bg-linear-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                      Mastery
+                    </span>
+                  </h3>
+                </div>
 
-            <div className="space-y-4 md:space-y-8">
-              <div>
-                <h3 className="text-2xl md:text-4xl font-black text-cyan-400 mb-2 md:mb-6">
-                  Our Vision
-                </h3>
-                <p className="text-sm md:text-xl text-cyan-100 leading-relaxed">
-                  To make technology{" "}
-                  <span className="text-white font-bold">
-                    simple, accessible, and affordable
-                  </span>{" "}
-                  for every business.
+                <p className="text-sm md:text-lg text-gray-400 leading-relaxed font-medium">
+                  At NoDeskDeveloper, we transform complex business challenges
+                  into seamless digital experiences. Whether it's building
+                  high-performance **Web Platforms**, robust **Mobile
+                  Applications**, or intuitive **UI/UX Designs**, our approach
+                  is rooted in technical precision and strategic consulting.
                 </p>
-              </div>
 
-              <div>
-                <h3 className="text-xl md:text-4xl font-black text-sky-400 mb-6">
-                  Our Mission
-                </h3>
-                <ul className="space-y-4 text-[13px] md:text-lg text-cyan-200">
+                <ul className="grid grid-cols-3 gap-x-4 gap-y-3 text-left">
                   {[
-                    "Connect businesses with skilled developers",
-                    "Deliver high-quality ready-made apps",
-                    "Provide reliable support & maintenance",
-                    "Build long-term trust & partnerships",
-                  ].map((item, i) => (
+                    "Web Solutions",
+                    "Mobile Apps",
+                    "UI/UX Design",
+                    "Tech Consulting",
+                    "Scalable Auth",
+                    "Cloud Modern",
+                  ].map((service, i) => (
                     <li
                       key={i}
-                      className="flex items-center md:items-start gap-2 md:gap-4"
+                      className="flex items-center gap-2 text-gray-300 text-[12px] sm:text-xs md:text-base whitespace-nowrap"
                     >
-                      <CheckCircle2 className="size-4 md:size-7 text-cyan-400 shrink-0 mt-1" />
-                      <span>{item}</span>
+                      <div className="size-1 bg-blue-500 rounded-full shrink-0" />
+                      {service}
                     </li>
                   ))}
                 </ul>
-              </div>
-            </div>
-          </div>
-        </section>
+              </motion.div>
 
-        {/* What We Do – Premium Grid */}
-        <section className="py-20 px-6 bg-linear-to-b from-transparent via-blue-950/30 to-transparent">
-          <div className="max-w-7xl mx-auto">
-            <h2 className="text-[25px] md:text-7xl font-black text-center mb-8 md:mb-16">
-              <span className="bg-linear-to-r from-cyan-400 via-blue-400 to-sky-400 bg-clip-text text-transparent">
-                Everything Your Business Needs
-              </span>
-            </h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {aboutServices.map((service, i) => (
-                <div
-                  key={i}
-                  className="group relative p-8 bg-linear-to-br from-blue-900/50 via-sky-900/40 to-teal-900/50 backdrop-blur-3xl rounded-3xl border border-cyan-500/40 hover:border-cyan-300 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-600/60"
-                >
-                  <div className="absolute inset-0 bg-linear-to-br from-cyan-600/20 to-blue-600/20 opacity-0 group-hover:opacity-100 blur-3xl transition-opacity" />
-                  <div className="relative">
-                    <div className="size-14 md:size-16 rounded-2xl bg-linear-to-br from-cyan-500 to-blue-600 flex items-center justify-center mb-6 shadow-xl">
-                      <service.icon className="size-6 md:size-9 text-white" />
-                    </div>
-                    <h3 className="text-xl md:text-2xl font-black text-white mb-3">
-                      {service.title}
+              <motion.div
+                {...fadeInUp}
+                className="relative group/mastery order-1 lg:order-2"
+              >
+                <div className="absolute -inset-2 bg-linear-to-r from-blue-600 to-purple-600 rounded-2xl opacity-10 blur-xl group-hover/mastery:opacity-20 transition-all" />
+                <div className="relative rounded-2xl overflow-hidden border border-white/10 aspect-square md:aspect-video lg:aspect-square flex items-center justify-center bg-gray-950/50 shadow-xl max-w-md mx-auto">
+                  <div className="p-8">
+                    <Code2 className="w-16 h-16 text-blue-500 mx-auto mb-4 animate-pulse" />
+                    <h3 className="text-2xl font-black text-white mb-2 tracking-tight">
+                      Technical Purity
                     </h3>
-                    <p className="text-cyan-200 text-xs leading-relaxed">
-                      {service.desc}
+                    <p className="text-gray-400 italic text-sm md:text-base">
+                      "Reliable solutions, zero friction."
                     </p>
                   </div>
                 </div>
-              ))}
+              </motion.div>
             </div>
           </div>
         </section>
 
-        {/* Why Choose Us */}
-        <section className="py-12 px-6">
-          <div className="max-w-7xl mx-auto">
-            <h2 className="text-2xl sm:text-5xl md:text-7xl font-black text-center mb-16">
-              <span className="bg-linear-to-r from-blue-400 via-cyan-400 to-sky-400 bg-clip-text text-transparent">
-                Why Businesses Trust CodeConnect
+        {/* Core Expertise (SEO H2) */}
+        <section className="py-20 px-6">
+          <div className="max-w-6xl mx-auto text-center mb-16 space-y-2">
+            <motion.h2
+              {...fadeInUp}
+              className="text-3xl md:text-5xl font-black text-white"
+            >
+              Why Businesses Choose Us
+            </motion.h2>
+            <motion.div
+              {...fadeInUp}
+              className="w-16 h-1 bg-blue-600 mx-auto rounded-full"
+            />
+          </div>
+
+          <motion.div
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="whileInView"
+            viewport={{ once: true }}
+            className="grid md:grid-cols-3 gap-6 mx-auto max-w-7xl"
+          >
+            {[
+              {
+                title: "Elite Engineering",
+                desc: "Our platform provides access to developers in the top 1%, vetted for deep expertise in modern tech stacks.",
+                icon: Star,
+              },
+              {
+                title: "Asset Security",
+                desc: "We prioritize your intellectual property. Our platform uses military-grade encryption and NDA-protected flows.",
+                icon: Shield,
+              },
+              {
+                title: "Agile Speed",
+                desc: "Go from concept to launch within days. Our ready-made engines accelerate time-to-market significantly.",
+                icon: Zap,
+              },
+            ].map((item, idx) => (
+              <motion.div
+                key={idx}
+                variants={fadeInUp}
+                className="p-8 rounded-[32px] bg-white/[0.02] border border-white/5 hover:border-blue-500/30 transition-all group/edge"
+              >
+                <div className="size-12 rounded-xl bg-blue-600/10 flex items-center justify-center mb-6 border border-blue-500/20 group-hover/edge:bg-blue-600 transition-colors">
+                  <item.icon className="w-5 h-5 text-blue-500 group-hover/edge:text-white" />
+                </div>
+                <h3 className="text-xl font-black text-white mb-3">
+                  {item.title}
+                </h3>
+                <p className="text-gray-400 text-sm md:text-base leading-relaxed">
+                  {item.desc}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </section>
+
+        {/* Commitment Section (SEO H2) */}
+        <section className="py-20 px-6 bg-blue-600/5">
+          <div className="max-w-4xl mx-auto text-center space-y-10">
+            <motion.div {...fadeInUp} className="space-y-4">
+              <Lock className="w-12 h-12 text-blue-400 mx-auto" />
+              <h2 className="text-3xl md:text-5xl font-black text-white">
+                Platform Commitment
+              </h2>
+            </motion.div>
+
+            <motion.div
+              {...fadeInUp}
+              className="grid md:grid-cols-2 gap-8 text-left bg-black p-6 md:p-10 rounded-[32px] border border-white/5 backdrop-blur-3xl shadow-2xl"
+            >
+              <div className="space-y-4">
+                <h3 className="flex items-center gap-2 text-lg font-black text-white">
+                  <Shield className="w-5 h-5 text-blue-500" /> Intellectual
+                  Property
+                </h3>
+                <p className="text-gray-400 text-sm leading-relaxed font-medium">
+                  All products and source codes delivered via NoDeskDeveloper
+                  are protected under global IP laws. Client ownership and
+                  confidentiality are our highest legal priorities.
+                </p>
+              </div>
+              <div className="space-y-4">
+                <h3 className="flex items-center gap-2 text-lg font-black text-white">
+                  <Lock className="w-5 h-5 text-blue-500" /> Data Privacy
+                </h3>
+                <p className="text-gray-400 text-sm leading-relaxed font-medium">
+                  We adhere strictly to international data protection protocols
+                  (GDPR/APPI compliance), ensuring that your business
+                  information remains secure and confidential.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* CTA (SEO H2) */}
+        <section className="py-24 px-6 text-center">
+          <motion.div {...fadeInUp} className="max-w-4xl mx-auto space-y-10">
+            <h2 className="text-4xl md:text-6xl font-black text-white leading-tight">
+              Ready to Upgrade <br />
+              <span className="bg-linear-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent italic">
+                Your Tech Stack?
               </span>
             </h2>
 
-            <div className="grid md:grid-cols-3 gap-10">
-              {[
-                {
-                  icon: Shield,
-                  title: "100% Verified Talent",
-                  desc: "Every developer is tested & background checked",
-                },
-                {
-                  icon: Zap,
-                  title: "Fastest Delivery",
-                  desc: "Ready apps in days • Developers in hours",
-                },
-                {
-                  icon: Star,
-                  title: "4.9/5 Client Rating",
-                  desc: "3000+ happy clients • 5000+ projects delivered",
-                },
-              ].map((item, i) => (
-                <div
-                  key={i}
-                  className="text-center border-2 border-white/20 p-5 rounded-xl bg-white/5 hover:skew-1 transition-all duration-200 ease-in-out"
-                >
-                  <div className="size-20 md:size-24 rounded-full bg-linear-to-br from-cyan-500 to-blue-600 flex items-center justify-center mx-auto mb-6 shadow-2xl">
-                    <item.icon className="size-10 md:size-12 text-white" />
-                  </div>
-                  <h3 className="text-2xl md:text-3xl font-black text-white mb-4">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm md:text-xl text-cyan-200">
-                    {item.desc}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Testimonials */}
-        <section className="py-12 px-6 bg-linear-to-b from-transparent via-cyan-950/20 to-transparent">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-5xl font-black text-center mb-16 bg-linear-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-              Loved by Clients Across India
-            </h2>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              {testimonials.map((t, i) => (
-                <div
-                  key={i}
-                  className="bg-linear-to-br from-blue-900/40 to-cyan-900/30 backdrop-blur-xl rounded-3xl p-8 border border-cyan-500/30"
-                >
-                  <div className="text-4xl md:text-6xl text-cyan-400/30 mb-0 md:mb-4">
-                    “
-                  </div>
-                  <p className="text-sm md:text-xl text-cyan-100 italic mb-2 md:mb-6 leading-relaxed">
-                    &#34;{t.text}&#34;
-                  </p>
-                  <div>
-                    <p className="font-bold text-white text-sm">{t.author}</p>
-                    <p className="text-cyan-300 text-xs">{t.role}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Final CTA */}
-        <section className="py-10 md:py-20 px-6 text-center">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl sm:text-5xl md:text-7xl font-black mb-10">
-              <span className="bg-linear-to-r from-cyan-400 via-blue-400 to-sky-400 bg-clip-text text-transparent">
-                Ready to Grow Your Business?
-              </span>
-            </h2>
-            <div className="flex flex-row gap-3 md:gap-6 justify-center items-center">
+            <div className="flex flex-row justify-center items-center gap-3 md:gap-4">
               <Link
                 href="/developers"
-                className="group relative px-6 py-4 md:px-12 md:py-7 bg-linear-to-r from-blue-600 via-cyan-600 to-sky-600 rounded-2xl font-black text-sm md:text-2xl shadow-2xl shadow-cyan-600/70 hover:shadow-cyan-500/90 transition-all duration-500 hover:scale-110 active:scale-95 overflow-hidden"
+                className="group relative flex-1 sm:flex-none px-4 sm:px-10 py-4 sm:py-5 bg-blue-600 text-white font-black text-xs sm:text-lg rounded-xl hover:scale-105 active:scale-95 transition-all shadow-xl text-center whitespace-nowrap"
               >
-                <span className="absolute inset-0 bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                <span className="relative flex items-center gap-1 md:gap-4">
-                  Hire <span className="hidden md:block">a Developer Now</span>
-                  <span className="md:hidden">Developer</span>
-                  <ArrowRight className="size-8 hidden md:block group-hover:translate-x-2 transition" />
-                </span>
+                Start Hiring Now
               </Link>
               <Link
-                href="/book-service"
-                className="px-6 py-4 md:px-12 md:py-7 border-2 border-cyan-500 rounded-2xl font-bold  text-sm md:text-xl hover:bg-cyan-500/10 transition-all duration-300 hover:scale-105"
+                href="/book-services"
+                className="flex-1 sm:flex-none px-4 sm:px-10 py-4 sm:py-5 border border-white/20 text-white font-black text-xs sm:text-lg rounded-xl hover:bg-white/5 transition-all outline-hidden text-center whitespace-nowrap"
               >
-                Book{" "}
-                <span className="hidden md:block">a Free Consultation</span>
-                <span className="md:hidden">Consult</span>
+                Book Consultation
               </Link>
             </div>
-          </div>
+          </motion.div>
         </section>
       </div>
     </>

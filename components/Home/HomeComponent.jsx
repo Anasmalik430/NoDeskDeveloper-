@@ -10,6 +10,7 @@ import ServicesVerticalBar from "../ServicesVertical/ServicesVerticalBar";
 import TestimonialsComponent from "../Testimonials/TestimonialsComponent";
 import DevNsoftwareComponent from "./DevNsoftwareComponent";
 import PricingPage from "../Pricing/PricingPage";
+import HowItWorksTimeline from "../HowItWorks/HowItWorksVerticalTimeline";
 
 export default function HomePage() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -207,6 +208,7 @@ export default function HomePage() {
           </section>
         </section>
         {/* Pricing Page Component */}
+        <HowItWorksTimeline />
         <PricingPage />
       </div>
     </>
