@@ -1,8 +1,83 @@
-"use client";
-import { ArrowRight } from "lucide-react";
+import {
+  ArrowRight,
+  Utensils,
+  GraduationCap,
+  Building2,
+  HeartPulse,
+  Layout,
+  PlaneTakeoff,
+} from "lucide-react";
 import Link from "next/link";
-import { softwareProducts } from "../Data";
-import { developers } from "../Developer/DevListData";
+
+const categoryIcons = {
+  Food: Utensils,
+  Education: GraduationCap,
+  "Real Estate": Building2,
+  Healthcare: HeartPulse,
+  Travel: PlaneTakeoff,
+};
+
+const developers = [
+  {
+    name: "Anas Malik",
+    experience: 2,
+    skills: ["Next.js", "React"],
+    hourlyRate: 800,
+  },
+  {
+    name: "Abhinav",
+    experience: 1,
+    skills: ["React", "Express"],
+    hourlyRate: 1000,
+  },
+  {
+    name: "Jefrin Akter Jui",
+    experience: 2,
+    skills: ["React", "Next.js"],
+    hourlyRate: 1300,
+  },
+  {
+    name: "Abhishek",
+    experience: 1,
+    skills: ["React", "Express"],
+    hourlyRate: 1000,
+  },
+];
+
+const softwareProducts = [
+  {
+    _id: "s1",
+    name: "Food Delivery App",
+    category: "Food",
+    tech: ["Flutter"],
+    price: 45000,
+    color: "from-orange-500 to-red-500",
+  },
+  {
+    _id: "s2",
+    name: "School Management",
+    category: "Education",
+    tech: ["Laravel"],
+    price: 65000,
+    color: "from-blue-500 to-cyan-500",
+  },
+  {
+    _id: "s3",
+    name: "Real Estate CRM",
+    category: "Real Estate",
+    tech: ["React"],
+    price: 55000,
+    color: "from-purple-500 to-pink-500",
+  },
+  {
+    _id: "s4",
+    name: "Clinic Management",
+    category: "Healthcare",
+    tech: ["Next.js"],
+    price: 38000,
+    color: "from-teal-500 to-emerald-500",
+  },
+];
 
 export default function DevelopersSoftwareSection() {
   return (
@@ -29,45 +104,51 @@ export default function DevelopersSoftwareSection() {
               <h2 className="text-2xl md:text-3xl font-black text-white">
                 Top Developers
               </h2>
-              <Link href="/developers" className="group/link flex items-center gap-2 text-purple-400 hover:text-purple-300 font-semibold transition-colors" >
+              <Link
+                href="/developers"
+                className="group/link flex items-center gap-2 text-purple-400 hover:text-purple-300 font-semibold transition-colors"
+              >
                 View all
                 <ArrowRight className="w-5 h-5 group-hover/link:translate-x-1 transition-transform" />
               </Link>
             </div>
 
             {/* Developer Cards Grid */}
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3 md:gap-4">
               {developers.slice(0, 4).map((profile, idx) => (
-                <div key={idx} className="group/card cursor-pointer space-y-4 relative bg-white/2 hover:bg-white/5 border border-white/10 hover:border-blue-500/30 rounded-2xl p-5 transition-all duration-300 hover:scale-[1.02]" >
-                  <div className="flex justify-between  ">
-                    <h3 className="text-white font-bold text-lg">{profile.name}</h3>
-                    <span className="text-[10px] font-semibold text-blue-400 bg-blue-900/50 flex justify-center items-center h-fit px-2 py-1 rounded-full">
-                      {profile.experience} years+
+                <div
+                  key={idx}
+                  className="group/card cursor-pointer space-y-2 md:space-y-4 relative bg-white/2 hover:bg-white/5 border border-white/10 hover:border-blue-500/30 rounded-xl md:rounded-2xl p-3 md:p-5 transition-all duration-300 hover:scale-[1.02]"
+                >
+                  <div className="flex justify-between items-start gap-1">
+                    <h3 className="text-white font-bold text-sm md:text-lg truncate">
+                      {profile.name}
+                    </h3>
+                    <span className="shrink-0 text-[8px] md:text-[10px] font-semibold text-blue-400 bg-blue-900/50 flex justify-center items-center h-fit px-1.5 md:px-2 py-0.5 md:py-1 rounded-full">
+                      {profile.experience}y+
                     </span>
                   </div>
-                  <div className="flex justify-between  ">
+                  <div className="flex justify-between items-end gap-1">
                     {/* Skills */}
-                    <span className="space-x-1 mt-2 flex-wrap flex-3">
-                      {profile.skills.slice(0, 2).map((skill) => (
-                        <span key={skill} className="text-gray-300  gap-1 text-[10px] bg-slate-700/50 px-2 py-1 rounded-full" >
+                    <span className="space-x-1 mt-1 flex-wrap flex-3 hidden sm:flex">
+                      {profile.skills.slice(0, 1).map((skill) => (
+                        <span
+                          key={skill}
+                          className="text-gray-300 gap-1 text-[8px] bg-slate-700/50 px-1.5 py-0.5 rounded-full"
+                        >
                           {skill}
                         </span>
                       ))}
                     </span>
+                    <span className="sm:hidden text-[8px] text-gray-500 truncate max-w-[50px]">
+                      {profile.skills[0]}
+                    </span>
 
                     {/* Rate */}
-                    <p className="text-2xl font-black bg-linear-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                    <p className="text-base md:text-2xl font-black bg-linear-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
                       ₹{profile.hourlyRate}
                     </p>
                   </div>
-                  {/* Book Button */}
-                  {/* <Link
-                    href="/developers"
-                    className="inline-flex items-center gap-2 text-purple-400 hover:text-purple-300 font-semibold text-sm transition-colors"
-                  >
-                    Book Developer
-                    <ArrowRight className="w-4 h-4 group-hover/card:translate-x-1 transition-transform" />
-                  </Link> */}
                 </div>
               ))}
             </div>
@@ -99,46 +180,43 @@ export default function DevelopersSoftwareSection() {
             </div>
 
             {/* Software Cards Grid */}
-            <div className="grid md:grid-cols-2 gap-4 mb-6">
-              {softwareProducts.slice(0, 4).map((software, idx) => {
-                const Icon = software.icon;
-                const techStack = [
-                  "Next.js + Supabase",
-                  "Flutter + Firebase",
-                  "React + Node",
-                  "MERN Stack",
-                ];
-
+            <div className="grid grid-cols-2 gap-3 md:gap-4 mb-6">
+              {softwareProducts.map((software, idx) => {
+                const Icon =
+                  (software.category && categoryIcons[software.category]) ||
+                  Layout;
                 return (
                   <div
-                    key={idx}
-                    className="group/card relative bg-white/2 hover:bg-white/5 border border-white/10 hover:border-purple-500/30 rounded-2xl p-5 transition-all duration-300 hover:scale-[1.02]"
+                    key={software._id || idx}
+                    className="group/card relative cursor-pointer bg-white/2 hover:bg-white/5 border border-white/10 hover:border-purple-500/30 rounded-xl md:rounded-2xl p-3 md:p-5 transition-all duration-300 hover:scale-[1.02]"
                   >
                     {/* Header */}
-                    <div className="flex items-start justify-between mb-3">
-                      <div className="flex items-center gap-3 flex-1">
+                    <div className="flex items-start justify-between mb-2 md:mb-3">
+                      <div className="flex items-center gap-2 md:gap-3 flex-1 min-w-0">
                         <div
-                          className={`p-2.5 bg-linear-to-br ${software.color} rounded-xl shrink-0`}
+                          className={`p-1.5 md:p-2.5 bg-linear-to-br ${software.color || "from-purple-600 to-pink-500"} rounded-lg md:rounded-xl shrink-0`}
                         >
                           <Icon
-                            className="w-5 h-5 text-white"
+                            className="w-4 h-4 md:w-5 md:h-5 text-white"
                             strokeWidth={2.5}
                           />
                         </div>
                         <div className="min-w-0">
-                          <h3 className="text-white font-bold text-base mb-0.5 truncate">
+                          <h3 className="text-white font-bold text-xs md:text-base mb-0.5 truncate">
                             {software.name}
                           </h3>
-                          <p className="text-gray-400 text-xs">
-                            {techStack[idx]}
+                          <p className="text-gray-400 text-[8px] md:text-xs truncate">
+                            {Array.isArray(software.tech)
+                              ? software.tech.slice(0, 1).join(" + ")
+                              : software.tech || "Custom Stack"}
                           </p>
                         </div>
                       </div>
                     </div>
 
                     {/* Price */}
-                    <p className="text-2xl font-black bg-linear-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-1">
-                      {software.price}
+                    <p className="text-base md:text-2xl font-black bg-linear-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-1">
+                      ₹{software.price?.toLocaleString()}
                     </p>
 
                     {/* Actions */}
