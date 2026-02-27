@@ -1,4 +1,16 @@
-import { Shield, Clock, Code2, Package, Wrench, Blocks, Brain, Cloud, Palette, Server, Zap, } from "lucide-react";
+import {
+  Shield,
+  Clock,
+  Code2,
+  Package,
+  Wrench,
+  Blocks,
+  Brain,
+  Cloud,
+  Palette,
+  Server,
+  Zap,
+} from "lucide-react";
 import { GrWordpress } from "react-icons/gr";
 import { CiMobile1 } from "react-icons/ci";
 import { FaGlobeAsia } from "react-icons/fa";
@@ -6,27 +18,35 @@ import { FaGlobeAsia } from "react-icons/fa";
 export const slides = [
   {
     title: "Hire Top 1% Developers",
-    subtitle: "Handpicked talent. Verified skills. Delivered on time — every time.",
+    subtitle:
+      "Handpicked talent. Verified skills. Delivered on time — every time.",
     highlight: "Zero Risk. Full Control.",
-    image:  "https://images.pexels.com/photos/10508800/pexels-photo-10508800.jpeg",
+    image:
+      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop",
   },
   {
     title: "Launch in Days, Not Months",
-    subtitle: "500+ successful projects. Built by experts who care about your success.",
+    subtitle:
+      "500+ successful projects. Built by experts who care about your success.",
     highlight: "Faster. Smarter. Better.",
-    image:  "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1920&h=1080&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop",
   },
   {
     title: "Fixed Rates. No Surprises.",
-    subtitle: "Transparent pricing. Milestone payments. Full escrow protection.",
+    subtitle:
+      "Transparent pricing. Milestone payments. Full escrow protection.",
     highlight: "You’re Always in Control.",
-    image:  "https://images.unsplash.com/photo-1613909207039-6b173b755cc1?q=80&w=1247&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image:
+      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop",
   },
   {
     title: "From Idea to Launch Fast",
-    subtitle: "Our developers don’t just code. They build your vision with passion.",
+    subtitle:
+      "Our developers don’t just code. They build your vision with passion.",
     highlight: "Your Success is Our Mission.",
-    image:  "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1920&h=1080&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2070&auto=format&fit=crop",
   },
 ];
 
