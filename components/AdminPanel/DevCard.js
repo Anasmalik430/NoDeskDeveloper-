@@ -41,7 +41,7 @@ export default function DevCard({ developer }) {
           <div className="flex flex-col items-center -mt-12">
             <div className="size-40 rounded-2xl overflow-hidden border-4 border-black shadow-2xl ring-4 ring-blue-500/30">
               <Image
-                src={photo || "/ProfilePic.jpg"}
+                src={photo || "/dev.webp"}
                 alt={name}
                 width={1920}
                 height={1080}

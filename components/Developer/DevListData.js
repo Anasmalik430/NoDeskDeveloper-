@@ -4,7 +4,7 @@ export const developers = [
   {
     id: 1,
     name: "Anas Malik",
-    photo: "/ProfilePic.jpg",
+    photo: "/dev.webp",
     skills: ["React", "Next.js", "TypeScript", "Node.js"],
     experience: 5,
     hourlyRate: 1200,
