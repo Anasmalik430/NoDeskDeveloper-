@@ -33,7 +33,7 @@ export async function generateMetadata({ params }) {
         title,
         description,
         images: [ogImage],
-        url: `https://www.nodeskdeveloper.vercel.app/software/${slug}`,
+        url: `https://www.nodeskdeveloper.in/software/${slug}`,
         siteName: "Nodesk Developer",
       },
       twitter: {

@@ -97,7 +97,7 @@ export default function FooterComponent() {
             {/* Contact Info */}
             <div className="space-y-3">
               <Link
-                href="mailto:developeranas738@gmail.com"
+                href="mailto:support@nodeskdeveloper.in"
                 className="flex items-center gap-3 text-gray-400 hover:text-blue-400 transition-colors duration-300 group w-fit"
               >
                 <div className="p-2 rounded-lg bg-blue-500/10 group-hover:bg-blue-500/20 transition-colors duration-300">
@@ -106,7 +106,7 @@ export default function FooterComponent() {
                 <span className="text-sm">support@nodeskdeveloper.in</span>
               </Link>
               <Link
-                href="tel:+1234567890"
+                href="tel:+919690170502"
                 className="flex items-center gap-3 text-gray-400 hover:text-blue-400 transition-colors duration-300 group w-fit"
               >
                 <div className="p-2 rounded-lg bg-blue-500/10 group-hover:bg-blue-500/20 transition-colors duration-300">
@@ -115,7 +115,7 @@ export default function FooterComponent() {
                 <span className="text-sm">+91 9690170502</span>
               </Link>
               <Link
-                href="https://api.whatsapp.com/send?phone=+919690170502&text=Hello%20Team,%20I%20need%20your%20service"
+                href="https://api.whatsapp.com/send?phone=+919690170502&text=Hello%20NoDeskDeveloper%20Team,%20I%20need%20your%20service"
                 className="flex items-center gap-3 text-gray-400 hover:text-blue-400 transition-colors duration-300 group w-fit"
               >
                 <div className="p-2 rounded-lg bg-blue-500/10 group-hover:bg-blue-500/20 transition-colors duration-300">
@@ -123,12 +123,12 @@ export default function FooterComponent() {
                 </div>
                 <span className="text-sm">+91 9690170502</span>
               </Link>
-              {/* <div className="flex items-center gap-3 text-gray-400">
+              <div className="flex items-center gap-3 text-gray-400">
                 <div className="p-2 rounded-lg bg-blue-500/10">
                   <MapPin className="w-4 h-4" />
                 </div>
-                <span className="text-sm">San Francisco, CA 94102</span>
-              </div> */}
+                <span className="text-sm">Roorkee, Uttarakhand, India</span>
+              </div>
             </div>
           </div>
 
