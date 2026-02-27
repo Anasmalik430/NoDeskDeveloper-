@@ -51,7 +51,6 @@ export default function Testimonials() {
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % testimonials.length);
     }, 3000);
-
     return () => clearInterval(interval);
   }, [testimonials.length]);
 
@@ -73,45 +72,53 @@ export default function Testimonials() {
   }, [activeIndex]);
 
   return (
-    <div className="bg-linear-to-b from-black via-gray-950 to-black pt-0 px-5 lg:px-8">
+    <div className="relative bg-linear-to-b from-black via-gray-950 to-black pt-0 px-4 sm:px-5 lg:px-8 overflow-hidden">
       {/* Animated Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute top-20 left-1/4 w-72 sm:w-96 h-72 sm:h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
         <div
           style={{ animationDelay: "1.5s" }}
-          className="absolute bottom-20 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"
+          className="absolute bottom-20 right-1/4 w-72 sm:w-96 h-72 sm:h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"
         />
       </div>
 
-      <div className="relative min-w-100 max-w-[1400px] mx-auto">
-        {/* Main Container with Gradient Border */}
-        <div className="relative p-1 rounded-[40px]">
-          <div className=" rounded-[38px] p-8 md:p-12">
+      <div className="relative w-full max-w-[1400px] mx-auto">
+        {/* Main Container */}
+        <div className="relative p-1 rounded-[28px] sm:rounded-[40px]">
+          <div className="rounded-[26px] sm:rounded-[38px] p-4 sm:p-8 md:p-12">
             {/* Header */}
-            <div className="mx-auto h-fit  pb-16">
-              <h2 className="md:hidden text-5xl pb-2 border-white md:text-6xl font-black text-center bg-linear-to-r from-teal-400 via-sky-400 to-blue-400 bg-clip-text text-transparent">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="mx-auto h-fit pb-10 sm:pb-16"
+            >
+              <h2 className="md:hidden text-3xl sm:text-5xl pb-2 font-black text-center bg-linear-to-r from-teal-400 via-sky-400 to-blue-400 bg-clip-text text-transparent">
                 Reviews
               </h2>
-              <h2 className="hidden md:block text-5xl pb-2 border-white md:text-6xl font-black text-center bg-linear-to-r from-teal-400 via-sky-400 to-blue-400 bg-clip-text text-transparent">
+              <h2 className="hidden md:block text-5xl md:text-6xl pb-2 font-black text-center bg-linear-to-r from-teal-400 via-sky-400 to-blue-400 bg-clip-text text-transparent">
                 Loved by{" "}
-                <span className="bg-linear-to-br  from-blue-600 via-sky-500 to-teal-600 text-transparent bg-clip-text">
+                <span className="bg-linear-to-br from-blue-600 via-sky-500 to-teal-600 text-transparent bg-clip-text">
                   founders{" "}
                 </span>
                 &{" "}
-                <span className="bg-linear-to-br  from-blue-600 via-sky-500 to-teal-600 text-transparent bg-clip-text">
+                <span className="bg-linear-to-br from-blue-600 via-sky-500 to-teal-600 text-transparent bg-clip-text">
                   teams
                 </span>
               </h2>
-            </div>
+            </motion.div>
 
             {/* Scrollable Cards Container */}
-            <div className="relative -mx-8 md:-mx-12 px-8 md:px-12 mb-8 ">
+            <div className="relative -mx-4 sm:-mx-8 md:-mx-12 px-4 sm:px-8 md:px-12 mb-8">
               <div
                 ref={scrollRef}
-                className="flex gap-6 overflow-x-auto scrollbar-hide pb-4 "
+                className="flex gap-4 sm:gap-6 overflow-x-auto pb-4"
                 style={{
                   scrollSnapType: "x mandatory",
                   WebkitOverflowScrolling: "touch",
+                  scrollbarWidth: "none",
+                  msOverflowStyle: "none",
                 }}
               >
                 {testimonials.map((testimonial, index) => {
@@ -130,33 +137,38 @@ export default function Testimonials() {
                       animate={{ scale, opacity }}
                       transition={{ duration: 0.5, ease: "easeOut" }}
                       onClick={() => setActiveIndex(index)}
-                      className="shrink-0 w-[320px] md:w-[380px] scroll-snap-align-center cursor-pointer"
+                      className="shrink-0 w-[260px] sm:w-[320px] md:w-[380px] cursor-pointer"
+                      style={{ scrollSnapAlign: "center" }}
                     >
                       <div
-                        className={`relative bg-linear-to-b from-white/5 to-white/2 backdrop-blur-sm border rounded-3xl p-6 h-full transition-all duration-500 ${isActive ? "border-blue-500/40 shadow-xl shadow-blue-500/10" : "border-white/10 hover:border-white/20"}`}
+                        className={`relative bg-linear-to-b from-white/5 to-white/2 backdrop-blur-sm border rounded-2xl sm:rounded-3xl p-5 sm:p-6 h-full transition-all duration-500 ${
+                          isActive
+                            ? "border-blue-500/40 shadow-xl shadow-blue-500/10"
+                            : "border-white/10 hover:border-white/20"
+                        }`}
                       >
                         {/* Stars */}
-                        <div className="flex gap-1 mb-4">
+                        <div className="flex gap-1 mb-3 sm:mb-4">
                           {[...Array(testimonial.rating)].map((_, i) => (
                             <Star
                               key={i}
                               strokeWidth={2}
-                              className="w-5 h-5 fill-yellow-400 text-yellow-400"
+                              className="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400"
                             />
                           ))}
                         </div>
 
                         {/* Quote */}
-                        <p className="text-gray-300 text-[15px] leading-relaxed mb-6 min-h-20">
-                          &#34;{testimonial.text}&#34;
+                        <p className="text-gray-300 text-sm sm:text-[15px] leading-relaxed mb-4 sm:mb-6 min-h-16 sm:min-h-20">
+                          &quot;{testimonial.text}&quot;
                         </p>
 
                         {/* Author */}
-                        <div className="border-t border-white/10 pt-4">
-                          <p className="text-white font-semibold text-base">
+                        <div className="border-t border-white/10 pt-3 sm:pt-4">
+                          <p className="text-white font-semibold text-sm sm:text-base">
                             {testimonial.author}
                           </p>
-                          <p className="text-gray-400 text-sm">
+                          <p className="text-gray-400 text-xs sm:text-sm">
                             {testimonial.role}
                           </p>
                         </div>
@@ -170,7 +182,7 @@ export default function Testimonials() {
                               stiffness: 300,
                               damping: 30,
                             }}
-                            className="absolute bottom-2 left-1/2  -translate-x-1/2 w-20 h-1 bg-linear-to-r from-blue-500 to-purple-500 rounded-full"
+                            className="absolute bottom-2 left-1/2 -translate-x-1/2 w-16 sm:w-20 h-1 bg-linear-to-r from-blue-500 to-purple-500 rounded-full"
                           />
                         )}
                       </div>
@@ -179,26 +191,13 @@ export default function Testimonials() {
                 })}
               </div>
             </div>
-
-            {/* Progress Dots */}
-            {/* <div className={`flex justify-center gap-2 mb-0 ${ pathname === "/" ? "hidden" : "" }`} >
-              {testimonials.map((_, index) => (
-                <button  key={index}  onClick={() => setActiveIndex(index)}  className={`h-2 rounded-full transition-all duration-300 ${ index === activeIndex ? "w-8 bg-linear-to-r from-blue-500 to-purple-500" : "w-2 bg-white/20 hover:bg-white/30" }`} />  ))}
-            </div> */}
           </div>
         </div>
       </div>
 
       <style jsx>{`
-        .scrollbar-hide::-webkit-scrollbar {
+        div::-webkit-scrollbar {
           display: none;
-        }
-        .scrollbar-hide {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-        .scroll-snap-align-center {
-          scroll-snap-align: center;
         }
       `}</style>
     </div>
