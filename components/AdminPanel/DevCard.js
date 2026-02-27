@@ -29,7 +29,7 @@ export default function DevCard({ developer }) {
     preferredLanguage,
   } = developer;
 
-  console.log("Developer Data:", _id, developer);
+  // console.log("Developer Data:", _id, developer);
   return (
     <>
       <div className="group relative bg-linear-to-b from-white/5 to-white/2 backdrop-blur-xl border border-white/20 rounded-3xl p-6 hover:border-blue-500/40 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-blue-500/10">

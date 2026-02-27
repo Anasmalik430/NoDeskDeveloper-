@@ -46,7 +46,7 @@ export default function AllDevelopersPage() {
       if (result.success) {
         setDevelopers((prev) => [result.data, ...prev]);
         setIsModalOpen(false);
-        console.log("Developer added successfully:", result.data);
+        // console.log("Developer added successfully:", result.data);
       } else {
         console.error("Failed to add developer:", result.message);
       }

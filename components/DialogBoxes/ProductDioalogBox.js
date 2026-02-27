@@ -65,20 +65,20 @@ export const ProductDialogBox = ({ product, isOpen, onClose }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Demo Request Submitted:", {
-      product: product.name,
-      client: formData,
-      selectedAddons: selectedAddons.map((a) => ({
-        name: a.label,
-        cost: a.cost,
-      })),
-      pricing: {
-        base: basePrice,
-        addonsTotal: Math.round(addonsTotal),
-        serviceFee: Math.round(serviceFee),
-        estimatedTotal: Math.round(total),
-      },
-    });
+    // console.log("Demo Request Submitted:", {
+    //   product: product.name,
+    //   client: formData,
+    //   selectedAddons: selectedAddons.map((a) => ({
+    //     name: a.label,
+    //     cost: a.cost,
+    //   })),
+    //   pricing: {
+    //     base: basePrice,
+    //     addonsTotal: Math.round(addonsTotal),
+    //     serviceFee: Math.round(serviceFee),
+    //     estimatedTotal: Math.round(total),
+    //   },
+    // });
     alert("Request sent! Check console for details.");
   };
 

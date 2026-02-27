@@ -5,7 +5,7 @@ const f = createUploadthing();
 export const ourFileRouter = {
   resumeUploader: f({ pdf: { maxFileSize: "5MB" } }).onUploadComplete(
     async ({ file }) => {
-      console.log("Resume uploaded:", file.url);
+      // console.log("Resume uploaded:", file.url);
       return { url: file.url };
     }
   ),

@@ -98,7 +98,7 @@ export default function AddSoftwareModal({ isOpen, onClose, onAdd }) {
       isActive: formData.isActive,
     };
 
-    console.log("New Project Added:", newProject);
+    // console.log("New Project Added:", newProject);
     onAdd?.(newProject);
     onClose();
   };

@@ -47,7 +47,7 @@ export default function FooterComponent() {
 
   const handleSubscribe = (e) => {
     e.preventDefault();
-    console.log("Subscribed:", email);
+    // console.log("Subscribed:", email);
     setEmail("");
   };
 
