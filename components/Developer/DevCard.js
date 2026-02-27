@@ -209,12 +209,13 @@ const DevCard = ({ filteredDevelopers }) => {
 
                   {/* Level Badge */}
                   <span
-                    className={`inline-block text-xs px-3 py-1 rounded-full mt-2 ${dev.level === "Expert"
+                    className={`inline-block text-xs px-3 py-1 rounded-full mt-2 ${
+                      dev.level === "Expert"
                         ? "text-blue-400 bg-blue-900/50"
                         : dev.level === "Beginner"
                           ? "text-green-400 bg-green-900/50"
                           : "text-yellow-400 bg-yellow-900/50"
-                      }`}
+                    }`}
                   >
                     {dev.level}
                   </span>
@@ -288,12 +289,13 @@ const DevCard = ({ filteredDevelopers }) => {
               {/* Availability */}
               <div className="flex items-center gap-2 mb-4 p-2 bg-sky-900/20 rounded-lg border border-sky-500/30">
                 <BadgeCheck
-                  className={`size-5 ${dev.availability === "Full-time"
+                  className={`size-5 ${
+                    dev.availability === "Full-time"
                       ? "text-blue-400"
                       : dev.availability === "Part-time"
                         ? "text-yellow-400"
                         : "text-green-400"
-                    }`}
+                  }`}
                 />
                 <span className="text-xs text-blue-300">Availability:</span>
                 <span className="text-sm font-bold text-white">

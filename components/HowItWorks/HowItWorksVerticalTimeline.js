@@ -68,7 +68,9 @@ export default function HowItWorksTimeline() {
 
                 {/* Pro Tip */}
                 <div className="my-2 p-3 bg-white/5 border border-blue-500/20 rounded-xl pt-0">
-                  <p className=" text-gray-400" style={{fontSize: "12px"}}>{item.proTip}</p>
+                  <p className=" text-gray-400" style={{ fontSize: "12px" }}>
+                    {item.proTip}
+                  </p>
                 </div>
 
                 {/* Tags */}

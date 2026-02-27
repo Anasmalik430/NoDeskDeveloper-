@@ -170,7 +170,7 @@ export default function CareersPage() {
                       value={form.name}
                       onChange={handleChange}
                       className="w-full pl-12 pr-4 py-4 bg-white/5 border border-blue-500/30 rounded-xl text-white placeholder-cyan-400/50 focus:outline-none focus:border-cyan-400 transition"
-                      placeholder="John Doe"
+                      placeholder="Your Name"
                     />
                   </div>
                   {errors.name && (

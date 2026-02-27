@@ -62,9 +62,9 @@ export default function DevelopersPage() {
         (dev) =>
           dev.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
           dev.skills.some((s) =>
-            s.toLowerCase().includes(searchTerm.toLowerCase())
+            s.toLowerCase().includes(searchTerm.toLowerCase()),
           ) ||
-          dev.country?.toLowerCase().includes(searchTerm.toLowerCase())
+          dev.country?.toLowerCase().includes(searchTerm.toLowerCase()),
       );
     }
 
@@ -109,7 +109,10 @@ export default function DevelopersPage() {
             </div>
             <div className="flex flex-wrap gap-3">
               {[...Array(10)].map((_, i) => (
-                <div key={i} className="h-8 w-24 bg-white/10 rounded-full shimmer" />
+                <div
+                  key={i}
+                  className="h-8 w-24 bg-white/10 rounded-full shimmer"
+                />
               ))}
             </div>
           </div>
@@ -117,7 +120,10 @@ export default function DevelopersPage() {
           {/* Skeleton Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
             {[...Array(6)].map((_, i) => (
-              <div key={i} className="bg-white/5 backdrop-blur-xl border border-blue-500/20 rounded-3xl p-6" >
+              <div
+                key={i}
+                className="bg-white/5 backdrop-blur-xl border border-blue-500/20 rounded-3xl p-6"
+              >
                 <div className="flex gap-4 mb-6">
                   <div className="size-20 bg-white/5 rounded-2xl shimmer" />
                   <div className="flex-1 space-y-3">
@@ -127,12 +133,18 @@ export default function DevelopersPage() {
                 </div>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {[...Array(4)].map((_, j) => (
-                    <div key={j} className="h-7 w-20 bg-white/5 rounded-full shimmer" />
+                    <div
+                      key={j}
+                      className="h-7 w-20 bg-white/5 rounded-full shimmer"
+                    />
                   ))}
                 </div>
                 <div className="grid grid-cols-3 gap-3 mb-4">
                   {[...Array(3)].map((_, k) => (
-                    <div key={k} className="h-16 bg-white/5 rounded-xl shimmer" />
+                    <div
+                      key={k}
+                      className="h-16 bg-white/5 rounded-xl shimmer"
+                    />
                   ))}
                 </div>
                 <div className="flex gap-3">
@@ -190,10 +202,11 @@ export default function DevelopersPage() {
               <button
                 key={level}
                 onClick={() => setSelectedLevel(level)}
-                className={`px-4 py-1.5 cursor-pointer rounded-full text-[11px] md:text-sm transition-all ${selectedLevel === level
-                  ? "bg-linear-to-r from-blue-600 to-purple-600 text-white"
-                  : "bg-white/5 text-gray-300 hover:bg-white/10"
-                  }`}
+                className={`px-4 py-1.5 cursor-pointer rounded-full text-[11px] md:text-sm transition-all ${
+                  selectedLevel === level
+                    ? "bg-linear-to-r from-blue-600 to-purple-600 text-white"
+                    : "bg-white/5 text-gray-300 hover:bg-white/10"
+                }`}
               >
                 {level}
               </button>
@@ -205,10 +218,11 @@ export default function DevelopersPage() {
               <button
                 key={tech}
                 onClick={() => setSelectedTech(tech)}
-                className={`px-4 py-1.5 cursor-pointer rounded-full text-[11px] md:text-sm font-medium transition-all ${selectedTech === tech
-                  ? "bg-blue-500/30 text-blue-300 border border-blue-400/50"
-                  : "bg-white/5 text-gray-300 hover:bg-white/10"
-                  }`}
+                className={`px-4 py-1.5 cursor-pointer rounded-full text-[11px] md:text-sm font-medium transition-all ${
+                  selectedTech === tech
+                    ? "bg-blue-500/30 text-blue-300 border border-blue-400/50"
+                    : "bg-white/5 text-gray-300 hover:bg-white/10"
+                }`}
               >
                 {tech}
               </button>

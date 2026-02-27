@@ -128,7 +128,7 @@ export default function BookServicePage() {
                       onChange={handleChange}
                       required
                       className="w-full pl-12 pr-4 py-4 bg-white/5 border border-blue-500/30 rounded-xl text-white placeholder-cyan-400/50 focus:outline-none focus:border-cyan-400 transition"
-                      placeholder="John Doe"
+                      placeholder="Your Name"
                     />
                   </div>
                   {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name}</p>}
@@ -161,7 +161,7 @@ export default function BookServicePage() {
                       onChange={handleChange}
                       required
                       className="w-full pl-12 pr-4 py-4 bg-white/5 border border-blue-500/30 rounded-xl text-white placeholder-cyan-400/50 focus:outline-none focus:border-cyan-400 transition"
-                      placeholder="john@example.com"
+                      placeholder="mail@example.com"
                     />
                   </div>
                   {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
