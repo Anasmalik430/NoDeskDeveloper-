@@ -1,7 +1,15 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { Calendar, BadgeCheck, ArrowLeft, Sparkles, TrendingUp, MapPin, LanguagesIcon } from "lucide-react";
+import {
+  Calendar,
+  BadgeCheck,
+  ArrowLeft,
+  Sparkles,
+  TrendingUp,
+  MapPin,
+  LanguagesIcon,
+} from "lucide-react";
 import Image from "next/image";
 import { API_BASE } from "@/lib/api";
 import { HiOutlineCash } from "react-icons/hi";
@@ -24,53 +32,50 @@ export default function DeveloperDetailBySlug() {
     description: "",
   });
 
- // Openai states
+  // Openai states
   const [estimatedHours, setEstimatedHours] = useState(null);
   const [estimating, setEstimating] = useState(false);
-
+  const [wantsEstimation, setWantsEstimation] = useState(false);
 
   const projectTypes = [
-    "Web App", "Mobile App", "E-commerce", "Landing Page",
-    "Dashboard", "API Development", "Full Stack Project", "Other",
+    "Web App",
+    "Mobile App",
+    "E-commerce",
+    "Landing Page",
+    "Dashboard",
+    "API Development",
+    "Full Stack Project",
+    "Other",
   ];
 
   // Ye function description change pe call hoga
-const estimateHours = async (desc) => {
-  if (!desc || desc.length < 20) {
-    setEstimatedHours(null);
-    return;
-  }
-
-  setEstimating(true);
-  try {
-    const res = await fetch("/api/estimate-hours", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        description: desc,
-        projectType: formData.projectType || "General"
-      }),
-    });
-    const data = await res.json();
-    setEstimatedHours(data.hours);
-  } catch (err) {
-    console.error(err);
-    setEstimatedHours(null);
-  } finally {
-    setEstimating(false);
-  }
-};
-
-// handleInputChange me description ke liye debounce laga do (optional but smooth)
-useEffect(() => {
-  const timer = setTimeout(() => {
-    if (formData.description) {
-      estimateHours(formData.description);
+  const estimateHours = async (desc) => {
+    if (!desc || desc.length < 20) {
+      setEstimatedHours(null);
+      return;
     }
-  }, 1000); // 1 sec delay
 
-  return () => clearTimeout(timer);
-}, [formData.description, formData.projectType]);
+    setEstimating(true);
+    try {
+      const res = await fetch("/api/estimate-hours", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          description: desc,
+          projectType: formData.projectType || "General",
+        }),
+      });
+      const data = await res.json();
+      setEstimatedHours(data.hours);
+    } catch (err) {
+      console.error(err);
+      setEstimatedHours(null);
+    } finally {
+      setEstimating(false);
+    }
+  };
+
+  // remove auto-calculation effect
 
   // Fetch developer by SLUG
   useEffect(() => {
@@ -79,7 +84,9 @@ useEffect(() => {
 
       try {
         setLoading(true);
-        const response = await fetch(`${API_BASE}/developer/slug/${params.slug}`);
+        const response = await fetch(
+          `${API_BASE}/developer/slug/${params.slug}`,
+        );
 
         if (!response.ok) {
           throw new Error("Developer not found");
@@ -105,21 +112,27 @@ useEffect(() => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.clientName || !formData.email || !formData.phone || 
-        !formData.projectType || !formData.budget || !formData.description) {
+    if (
+      !formData.clientName ||
+      !formData.email ||
+      !formData.phone ||
+      !formData.projectType ||
+      !formData.budget ||
+      !formData.description
+    ) {
       alert("Please fill all fields");
       return;
     }
-    
+
     const finalDescription = estimatedHours
-  ? `${formData.description}\n\n[AI Estimated Hours: ${estimatedHours}]`
-  : formData.description;
+      ? `${formData.description}\n\n[AI Estimated Hours: ${estimatedHours}]`
+      : formData.description;
 
     const bookingData = {
       clientName: formData.clientName,
@@ -152,7 +165,12 @@ useEffect(() => {
       if (res.ok && result.success) {
         alert("Booking request sent! We'll contact you soon.");
         setFormData({
-          clientName: "", email: "", phone: "", projectType: "", budget: "", description: ""
+          clientName: "",
+          email: "",
+          phone: "",
+          projectType: "",
+          budget: "",
+          description: "",
         });
       } else {
         alert(result.message || "Something went wrong");
@@ -179,7 +197,9 @@ useEffect(() => {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-center">
-          <p className="text-red-500 text-xl mb-6">{error || "Developer not found"}</p>
+          <p className="text-red-500 text-xl mb-6">
+            {error || "Developer not found"}
+          </p>
           <button
             onClick={() => router.push("/developers")}
             className="px-8 py-3 bg-blue-600 hover:bg-blue-500 rounded-xl text-white"
@@ -233,28 +253,36 @@ useEffect(() => {
                     </h1>
                     <div className="flex items-center gap-2 text-sm text-gray-400 mb-4">
                       <MapPin className="size-4" />
-                      <span>{developer.state}, {developer.country}</span>
+                      <span>
+                        {developer.state}, {developer.country}
+                      </span>
                     </div>
 
                     <div className="flex flex-wrap gap-2">
-                      <span className={`px-3 py-1.5 rounded-full text-xs font-medium border ${
-                        developer.level === "Expert" ? "text-blue-400 bg-blue-500/10 border-blue-500/20" :
-                        developer.level === "Beginner" ? "text-green-400 bg-green-500/10 border-green-500/20" :
-                        "text-yellow-400 bg-yellow-500/10 border-yellow-500/20"
-                      }`}>
+                      <span
+                        className={`px-3 py-1.5 rounded-full text-xs font-medium border ${
+                          developer.level === "Expert"
+                            ? "text-blue-400 bg-blue-500/10 border-blue-500/20"
+                            : developer.level === "Beginner"
+                              ? "text-green-400 bg-green-500/10 border-green-500/20"
+                              : "text-yellow-400 bg-yellow-500/10 border-yellow-500/20"
+                        }`}
+                      >
                         {developer.level}
                       </span>
                       {developer.available && (
                         <div className="flex items-center gap-1.5 bg-green-500/10 px-3 py-1.5 rounded-full border border-green-500/20">
                           <div className="size-2 bg-green-400 rounded-full animate-pulse" />
-                          <span className="text-xs text-green-400 font-medium">Available</span>
+                          <span className="text-xs text-green-400 font-medium">
+                            Available
+                          </span>
                         </div>
                       )}
                     </div>
                   </div>
                 </div>
 
-               {/* Quick Stats */}
+                {/* Quick Stats */}
                 <div className="grid grid-cols-3 gap-3 mb-8">
                   <div className="bg-white/5 border border-white/10 rounded-2xl p-4 text-center hover:bg-white/10 transition-colors">
                     <div className="flex justify-center mb-2">
@@ -271,7 +299,11 @@ useEffect(() => {
                       <HiOutlineCash className="size-5 text-green-400" />
                     </div>
                     <p className="text-[16px] md:text-2xl font-bold text-white mb-1">
-                     {loading ? "......." : convertINR(developer?.hourlyRate) || `₹${developer?.hourlyRate}`}/hr
+                      {loading
+                        ? "......."
+                        : convertINR(developer?.hourlyRate) ||
+                          `₹${developer?.hourlyRate}`}
+                      /hr
                     </p>
                     <p className="text-xs text-gray-400">Per Hour</p>
                   </div>
@@ -295,8 +327,8 @@ useEffect(() => {
                         developer.availability === "Full-time"
                           ? "text-blue-400"
                           : developer.availability === "Part-time"
-                          ? "text-yellow-400"
-                          : "text-green-400"
+                            ? "text-yellow-400"
+                            : "text-green-400"
                       }`}
                     />
                     <div>
@@ -329,10 +361,15 @@ useEffect(() => {
 
                 {/* Skills */}
                 <div className="mt-8">
-                  <h3 className="text-sm font-medium text-gray-400 mb-3">Technical Skills</h3>
+                  <h3 className="text-sm font-medium text-gray-400 mb-3">
+                    Technical Skills
+                  </h3>
                   <div className="flex flex-wrap gap-2">
                     {developer.skills.map((skill, i) => (
-                      <span key={i} className="px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-xs md:text-sm text-white">
+                      <span
+                        key={i}
+                        className="px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-xs md:text-sm text-white"
+                      >
                         {skill}
                       </span>
                     ))}
@@ -428,20 +465,62 @@ useEffect(() => {
                     required
                     className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 transition-all resize-none"
                   />
-                  {/* Added just below textarea */}
-                  {formData.description.length > 10 &&
-                    <div style={{fontFamily: "monospace"}} className="mt-2 p-3 bg-blue-500/10 border border-blue-500/30 rounded-xl text-center">
+                  {/* Toggle UI for AI Estimation */}
+                  {formData.description.length >= 20 && (
+                    <div className="flex items-center gap-3 p-4 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-colors">
+                      <label className="relative inline-flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          className="sr-only peer"
+                          checked={wantsEstimation}
+                          onChange={(e) => {
+                            const checked = e.target.checked;
+                            setWantsEstimation(checked);
+                            if (checked && !estimatedHours) {
+                              estimateHours(formData.description);
+                            } else if (!checked) {
+                              setEstimatedHours(null);
+                            }
+                          }}
+                        />
+                        <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                      </label>
+                      <div className="flex flex-col">
+                        <span className="text-sm font-medium text-white">
+                          Get AI Hour Estimate
+                        </span>
+                        <span className="text-[10px] text-gray-400">
+                          AI will analyze your description for an accurate
+                          estimate
+                        </span>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Estimation Result */}
+                  {wantsEstimation && (
+                    <div
+                      style={{ fontFamily: "monospace" }}
+                      className="mt-2 p-3 bg-blue-500/10 border border-blue-500/30 rounded-xl text-center"
+                    >
                       {estimating ? (
-                        <span className="text-blue-400 text-sm">Estimating hours...</span>
+                        <div className="flex items-center justify-center gap-2">
+                          <div className="size-4 border-2 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
+                          <span className="text-blue-400 text-sm">
+                            AI is analyzing...
+                          </span>
+                        </div>
                       ) : estimatedHours ? (
                         <span className="text-green-400 font-bold text-[16px]">
                           Estimated Approximately: {estimatedHours} hours
                         </span>
-                      ) : formData.description.length > 20 ? (
-                        <span className="text-gray-500 text-sm">AI will estimate soon...</span>
-                      ) : null}
+                      ) : (
+                        <span className="text-gray-500 text-sm">
+                          Failed to get estimate. Try again.
+                        </span>
+                      )}
                     </div>
-}
+                  )}
                   {/* Rate Display */}
                   {/* <div className="flex items-center justify-between py-3 px-4 bg-blue-500/10 border border-blue-500/20 rounded-xl">
                     <span className="text-xs text-gray-400">Hourly Rate</span>

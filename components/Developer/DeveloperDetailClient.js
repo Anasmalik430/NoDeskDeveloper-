@@ -34,6 +34,7 @@ export default function DeveloperDetailClient() {
   // Openai states
   const [estimatedHours, setEstimatedHours] = useState(null);
   const [estimating, setEstimating] = useState(false);
+  const [wantsEstimation, setWantsEstimation] = useState(false);
 
   const projectTypes = [
     "Web App",
@@ -73,16 +74,7 @@ export default function DeveloperDetailClient() {
     }
   };
 
-  // handleInputChange me description ke liye debounce laga do (optional but smooth)
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (formData.description) {
-        estimateHours(formData.description);
-      }
-    }, 1000); // 1 sec delay
-
-    return () => clearTimeout(timer);
-  }, [formData.description, formData.projectType]);
+  // remove auto-calculation effect
 
   useEffect(() => {
     const fetchDeveloper = async () => {
@@ -282,8 +274,8 @@ export default function DeveloperDetailClient() {
                           developer.level === "Expert"
                             ? "text-blue-400 bg-blue-500/10 border-blue-500/20"
                             : developer.level === "Beginner"
-                            ? "text-green-400 bg-green-500/10 border-green-500/20"
-                            : "text-yellow-400 bg-yellow-500/10 border-yellow-500/20"
+                              ? "text-green-400 bg-green-500/10 border-green-500/20"
+                              : "text-yellow-400 bg-yellow-500/10 border-yellow-500/20"
                         }`}
                       >
                         {developer.level}
@@ -346,8 +338,8 @@ export default function DeveloperDetailClient() {
                         developer.availability === "Full-time"
                           ? "text-blue-400"
                           : developer.availability === "Part-time"
-                          ? "text-yellow-400"
-                          : "text-green-400"
+                            ? "text-yellow-400"
+                            : "text-green-400"
                       }`}
                     />
                     <div>
@@ -484,22 +476,60 @@ export default function DeveloperDetailClient() {
                     required
                     className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 transition-all resize-none"
                   />
-                  {/* Added it just below textarea */}
-                  {formData.description.length > 10 && (
-                    <div style={{fontFamily: "monospace"}} className="mt-2 p-3 bg-blue-500/10 border border-blue-500/30 rounded-xl text-center">
-                      {estimating ? (
-                        <span className="text-blue-400 text-sm">
-                          Estimating hours...
+                  {/* Toggle UI for AI Estimation */}
+                  {formData.description.length >= 20 && (
+                    <div className="flex items-center gap-3 p-4 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-colors">
+                      <label className="relative inline-flex items-center cursor-pointer">
+                        <input
+                          type="checkbox"
+                          className="sr-only peer"
+                          checked={wantsEstimation}
+                          onChange={(e) => {
+                            const checked = e.target.checked;
+                            setWantsEstimation(checked);
+                            if (checked && !estimatedHours) {
+                              estimateHours(formData.description);
+                            } else if (!checked) {
+                              setEstimatedHours(null);
+                            }
+                          }}
+                        />
+                        <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                      </label>
+                      <div className="flex flex-col">
+                        <span className="text-sm font-medium text-white">
+                          Get AI Hour Estimate
                         </span>
+                        <span className="text-[10px] text-gray-400">
+                          AI will analyze your description for an accurate
+                          estimate
+                        </span>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Estimation Result */}
+                  {wantsEstimation && (
+                    <div
+                      style={{ fontFamily: "monospace" }}
+                      className="mt-2 p-3 bg-blue-500/10 border border-blue-500/30 rounded-xl text-center"
+                    >
+                      {estimating ? (
+                        <div className="flex items-center justify-center gap-2">
+                          <div className="size-4 border-2 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
+                          <span className="text-blue-400 text-sm">
+                            AI is analyzing...
+                          </span>
+                        </div>
                       ) : estimatedHours ? (
-                        <span  className="text-green-400 font-bold text-[16px]">
+                        <span className="text-green-400 font-bold text-[16px]">
                           Estimated Approximately: {estimatedHours} hours
                         </span>
-                      ) : formData.description.length > 20 ? (
+                      ) : (
                         <span className="text-gray-500 text-sm">
-                          AI will estimate soon...
+                          Failed to get estimate. Try again.
                         </span>
-                      ) : null}
+                      )}
                     </div>
                   )}
 
