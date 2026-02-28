@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Code2, Mail, Phone, MapPin, Github, Linkedin, Twitter, Instagram, ArrowUpRight, Heart, Send, Sparkles, } from "lucide-react";
+import { Code2, Mail, Phone, MapPin, Github, Linkedin, Twitter, Instagram, ArrowUpRight, Heart, Send, Sparkles, Facebook, } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaWhatsapp } from "react-icons/fa";
@@ -33,10 +33,10 @@ const footerLinks = {
 };
 
 const socialLinks = [
-  { Icon: Github, href: "https://github.com", label: "GitHub" },
-  { Icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
-  { Icon: Twitter, href: "https://twitter.com", label: "Twitter" },
-  { Icon: Instagram, href: "https://instagram.com", label: "Instagram" },
+  { Icon: Facebook, href: "https://www.facebook.com/nodeskdeveloper", label: "Facebook" },
+  { Icon: Linkedin, href: "https://www.linkedin.com/company/nodeskdeveloper", label: "LinkedIn" },
+  { Icon: Twitter, href: "https://x.com/nodeskdeveloper", label: "X" },
+  { Icon: Instagram, href: "https://www.instagram.com/nodeskdeveloper", label: "Instagram" },
 ];
 
 export default function FooterComponent() {
