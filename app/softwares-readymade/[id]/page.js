@@ -19,18 +19,33 @@ export async function generateMetadata({ params }) {
       return { title: "Product Not Found" };
     }
 
-    const title = `${product?.name} - Ready Made App`;
-    const description = product.description.replace(/<[^>]*>/g, '').slice(0, 50) || "Production-ready app";
+    const title = `${product?.name} - Buy Ready-Made App | NoDeskDeveloper`;
+    const description =
+      product.description?.replace(/<[^>]*>/g, "").slice(0, 155) ||
+      "Production-ready app available for purchase on NoDeskDeveloper.";
 
-    const ogImage = product.screenshots?.[0] || "/productImage.webp";
+    const ogImage = product.screenshots?.[0] || "/og-image.png";
 
     return {
       title,
       description,
+      keywords: [
+        product?.name,
+        product?.category,
+        "buy ready-made app",
+        "clone app India",
+        "NoDeskDeveloper software",
+      ].filter(Boolean),
+      alternates: {
+        canonical: `/softwares-readymade/${id}`,
+      },
       openGraph: {
         title,
         description,
+        url: `https://nodeskdeveloper.in/softwares-readymade/${id}`,
+        siteName: "NoDeskDeveloper",
         images: [ogImage],
+        type: "website",
       },
       twitter: {
         card: "summary_large_image",

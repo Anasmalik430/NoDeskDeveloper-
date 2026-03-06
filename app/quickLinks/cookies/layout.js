@@ -9,6 +9,9 @@ export const metadata = {
     "data tracking policy",
     "essential cookies",
   ],
+  alternates: {
+    canonical: "/quickLinks/cookies",
+  },
 };
 
 export default function CookiesLayout({ children }) {

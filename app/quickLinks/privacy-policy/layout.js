@@ -9,6 +9,9 @@ export const metadata = {
     "NoDeskDeveloper legal",
     "user data security",
   ],
+  alternates: {
+    canonical: "/quickLinks/privacy-policy",
+  },
 };
 
 export default function PrivacyLayout({ children }) {

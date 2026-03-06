@@ -9,6 +9,9 @@ export const metadata = {
     "escrow security",
     "software development contract",
   ],
+  alternates: {
+    canonical: "/quickLinks/terms",
+  },
 };
 
 export default function TermsLayout({ children }) {

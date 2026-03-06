@@ -9,6 +9,9 @@ export const metadata = {
     "technical stack",
     "copyright information",
   ],
+  alternates: {
+    canonical: "/quickLinks/licenses",
+  },
 };
 
 export default function LicensesLayout({ children }) {
