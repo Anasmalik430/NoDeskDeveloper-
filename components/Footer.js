@@ -1,6 +1,20 @@
 "use client";
 import { useState } from "react";
-import { Code2, Mail, Phone, MapPin, Github, Linkedin, Twitter, Instagram, ArrowUpRight, Heart, Send, Sparkles, Facebook, } from "lucide-react";
+import {
+  Code2,
+  Mail,
+  Phone,
+  MapPin,
+  Github,
+  Linkedin,
+  Twitter,
+  Instagram,
+  ArrowUpRight,
+  Heart,
+  Send,
+  Sparkles,
+  Facebook,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaWhatsapp } from "react-icons/fa";
@@ -33,17 +47,29 @@ const footerLinks = {
 };
 
 const socialLinks = [
-  { Icon: Facebook, href: "https://www.facebook.com/nodeskdeveloper", label: "Facebook" },
-  { Icon: Linkedin, href: "https://www.linkedin.com/company/nodeskdeveloper", label: "LinkedIn" },
+  {
+    Icon: Facebook,
+    href: "https://www.facebook.com/nodeskdeveloper",
+    label: "Facebook",
+  },
+  {
+    Icon: Linkedin,
+    href: "https://www.linkedin.com/company/nodeskdeveloper",
+    label: "LinkedIn",
+  },
   { Icon: Twitter, href: "https://x.com/nodeskdeveloper", label: "X" },
-  { Icon: Instagram, href: "https://www.instagram.com/nodeskdeveloper", label: "Instagram" },
+  {
+    Icon: Instagram,
+    href: "https://www.instagram.com/nodeskdeveloper",
+    label: "Instagram",
+  },
 ];
 
 export default function FooterComponent() {
   const currentYear = new Date().getFullYear();
   const [email, setEmail] = useState("");
   const [hoveredSocial, setHoveredSocial] = useState(null);
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   const handleSubscribe = (e) => {
     e.preventDefault();
@@ -52,7 +78,9 @@ export default function FooterComponent() {
   };
 
   return (
-    <footer className={`relative bg-linear-to-b from-black via-gray-950 to-black border-t border-blue-500/20 overflow-hidden  ${pathname.startsWith('/admin') ? 'hidden' : ''}`}>
+    <footer
+      className={`relative bg-linear-to-b from-black via-gray-950 to-black border-t border-blue-500/20 overflow-hidden  ${pathname.startsWith("/admin") ? "hidden" : ""}`}
+    >
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
@@ -74,8 +102,12 @@ export default function FooterComponent() {
             <Link href="/" className="flex items-center gap-3 group w-fit">
               <div className="relative">
                 <div className="absolute inset-0 bg-linear-to-br from-blue-500 via-sky-500 to-teal-500 rounded-2xl blur-xl opacity-70 group-hover:opacity-100 transition-all duration-500" />
-                <div className="relative bg-linear-to-br from-blue-600 via-sky-500 to-teal-400 p-3 rounded-2xl shadow-2xl ring-2 ring-blue-400/50">
-                  <Code2 className="w-7 h-7 text-white" strokeWidth={3} />
+                <div className="relative bg-black rounded-2xl shadow-2xl ring-2 ring-blue-400/50 overflow-hidden size-13 flex items-center justify-center">
+                  <img
+                    src="/logo.png"
+                    alt="NoDeskDeveloper Logo"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </div>
               <div>
@@ -187,10 +219,13 @@ export default function FooterComponent() {
 
               {/* MSME Badge */}
               <div className="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-white/5 border border-blue-500/20 hover:border-blue-500/50 transition-all duration-300 group/msme cursor-default">
-
                 <div className="flex flex-col space-y-0.5">
-                  <span className="text-[12px] font-black uppercase tracking-[0.2em] text-white">MSME</span>
-                  <span className="text-[7px] font-bold text-blue-300/40 tracking-widest leading-none">REGISTERED</span>
+                  <span className="text-[12px] font-black uppercase tracking-[0.2em] text-white">
+                    MSME
+                  </span>
+                  <span className="text-[7px] font-bold text-blue-300/40 tracking-widest leading-none">
+                    REGISTERED
+                  </span>
                 </div>
               </div>
             </div>
