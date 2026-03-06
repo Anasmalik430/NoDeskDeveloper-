@@ -21,7 +21,7 @@ export default function DeveloperDetailBySlug() {
   const [developer, setDeveloper] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const { convertINR } = useINRConverter();
+  const { convertINR, loading: currencyLoading, symbol } = useINRConverter();
 
   const [formData, setFormData] = useState({
     clientName: "",
@@ -139,9 +139,9 @@ export default function DeveloperDetailBySlug() {
       email: formData.email,
       phone: formData.phone,
       projectType: formData.projectType,
-      estimatedBudget: formData.budget,
+      estimatedBudget: `${symbol}${formData.budget}`,
       description: finalDescription,
-      developerRate: `₹${convertINR(developer?.hourlyRate)}/hr`,
+      developerRate: `${convertINR(developer?.hourlyRate)}/hr`,
       developer: {
         id: developer._id,
         name: developer.name,
@@ -299,10 +299,9 @@ export default function DeveloperDetailBySlug() {
                       <HiOutlineCash className="size-5 text-green-400" />
                     </div>
                     <p className="text-[16px] md:text-2xl font-bold text-white mb-1">
-                      {loading
-                        ? "......."
-                        : convertINR(developer?.hourlyRate) ||
-                          `₹${developer?.hourlyRate}`}
+                      {currencyLoading
+                        ? "..."
+                        : convertINR(developer?.hourlyRate)}
                       /hr
                     </p>
                     <p className="text-xs text-gray-400">Per Hour</p>
@@ -451,7 +450,7 @@ export default function DeveloperDetailBySlug() {
                     name="budget"
                     value={formData.budget}
                     onChange={handleInputChange}
-                    placeholder="Budget (₹)"
+                    placeholder={`Budget (${symbol})`}
                     required
                     className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 transition-all"
                   />
@@ -521,13 +520,6 @@ export default function DeveloperDetailBySlug() {
                       )}
                     </div>
                   )}
-                  {/* Rate Display */}
-                  {/* <div className="flex items-center justify-between py-3 px-4 bg-blue-500/10 border border-blue-500/20 rounded-xl">
-                    <span className="text-xs text-gray-400">Hourly Rate</span>
-                    <span className="text-sm font-bold text-blue-400">
-                      {loading ? "......." : convertINR(developer?.hourlyRate) || `₹${developer?.hourlyRate}`}/hr
-                    </span>
-                  </div> */}
 
                   <button
                     type="submit"

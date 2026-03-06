@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import useINRConverter from "@/utils/currencyConverter";
 import {
   Activity,
   BadgeCheck,
@@ -28,6 +29,7 @@ export default function DevCard({ developer }) {
     state,
     preferredLanguage,
   } = developer;
+  const { convertINR, loading: currencyLoading } = useINRConverter();
 
   // console.log("Developer Data:", _id, developer);
   return (
@@ -48,7 +50,12 @@ export default function DevCard({ developer }) {
                 className="object-cover object-top w-full h-full"
               />
             </div>
-            <h3 style={{fontFamily: "monospace"}} className="mt-4 text-2xl font-bold border-b border-white/20 pb-2 text-white">{name}</h3>
+            <h3
+              style={{ fontFamily: "monospace" }}
+              className="mt-4 text-2xl font-bold border-b border-white/20 pb-2 text-white"
+            >
+              {name}
+            </h3>
             {/* <p className="text-sm text-blue-400 font-semibold">{level}</p> */}
           </div>
 

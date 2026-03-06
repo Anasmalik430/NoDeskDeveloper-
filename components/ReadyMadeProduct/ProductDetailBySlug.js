@@ -1,7 +1,14 @@
 "use client";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { ArrowLeft, PlayCircle, Copy, Smartphone, Monitor, Check, } from "lucide-react";
+import {
+  ArrowLeft,
+  PlayCircle,
+  Copy,
+  Smartphone,
+  Monitor,
+  Check,
+} from "lucide-react";
 import Link from "next/link";
 import { API_BASE } from "@/lib/api";
 import Image from "next/image";
@@ -12,8 +19,7 @@ export default function ProductDetailBySlug() {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [mainImage, setMainImage] = useState(0); // Track main image index
-  const { convertINR } = useINRConverter();
-  
+  const { convertINR, loading: currencyLoading, symbol } = useINRConverter();
 
   // Form & Addons State
   const [formData, setFormData] = useState({
@@ -126,18 +132,18 @@ export default function ProductDetailBySlug() {
   const total = basePrice + addonsTotal + serviceFee;
 
   const handleCopyQuote = () => {
-    let quote = `${product.name}\nBase Price: ${convertINR(basePrice.toLocaleString())}`;
+    let quote = `${product.name}\nBase Price: ${convertINR(basePrice)}`;
 
     if (selectedAddons.length > 0) {
       quote += `\n\nSelected Add-ons:`;
       selectedAddons.forEach((addon) => {
-        quote += `\n• ${addon.label}: ${convertINR(addon.cost.toLocaleString())}`;
+        quote += `\n• ${addon.label}: ${convertINR(addon.cost)}`;
       });
-      quote += `\n\nAdd-ons Total: ${convertINR(Math.round(addonsTotal).toLocaleString())}`;
+      quote += `\n\nAdd-ons Total: ${convertINR(Math.round(addonsTotal))}`;
     }
 
-    quote += `\nService Fee (5%): ${convertINR(Math.round(serviceFee).toLocaleString())}`;
-    quote += `\n\nTotal Amount: ${convertINR(Math.round(total).toLocaleString())}`;
+    quote += `\nService Fee (5%): ${convertINR(Math.round(serviceFee))}`;
+    quote += `\n\nTotal Amount: ${convertINR(Math.round(total))}`;
 
     navigator.clipboard.writeText(quote);
     alert("Quote copied to clipboard!");
@@ -323,8 +329,12 @@ export default function ProductDetailBySlug() {
               </div>
               {/* ============================== */}
               <div className="border mt-6 p-4 pr-px py-2 text-sm border-white/20 rounded-xl">
-                <div className="max-h-110 prodfeatures overflow-y-scroll prose prose-invert prose-sm max-w-none  text-slate-300 leading-relaxed  [&_ul]:list-disc [&_ul]:pl-5  [&_ol]:list-decimal [&_ol]:pl-5  [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:mt-6 [&_h1]:mb-3 [&_h2]:text-xl [&_h2]:font-bold [&_h2]:mt-5 [&_h2]:mb-2 [&_strong]:text-white [&_em]:italic [&_a]:text-blue-400 [&_a]:underline"
-                  dangerouslySetInnerHTML={{ __html: product.description || ""}}/>
+                <div
+                  className="max-h-110 prodfeatures overflow-y-scroll prose prose-invert prose-sm max-w-none  text-slate-300 leading-relaxed  [&_ul]:list-disc [&_ul]:pl-5  [&_ol]:list-decimal [&_ol]:pl-5  [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:mt-6 [&_h1]:mb-3 [&_h2]:text-xl [&_h2]:font-bold [&_h2]:mt-5 [&_h2]:mb-2 [&_strong]:text-white [&_em]:italic [&_a]:text-blue-400 [&_a]:underline"
+                  dangerouslySetInnerHTML={{
+                    __html: product.description || "",
+                  }}
+                />
               </div>
             </div>
 
@@ -420,7 +430,7 @@ export default function ProductDetailBySlug() {
                         >
                           <span className="text-slate-300">{addon.label}</span>
                           <span className="font-medium text-white">
-                            {convertINR(addon.cost.toLocaleString())}
+                            {convertINR(addon.cost)}
                           </span>
                         </div>
                       ))}
@@ -433,27 +443,29 @@ export default function ProductDetailBySlug() {
                   <div className="flex justify-between text-sm">
                     <span className="text-slate-400">Base Price</span>
                     <span className="font-semibold text-white">
-                     {loading ? "......." : convertINR(basePrice.toLocaleString())}
+                      {currencyLoading ? "..." : convertINR(basePrice)}
                     </span>
                   </div>
                   {selectedAddons.length > 0 && (
                     <div className="flex justify-between text-sm">
                       <span className="text-slate-400">Add-ons Total</span>
                       <span className="font-semibold text-white">
-                        {loading ? "......." : convertINR(addonsTotal.toLocaleString())}
+                        {currencyLoading ? "..." : convertINR(addonsTotal)}
                       </span>
                     </div>
                   )}
                   <div className="flex justify-between text-sm">
                     <span className="text-slate-400">Service Fee (5%)</span>
                     <span className="text-white">
-                      {loading ? "......." : convertINR(Math.round(serviceFee).toLocaleString())}
+                      {currencyLoading
+                        ? "..."
+                        : convertINR(Math.round(serviceFee))}
                     </span>
                   </div>
                   <div className="flex justify-between text-xl font-bold pt-3 border-t border-slate-600">
                     <span>Total</span>
                     <span className="text-purple-400">
-                     {loading ? "......." : convertINR(Math.round(total).toLocaleString())}
+                      {currencyLoading ? "..." : convertINR(Math.round(total))}
                     </span>
                   </div>
                 </div>

@@ -6,7 +6,7 @@ import useINRConverter from "@/utils/currencyConverter";
 
 export default function CodeNScriptCard({ product }) {
   const router = useRouter();
-  const { convertINR, loading } = useINRConverter();
+  const { convertINR, loading: currencyLoading, symbol } = useINRConverter();
 
   const shareProduct = async (product) => {
     if (navigator.share) {
@@ -21,11 +21,20 @@ export default function CodeNScriptCard({ product }) {
   };
 
   return (
-    <div onClick={() => router.push(`/services/codeNscript/${product.slug}`)} className="group relative bg-linear-to-br from-slate-900/90 via-blue-900/50 to-slate-900/90 backdrop-blur-xl rounded-3xl overflow-hidden border border-slate-700/50 hover:border-blue-500/50 shadow-xl hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-500 hover:scale-[1.02] hover:-translate-y-2 cursor-pointer" >
+    <div
+      onClick={() => router.push(`/services/codeNscript/${product.slug}`)}
+      className="group relative bg-linear-to-br from-slate-900/90 via-blue-900/50 to-slate-900/90 backdrop-blur-xl rounded-3xl overflow-hidden border border-slate-700/50 hover:border-blue-500/50 shadow-xl hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-500 hover:scale-[1.02] hover:-translate-y-2 cursor-pointer"
+    >
       <div className="absolute inset-0 bg-linear-to-br from-blue-500/0 via-purple-500/0 to-blue-500/0 group-hover:from-blue-500/10 group-hover:via-purple-500/5 group-hover:to-blue-500/10 transition-all duration-700 pointer-events-none" />
 
       <div className="relative h-60 overflow-hidden bg-slate-800/50">
-        <Image src={product.images?.[0] || "/productImage.webp"} alt={product.name} width={1920} height={1080} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+        <Image
+          src={product.images?.[0] || "/productImage.webp"}
+          alt={product.name}
+          width={1920}
+          height={1080}
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+        />
         <div className="absolute inset-0 bg-linear-to-t from-slate-900 via-slate-900/40 to-transparent" />
         <button
           onClick={(e) => {
@@ -48,20 +57,42 @@ export default function CodeNScriptCard({ product }) {
           </span>
         </div>
 
-        <p className="text-slate-300 text-left truncate text-xs leading-relaxed line-clamp-1" dangerouslySetInnerHTML={{ __html: product.description || "" }} />
+        <p
+          className="text-slate-300 text-left truncate text-xs leading-relaxed line-clamp-1"
+          dangerouslySetInnerHTML={{ __html: product.description || "" }}
+        />
 
         <div className="flex items-center gap-2">
           {product.installationType?.map((type) => (
-            <div key={type} className="flex items-center gap-1.5 px-2.5 py-1 bg-slate-800/50 rounded-lg border border-slate-700/50" >
-              {type === "Web" ? ( <Monitor className="size-3.5 text-slate-400" /> ) : ( <Smartphone className="size-3.5 text-slate-400" /> )}
-              <span className="text-[10px] text-slate-400 font-medium">{type}</span>
+            <div
+              key={type}
+              className="flex items-center gap-1.5 px-2.5 py-1 bg-slate-800/50 rounded-lg border border-slate-700/50"
+            >
+              {type === "Web" ? (
+                <Monitor className="size-3.5 text-slate-400" />
+              ) : (
+                <Smartphone className="size-3.5 text-slate-400" />
+              )}
+              <span className="text-[10px] text-slate-400 font-medium">
+                {type}
+              </span>
             </div>
           ))}
         </div>
 
         <div className="flex flex-wrap gap-1.5">
-          {(Array.isArray(product.codeLanguages) ? product.codeLanguages : product.codeLanguages?.split(", ") || [] ).slice(0, 4).map((lang) => (
-              <span key={lang} className="text-[11px] tracking-wide px-2 py-1 bg-slate-800/60 text-slate-300 rounded-md border border-slate-700/50" >{lang}</span>
+          {(Array.isArray(product.codeLanguages)
+            ? product.codeLanguages
+            : product.codeLanguages?.split(", ") || []
+          )
+            .slice(0, 4)
+            .map((lang) => (
+              <span
+                key={lang}
+                className="text-[11px] tracking-wide px-2 py-1 bg-slate-800/60 text-slate-300 rounded-md border border-slate-700/50"
+              >
+                {lang}
+              </span>
             ))}
           {product.codeLanguages.length > 4 && (
             <span className="text-xs px-2 py-1 bg-slate-800/60 text-slate-300 rounded-md border border-slate-700/50">
@@ -75,7 +106,8 @@ export default function CodeNScriptCard({ product }) {
             <div>
               <p className="text-base text-slate-400 mb-0.5">Base Price</p>
               <p className="text-2xl font-black text-white">
-                {loading ? "......." : convertINR(product.basePrice?.toLocaleString()) || 0} </p>
+                {currencyLoading ? "..." : convertINR(product.basePrice)}{" "}
+              </p>
             </div>
             {/* <div className="text-right">
               <p className="text-xs text-slate-400 mb-0.5">Additional Charges</p>
@@ -86,7 +118,10 @@ export default function CodeNScriptCard({ product }) {
           </div>
         </div>
 
-        <button onClick={() => router.push(`/services/codeNscript/${product?.slug}`)} className="border border-white/20 mt-2 bg-linear-to-r from-violet-500  to-purple-600 font-semibold w-full px-5 py-2 rounded-xl" >
+        <button
+          onClick={() => router.push(`/services/codeNscript/${product?.slug}`)}
+          className="border border-white/20 mt-2 bg-linear-to-r from-violet-500  to-purple-600 font-semibold w-full px-5 py-2 rounded-xl"
+        >
           View Details
         </button>
       </div>

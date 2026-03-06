@@ -6,9 +6,11 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Calendar, User, IndianRupee, AlertCircle } from "lucide-react";
 import { API_BASE } from "@/lib/api";
+import useINRConverter from "@/utils/currencyConverter";
 
 export default function AdminBuyProductEnquire() {
   const router = useRouter();
+  const { convertINR, symbol, loading: currencyLoading } = useINRConverter();
   const [enquiries, setEnquiries] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -88,7 +90,7 @@ export default function AdminBuyProductEnquire() {
                 </div>
                 <span
                   className={`px-3 py-1.5 rounded-full text-xs font-medium ${getStatusColor(
-                    enq.status
+                    enq.status,
                   )}`}
                 >
                   {enq.status}
@@ -102,9 +104,11 @@ export default function AdminBuyProductEnquire() {
 
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <IndianRupee className="size-5 text-green-400" />
+                  <div className="size-5 flex items-center justify-center font-bold text-green-400">
+                    ₹
+                  </div>
                   <span className="text-lg font-bold text-white">
-                    ₹{enq.finalTotal.toLocaleString()}
+                    {enq.finalTotal}
                   </span>
                 </div>
                 {enq.selectedAddons.length > 0 && (
@@ -122,7 +126,7 @@ export default function AdminBuyProductEnquire() {
               <button
                 onClick={() =>
                   router.push(
-                    `/admin/bookings/productsbuying-requests/${enq._id}`
+                    `/admin/bookings/productsbuying-requests/${enq._id}`,
                   )
                 }
                 className="w-full py-3 bg-linear-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-medium rounded-xl transition-all shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40"

@@ -1,8 +1,17 @@
 "use client";
 import { useState } from "react";
-import { User, Mail, Send, Phone, Briefcase, IndianRupee, ChevronDown, MessageSquare, } from "lucide-react";
+import {
+  User,
+  Mail,
+  Send,
+  Phone,
+  Briefcase,
+  ChevronDown,
+  MessageSquare,
+} from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import { API_BASE } from "@/lib/api";
+import useINRConverter from "@/utils/currencyConverter";
 
 const services = [
   "Hire a Developer",
@@ -73,7 +82,7 @@ export default function BookServicePage() {
 
       if (res.ok) {
         toast.success("Request received! We’ll contact you within 2 hours.");
-        
+
         // Reset form
         setForm({
           name: "",
@@ -85,7 +94,9 @@ export default function BookServicePage() {
         });
         setErrors({});
       } else {
-        toast.error(result.message || "Something went wrong. Please try again.");
+        toast.error(
+          result.message || "Something went wrong. Please try again.",
+        );
       }
     } catch (err) {
       console.error("Submission error:", err);
@@ -94,6 +105,8 @@ export default function BookServicePage() {
       setIsSubmitting(false);
     }
   };
+
+  const { symbol } = useINRConverter();
 
   return (
     <>
@@ -119,7 +132,9 @@ export default function BookServicePage() {
               {/* Name, Phone, Email */}
               <div className="grid md:grid-cols-3 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-cyan-300 mb-2">Full Name</label>
+                  <label className="block text-sm font-medium text-cyan-300 mb-2">
+                    Full Name
+                  </label>
                   <div className="relative">
                     <User className="absolute left-4 top-4 w-5 h-5 text-cyan-400" />
                     <input
@@ -131,11 +146,15 @@ export default function BookServicePage() {
                       placeholder="Your Name"
                     />
                   </div>
-                  {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name}</p>}
+                  {errors.name && (
+                    <p className="text-red-400 text-xs mt-1">{errors.name}</p>
+                  )}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-cyan-300 mb-2">Phone</label>
+                  <label className="block text-sm font-medium text-cyan-300 mb-2">
+                    Phone
+                  </label>
                   <div className="relative">
                     <Phone className="absolute left-4 top-4 w-5 h-5 text-cyan-400" />
                     <input
@@ -147,11 +166,15 @@ export default function BookServicePage() {
                       placeholder="+91 98765 43210"
                     />
                   </div>
-                  {errors.phone && <p className="text-red-400 text-xs mt-1">{errors.phone}</p>}
+                  {errors.phone && (
+                    <p className="text-red-400 text-xs mt-1">{errors.phone}</p>
+                  )}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-cyan-300 mb-2">Email</label>
+                  <label className="block text-sm font-medium text-cyan-300 mb-2">
+                    Email
+                  </label>
                   <div className="relative">
                     <Mail className="absolute left-4 top-4 w-5 h-5 text-cyan-400" />
                     <input
@@ -164,13 +187,17 @@ export default function BookServicePage() {
                       placeholder="mail@example.com"
                     />
                   </div>
-                  {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
+                  {errors.email && (
+                    <p className="text-red-400 text-xs mt-1">{errors.email}</p>
+                  )}
                 </div>
               </div>
 
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-cyan-300 mb-2">Service Required</label>
+                  <label className="block text-sm font-medium text-cyan-300 mb-2">
+                    Service Required
+                  </label>
                   <div className="relative">
                     <Briefcase className="absolute left-4 top-4 w-5 h-5 text-cyan-400" />
                     <select
@@ -189,26 +216,36 @@ export default function BookServicePage() {
                     </select>
                     <ChevronDown className="absolute right-4 top-4 w-5 h-5 text-cyan-400 pointer-events-none" />
                   </div>
-                  {errors.service && <p className="text-red-400 text-xs mt-1">{errors.service}</p>}
+                  {errors.service && (
+                    <p className="text-red-400 text-xs mt-1">
+                      {errors.service}
+                    </p>
+                  )}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-cyan-300 mb-2">Budget Range</label>
+                  <label className="block text-sm font-medium text-cyan-300 mb-2">
+                    Budget Range
+                  </label>
                   <div className="relative">
-                    <IndianRupee className="absolute left-4 top-4 w-5 h-5 text-cyan-400" />
+                    <div className="absolute left-4 top-4 text-cyan-400 font-bold text-lg select-none">
+                      {symbol}
+                    </div>
                     <input
                       name="budget"
                       value={form.budget}
                       onChange={handleChange}
                       className="w-full pl-12 pr-4 py-4 bg-white/5 border border-blue-500/30 rounded-xl text-white placeholder-cyan-400/50 focus:outline-none focus:border-cyan-400 transition"
-                      placeholder="e.g. ₹1,00,000 – ₹3,00,000"
+                      placeholder={`e.g. ${symbol}1,00,000 – ${symbol}3,00,000`}
                     />
                   </div>
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-cyan-300 mb-2">Project Description</label>
+                <label className="block text-sm font-medium text-cyan-300 mb-2">
+                  Project Description
+                </label>
                 <div className="relative">
                   <MessageSquare className="absolute left-4 top-4 w-5 h-5 text-cyan-400" />
                   <textarea
@@ -221,7 +258,11 @@ export default function BookServicePage() {
                     placeholder="Brief us about your project requirements..."
                   />
                 </div>
-                {errors.description && <p className="text-red-400 text-xs mt-1">{errors.description}</p>}
+                {errors.description && (
+                  <p className="text-red-400 text-xs mt-1">
+                    {errors.description}
+                  </p>
+                )}
               </div>
 
               <div className="pt-6">
@@ -238,7 +279,8 @@ export default function BookServicePage() {
           </div>
 
           <div className="text-center mt-10 text-cyan-300/70 text-sm">
-            Your information is 100% secure • We never spam • Average response time: 1.5 hours
+            Your information is 100% secure • We never spam • Average response
+            time: 1.5 hours
           </div>
         </div>
       </div>

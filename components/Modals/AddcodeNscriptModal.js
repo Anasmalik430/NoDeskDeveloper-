@@ -4,7 +4,8 @@ import { useState } from "react";
 import { X, Upload, Loader2 } from "lucide-react";
 import { CldUploadWidget } from "next-cloudinary";
 import dynamic from "next/dynamic";
-const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });import "react-quill-new/dist/quill.snow.css";
+const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
+import "react-quill-new/dist/quill.snow.css";
 import { API_BASE } from "@/lib/api";
 
 export default function AddcodeNscriptModal({ isOpen, onClose, onSuccess }) {

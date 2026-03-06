@@ -50,7 +50,7 @@ export const aboutServices = [
 // About Page Testimonials
 export const testimonials = [
   {
-    text: "Saved us 4 months & ₹12 lakhs with their Real Estate CRM. Best decision ever!",
+    text: "Saved us 4 months & 12 lakhs with their Real Estate CRM. Best decision ever!",
     author: "Rahul Sharma",
     role: "Real Estate Agency Owner",
   },
@@ -74,7 +74,7 @@ export const softwareProducts = [
   {
     name: "Real Estate CRM",
     icon: Building2,
-    price: "₹15,000",
+    price: 15000,
     description: "Complete property management and client relationship system",
     features: [
       "Property listing management",
@@ -89,7 +89,7 @@ export const softwareProducts = [
   {
     name: "School ERP",
     icon: GraduationCap,
-    price: "₹25,000",
+    price: 25000,
     description: "Comprehensive school management and administration platform",
     features: [
       "Student & staff management",
@@ -105,7 +105,7 @@ export const softwareProducts = [
   {
     name: "Inventory Management",
     icon: Package,
-    price: "₹12,000",
+    price: 12000,
     description: "Smart inventory tracking and warehouse management solution",
     features: [
       "Real-time stock tracking",
@@ -120,7 +120,7 @@ export const softwareProducts = [
   {
     name: "POS + Billing Software",
     icon: CreditCard,
-    price: "₹18,000",
+    price: 18000,
     description: "Modern point-of-sale with integrated billing system",
     features: [
       "Quick billing interface",
@@ -141,7 +141,7 @@ export const developerTiers = [
   {
     level: "Junior Developer",
     icon: Code2,
-    price: "₹300 – ₹500",
+    price: "300 – 500",
     description: "Perfect for basic web development and simple projects",
     technologies: [
       "HTML5",
@@ -164,7 +164,7 @@ export const developerTiers = [
   {
     level: "Mid-Level Developer",
     icon: Zap,
-    price: "₹600 – ₹1000",
+    price: "600 – 1000",
     description: "Ideal for full-stack applications and modern frameworks",
     technologies: [
       "React",
@@ -188,7 +188,7 @@ export const developerTiers = [
   {
     level: "Senior Developer",
     icon: Crown,
-    price: "₹1200+",
+    price: "1200+",
     description: "Enterprise solutions with advanced tech stack",
     technologies: [
       "MERN Stack",

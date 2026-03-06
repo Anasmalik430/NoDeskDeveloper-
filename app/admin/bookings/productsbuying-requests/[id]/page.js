@@ -4,9 +4,20 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { ArrowLeft, User, Mail, Phone, Package, IndianRupee, Calendar, Sparkles, Check, Trash2, Plus } from "lucide-react";
+import {
+  ArrowLeft,
+  User,
+  Mail,
+  Phone,
+  Package,
+  IndianRupee,
+  Calendar,
+  Sparkles,
+  Check,
+  Trash2,
+  Plus,
+} from "lucide-react";
 import { API_BASE } from "@/lib/api";
-
 
 export default function BuyEnquiryDetail() {
   const params = useParams();
@@ -66,7 +77,9 @@ export default function BuyEnquiryDetail() {
     if (!confirm("Are you sure you want to delete this buy enquiry?")) return;
     setDeleting(true);
     try {
-      const res = await fetch(`${API_BASE}/buy-enquiry/${params.id}`, { method: "DELETE" });
+      const res = await fetch(`${API_BASE}/buy-enquiry/${params.id}`, {
+        method: "DELETE",
+      });
       const data = await res.json();
       if (data.success) {
         alert("Enquiry deleted successfully!");
@@ -83,28 +96,35 @@ export default function BuyEnquiryDetail() {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case "In Review": return "bg-blue-500/10 border-blue-500/20 text-blue-400";
-      case "Contacted": return "bg-cyan-500/10 border-cyan-500/20 text-cyan-400";
-      case "Quoted": return "bg-purple-500/10 border-purple-500/20 text-purple-400";
-      case "Closed": return "bg-green-500/10 border-green-500/20 text-green-400";
-      default: return "bg-yellow-500/10 border-yellow-500/20 text-yellow-400";
+      case "In Review":
+        return "bg-blue-500/10 border-blue-500/20 text-blue-400";
+      case "Contacted":
+        return "bg-cyan-500/10 border-cyan-500/20 text-cyan-400";
+      case "Quoted":
+        return "bg-purple-500/10 border-purple-500/20 text-purple-400";
+      case "Closed":
+        return "bg-green-500/10 border-green-500/20 text-green-400";
+      default:
+        return "bg-yellow-500/10 border-yellow-500/20 text-yellow-400";
     }
   };
 
-  if (loading) return (
-    <div className="min-h-screen bg-black flex items-center justify-center">
-      <div className="text-center">
-        <div className="inline-block size-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mb-4"></div>
-        <p className="text-white text-xl">Loading enquiry details...</p>
+  if (loading)
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center">
+        <div className="text-center">
+          <div className="inline-block size-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+          <p className="text-white text-xl">Loading enquiry details...</p>
+        </div>
       </div>
-    </div>
-  );
+    );
 
-  if (error || !enquiry) return (
-    <div className="min-h-screen bg-black flex items-center justify-center text-red-400 text-xl">
-      {error || "Enquiry not found"}
-    </div>
-  );
+  if (error || !enquiry)
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center text-red-400 text-xl">
+        {error || "Enquiry not found"}
+      </div>
+    );
 
   return (
     <div className="min-h-screen bg-black text-white pt-20 pb-16 px-4 md:px-6">
@@ -144,7 +164,13 @@ export default function BuyEnquiryDetail() {
                 </div>
                 {enquiry.demoLink && (
                   <div className="text-sm text-cyan-400 break-all">
-                    Demo: <a href={enquiry.demoLink} target="_blank" rel="noreferrer" className="underline hover:text-cyan-300">
+                    Demo:{" "}
+                    <a
+                      href={enquiry.demoLink}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="underline hover:text-cyan-300"
+                    >
                       {enquiry.demoLink}
                     </a>
                   </div>
@@ -161,22 +187,31 @@ export default function BuyEnquiryDetail() {
             <div className="relative space-y-6">
               {/* Pricing Breakdown */}
               <div className="space-y-3">
-                <h3 className="text-xl font-bold text-white mb-4">Pricing Details</h3>
+                <h3 className="text-xl font-bold text-white mb-4">
+                  Pricing Details
+                </h3>
                 <div className="bg-white/5 border border-white/10 rounded-xl p-4 space-y-3">
                   <div className="flex justify-between">
                     <span className="text-gray-400">Base Price</span>
-                    <span className="text-white font-medium">₹{enquiry.basePrice.toLocaleString()}</span>
+                    <span className="text-white font-medium">
+                      ₹{enquiry.basePrice}
+                    </span>
                   </div>
                   {enquiry.selectedAddons.length > 0 && (
                     <>
                       <div className="flex justify-between text-purple-400">
                         <span>Addons ({enquiry.selectedAddons.length})</span>
-                        <span>+₹{enquiry.addonsTotal.toLocaleString()}</span>
+                        <span>+ ₹{enquiry.addonsTotal}</span>
                       </div>
                       {enquiry.selectedAddons.map((addon, i) => (
-                        <div key={i} className="flex justify-between text-sm text-gray-300 pl-4">
-                          <span className="flex items-center gap-1"><Plus className="size-3" /> {addon.label}</span>
-                          <span>₹{addon.cost.toLocaleString()}</span>
+                        <div
+                          key={i}
+                          className="flex justify-between text-sm text-gray-300 pl-4"
+                        >
+                          <span className="flex items-center gap-1">
+                            <Plus className="size-3" /> {addon.label}
+                          </span>
+                          <span>₹{addon.cost}</span>
                         </div>
                       ))}
                     </>
@@ -184,13 +219,15 @@ export default function BuyEnquiryDetail() {
                   {enquiry.serviceFee > 0 && (
                     <div className="flex justify-between text-cyan-400">
                       <span>Service Fee</span>
-                      <span>+₹{enquiry.serviceFee.toLocaleString()}</span>
+                      <span>+ ₹{enquiry.serviceFee}</span>
                     </div>
                   )}
                   <div className="border-t border-white/10 pt-3 mt-3">
                     <div className="flex justify-between text-xl font-bold">
                       <span>Total Amount</span>
-                      <span className="text-green-400">₹{enquiry.finalTotal.toLocaleString()}</span>
+                      <span className="text-green-400">
+                        ₹{enquiry.finalTotal}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -202,8 +239,11 @@ export default function BuyEnquiryDetail() {
                   <div>
                     <p className="text-xs text-gray-400 mb-2">Platforms</p>
                     <div className="flex flex-wrap gap-2">
-                      {enquiry.platforms.map(p => (
-                        <span key={p} className="px-3 py-1 bg-blue-500/10 border border-blue-500/20 rounded-lg text-xs text-blue-300">
+                      {enquiry.platforms.map((p) => (
+                        <span
+                          key={p}
+                          className="px-3 py-1 bg-blue-500/10 border border-blue-500/20 rounded-lg text-xs text-blue-300"
+                        >
                           {p}
                         </span>
                       ))}
@@ -214,12 +254,19 @@ export default function BuyEnquiryDetail() {
                   <div>
                     <p className="text-xs text-gray-400 mb-2">Technologies</p>
                     <div className="flex flex-wrap gap-2">
-                      {enquiry.technologies.slice(0, 6).map(t => (
-                        <span key={t} className="px-3 py-1 bg-purple-500/10 border border-purple-500/20 rounded-lg text-xs text-purple-300">
+                      {enquiry.technologies.slice(0, 6).map((t) => (
+                        <span
+                          key={t}
+                          className="px-3 py-1 bg-purple-500/10 border border-purple-500/20 rounded-lg text-xs text-purple-300"
+                        >
                           {t}
                         </span>
                       ))}
-                      {enquiry.technologies.length > 6 && <span className="text-xs text-gray-400">+{enquiry.technologies.length - 6} more</span>}
+                      {enquiry.technologies.length > 6 && (
+                        <span className="text-xs text-gray-400">
+                          +{enquiry.technologies.length - 6} more
+                        </span>
+                      )}
                     </div>
                   </div>
                 )}
@@ -228,7 +275,9 @@ export default function BuyEnquiryDetail() {
               {/* Status Update */}
               <div className="space-y-4">
                 <h3 className="text-xl font-bold text-white">Update Status</h3>
-                <span className={`inline-block px-4 py-2 rounded-full text-sm font-medium ${getStatusColor(enquiry.status)} mb-4`}>
+                <span
+                  className={`inline-block px-4 py-2 rounded-full text-sm font-medium ${getStatusColor(enquiry.status)} mb-4`}
+                >
                   Current: {enquiry.status}
                 </span>
                 <select
@@ -248,7 +297,16 @@ export default function BuyEnquiryDetail() {
                   disabled={updating || newStatus === enquiry.status}
                   className={`w-full py-3 flex items-center justify-center gap-2 bg-linear-to-r from-blue-600 to-purple-600 text-white font-medium rounded-xl transition-all shadow-lg ${updating || newStatus === enquiry.status ? "opacity-80 cursor-not-allowed" : "hover:from-blue-500 hover:to-purple-500 shadow-blue-500/40"}`}
                 >
-                  {updating ? <><div className="size-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div> Updating...</> : <><Check className="size-4" /> Update Status</>}
+                  {updating ? (
+                    <>
+                      <div className="size-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>{" "}
+                      Updating...
+                    </>
+                  ) : (
+                    <>
+                      <Check className="size-4" /> Update Status
+                    </>
+                  )}
                 </button>
 
                 <button
@@ -256,7 +314,16 @@ export default function BuyEnquiryDetail() {
                   disabled={deleting}
                   className={`w-full py-3 flex items-center justify-center gap-2 bg-linear-to-r from-red-600 to-red-700 text-white font-medium rounded-xl transition-all shadow-lg ${deleting ? "opacity-80 cursor-not-allowed" : "hover:from-red-500 hover:to-red-600 shadow-red-500/40"}`}
                 >
-                  {deleting ? <><div className="size-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div> Deleting...</> : <><Trash2 className="size-4" /> Delete Enquiry</>}
+                  {deleting ? (
+                    <>
+                      <div className="size-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>{" "}
+                      Deleting...
+                    </>
+                  ) : (
+                    <>
+                      <Trash2 className="size-4" /> Delete Enquiry
+                    </>
+                  )}
                 </button>
               </div>
             </div>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { X, Monitor, Smartphone, Copy, PlayCircle, Play } from "lucide-react";
 import Image from "next/image";
+import useINRConverter from "@/utils/currencyConverter";
 
 export const ProductDialogBox = ({ product, isOpen, onClose }) => {
   const [formData, setFormData] = useState({
@@ -18,6 +19,8 @@ export const ProductDialogBox = ({ product, isOpen, onClose }) => {
     multiLanguage: false,
     whatsapp: false,
   });
+
+  const { convertINR, loading: currencyLoading } = useINRConverter();
 
   if (!isOpen) return null;
 
@@ -56,7 +59,7 @@ export const ProductDialogBox = ({ product, isOpen, onClose }) => {
   const selectedAddons = addonsList.filter((addon) => addons[addon.key]);
   const addonsTotal = selectedAddons.reduce(
     (sum, addon) => sum + addon.cost,
-    0
+    0,
   );
   const hasSelectedAddons = selectedAddons.length > 0;
 
@@ -65,27 +68,14 @@ export const ProductDialogBox = ({ product, isOpen, onClose }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log("Demo Request Submitted:", {
-    //   product: product.name,
-    //   client: formData,
-    //   selectedAddons: selectedAddons.map((a) => ({
-    //     name: a.label,
-    //     cost: a.cost,
-    //   })),
-    //   pricing: {
-    //     base: basePrice,
-    //     addonsTotal: Math.round(addonsTotal),
-    //     serviceFee: Math.round(serviceFee),
-    //     estimatedTotal: Math.round(total),
-    //   },
-    // });
     alert("Request sent! Check console for details.");
   };
 
   const handleCopyQuote = () => {
-    const quote = `${product.name}\nBase: ₹${basePrice}\nAdd-ons: ₹${Math.round(
-      addonsTotal
-    )}\nTotal: ₹${Math.round(total)}`;
+    const quote = `${product.name}
+Base: ${convertINR(basePrice)}
+Add-ons: ${convertINR(Math.round(addonsTotal))}
+Total: ${convertINR(Math.round(total))}`;
     navigator.clipboard.writeText(quote);
     alert("Quote copied to clipboard!");
   };
@@ -253,7 +243,7 @@ export const ProductDialogBox = ({ product, isOpen, onClose }) => {
                     >
                       <span className="text-slate-400">{addon.label}</span>
                       <span className="text-white font-medium">
-                        ₹{addon.cost.toLocaleString()}
+                        {currencyLoading ? "..." : convertINR(addon.cost)}
                       </span>
                     </div>
                   ))}
@@ -264,27 +254,31 @@ export const ProductDialogBox = ({ product, isOpen, onClose }) => {
                 <div className="flex justify-between text-sm">
                   <span className="text-slate-400">Base Price</span>
                   <span className="text-white font-medium">
-                    ₹{basePrice.toLocaleString()}
+                    {currencyLoading ? "..." : convertINR(basePrice)}
                   </span>
                 </div>
                 {hasSelectedAddons && (
                   <div className="flex justify-between text-sm">
                     <span className="text-slate-400">Add-ons Total</span>
                     <span className="text-white font-medium">
-                      ₹{Math.round(addonsTotal).toLocaleString()}
+                      {currencyLoading
+                        ? "..."
+                        : convertINR(Math.round(addonsTotal))}
                     </span>
                   </div>
                 )}
                 <div className="flex justify-between text-sm">
                   <span className="text-slate-400">Service Fee (5%)</span>
                   <span className="text-white font-medium">
-                    ₹{Math.round(serviceFee).toLocaleString()}
+                    {currencyLoading
+                      ? "..."
+                      : convertINR(Math.round(serviceFee))}
                   </span>
                 </div>
                 <div className="flex justify-between text-lg font-bold pt-3 border-t border-slate-600">
                   <span className="text-white">Estimated Total</span>
                   <span className="text-purple-400">
-                    ₹{Math.round(total).toLocaleString()}
+                    {currencyLoading ? "..." : convertINR(Math.round(total))}
                   </span>
                 </div>
               </div>

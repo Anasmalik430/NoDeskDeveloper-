@@ -4,9 +4,19 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { ArrowLeft, User, Mail, Phone, Code, IndianRupee, FileText, Calendar, Sparkles, Check } from "lucide-react";
+import {
+  ArrowLeft,
+  User,
+  Mail,
+  Phone,
+  Code,
+  IndianRupee,
+  FileText,
+  Calendar,
+  Sparkles,
+  Check,
+} from "lucide-react";
 import { API_BASE } from "@/lib/api";
-
 
 export default function BookingDetail() {
   const params = useParams();
@@ -66,11 +76,16 @@ export default function BookingDetail() {
 
   const getStatusColor = (status) => {
     switch (status) {
-      case "Confirmed": return "bg-green-500/10 border-green-500/20 text-green-400";
-      case "In Progress": return "bg-blue-500/10 border-blue-500/20 text-blue-400";
-      case "Completed": return "bg-purple-500/10 border-purple-500/20 text-purple-400";
-      case "Cancelled": return "bg-red-500/10 border-red-500/20 text-red-400";
-      default: return "bg-yellow-500/10 border-yellow-500/20 text-yellow-400";
+      case "Confirmed":
+        return "bg-green-500/10 border-green-500/20 text-green-400";
+      case "In Progress":
+        return "bg-blue-500/10 border-blue-500/20 text-blue-400";
+      case "Completed":
+        return "bg-purple-500/10 border-purple-500/20 text-purple-400";
+      case "Cancelled":
+        return "bg-red-500/10 border-red-500/20 text-red-400";
+      default:
+        return "bg-yellow-500/10 border-yellow-500/20 text-yellow-400";
     }
   };
 
@@ -119,7 +134,9 @@ export default function BookingDetail() {
 
               {/* Client Info */}
               <div className="space-y-3">
-                <h3 className="text-xl font-bold text-white">Client Information</h3>
+                <h3 className="text-xl font-bold text-white">
+                  Client Information
+                </h3>
                 <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-4 py-3">
                   <User className="size-5 text-blue-400" />
                   <span>{booking.clientName}</span>
@@ -136,10 +153,14 @@ export default function BookingDetail() {
 
               {/* Developer Info */}
               <div className="space-y-3">
-                <h3 className="text-xl font-bold text-white">Developer Information</h3>
+                <h3 className="text-xl font-bold text-white">
+                  Developer Information
+                </h3>
                 <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-4 py-3">
                   <User className="size-5 text-purple-400" />
-                  <span>{booking.developer.name} ({booking.developer.level})</span>
+                  <span>
+                    {booking.developer.name} ({booking.developer.level})
+                  </span>
                 </div>
                 <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-4 py-3">
                   <Calendar className="size-5 text-purple-400" />
@@ -161,14 +182,18 @@ export default function BookingDetail() {
             <div className="relative space-y-6">
               {/* Project Info */}
               <div className="space-y-3">
-                <h3 className="text-3xl font-bold text-white">Project Information</h3>
+                <h3 className="text-3xl font-bold text-white">
+                  Project Information
+                </h3>
                 <div className="bg-white/5 border border-white/10 rounded-xl px-4 py-3">
                   <p className="text-xs text-gray-400 mb-1">Type</p>
                   <p className="text-sm text-white">{booking.projectType}</p>
                 </div>
                 <div className="bg-white/5 border border-white/10 rounded-xl px-4 py-3">
                   <p className="text-xs text-gray-400 mb-1">Budget</p>
-                  <p className="text-sm text-white">₹{booking.estimatedBudget}</p>
+                  <p className="text-sm text-white">
+                    ₹{booking.estimatedBudget}
+                  </p>
                 </div>
                 <div className="bg-white/5 border border-white/10 rounded-xl px-4 py-3">
                   <p className="text-xs text-gray-400 mb-1">Description</p>
@@ -195,11 +220,21 @@ export default function BookingDetail() {
                   onChange={(e) => setNewStatus(e.target.value)}
                   className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:border-blue-500/50 transition-all appearance-none cursor-pointer"
                 >
-                  <option value="Pending" className="bg-black">Pending</option>
-                  <option value="Confirmed" className="bg-black">Confirmed</option>
-                  <option value="In Progress" className="bg-black">In Progress</option>
-                  <option value="Completed" className="bg-black">Completed</option>
-                  <option value="Cancelled" className="bg-black">Cancelled</option>
+                  <option value="Pending" className="bg-black">
+                    Pending
+                  </option>
+                  <option value="Confirmed" className="bg-black">
+                    Confirmed
+                  </option>
+                  <option value="In Progress" className="bg-black">
+                    In Progress
+                  </option>
+                  <option value="Completed" className="bg-black">
+                    Completed
+                  </option>
+                  <option value="Cancelled" className="bg-black">
+                    Cancelled
+                  </option>
                 </select>
                 <button
                   onClick={handleUpdateStatus}

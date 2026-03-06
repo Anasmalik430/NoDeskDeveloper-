@@ -9,7 +9,7 @@ import useINRConverter from "@/utils/currencyConverter";
 const ProductCard = ({ filteredProducts }) => {
   const [demoProduct, setDemoProduct] = useState(null);
   const router = useRouter();
-  const { convertINR, loading } = useINRConverter();
+  const { convertINR, loading: currencyLoading, symbol } = useINRConverter();
 
   const shareProduct = async (product) => {
     if (navigator.share) {
@@ -113,7 +113,9 @@ const ProductCard = ({ filteredProducts }) => {
                   <div>
                     <p className="text-xs text-slate-400 mb-0.5">One-time</p>
                     <p className="text-2xl font-black text-white">
-                      {loading ? "......." : convertINR(product.price?.toLocaleString()) || 0}
+                      {currencyLoading
+                        ? "..."
+                        : convertINR(product.price)}
                     </p>
                   </div>
                   <div className="text-right">
@@ -121,7 +123,10 @@ const ProductCard = ({ filteredProducts }) => {
                       Customization
                     </p>
                     <p className="text-sm font-bold text-slate-300">
-                      +{loading ? "......." : convertINR(product?.customization) || 0}
+                      +
+                      {currencyLoading
+                        ? "..."
+                        : convertINR(product?.customization)}
                     </p>
                   </div>
                 </div>

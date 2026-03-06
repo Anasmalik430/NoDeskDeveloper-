@@ -1,3 +1,4 @@
+// components/Pricing/PricingPage.js
 "use client";
 import { useState } from "react";
 import {
@@ -11,12 +12,34 @@ import {
 import { developerTiers, softwareProducts } from "@/components/Data";
 import BottomCTAButton from "@/components/MiniComponents/BottomCTAButton";
 import { useRouter } from "next/navigation";
+import useINRConverter from "@/utils/currencyConverter";
 
 export default function PricingPage() {
   const [activeTab, setActiveTab] = useState("developers");
   const [hoveredCard, setHoveredCard] = useState(null);
 
   const router = useRouter();
+  const { convertINR, loading: currencyLoading } = useINRConverter();
+
+  const formatPrice = (price) => {
+    if (currencyLoading) return "Loading...";
+    if (typeof price === "number") return convertINR(price);
+
+    // Handle ranges like "300 – 500"
+    if (price.includes(" – ")) {
+      return price
+        .split(" – ")
+        .map((p) => convertINR(p.trim()))
+        .join(" – ");
+    }
+
+    // Handle "1200+"
+    if (price.endsWith("+")) {
+      return `${convertINR(price.replace("+", ""))}+`;
+    }
+
+    return convertINR(price);
+  };
 
   return (
     <div className=" bg-linear-to-b from-black via-gray-950 to-black py-0 px-5 lg:px-8">
@@ -37,8 +60,8 @@ export default function PricingPage() {
           </h1>
 
           <p className="text-gray-400 text-[16px] md:text-lg max-w-2xl mx-auto">
-            Whether you need expert developers or ready-made solutions, we&#39;ve
-            got you covered with flexible pricing options.
+            Whether you need expert developers or ready-made solutions,
+            we&#39;ve got you covered with flexible pricing options.
           </p>
         </div>
 
@@ -141,9 +164,10 @@ export default function PricingPage() {
                     <div className="mb-6">
                       <div className="flex items-baseline gap-2">
                         <span
-                          className={`text-4xl font-black bg-linear-to-r ${tier.color} bg-clip-text text-transparent`}
+                          className={`text-xl md:text-2xl font-black bg-linear-to-r ${tier.color} bg-clip-text text-transparent`}
                         >
-                          {tier.price}/hr
+                          {formatPrice(tier.price)}
+                          /hr
                         </span>
                       </div>
                     </div>
@@ -154,7 +178,7 @@ export default function PricingPage() {
                         Technologies:
                       </p>
                       <div className="flex flex-wrap gap-2">
-                        {tier.technologies.slice(0,4).map((tech) => (
+                        {tier.technologies.slice(0, 4).map((tech) => (
                           <span
                             key={tech}
                             className="px-3 py-1 bg-white/5 border border-blue-500/30 rounded-lg text-[10px] text-gray-300"
@@ -162,10 +186,10 @@ export default function PricingPage() {
                             {tech}
                           </span>
                         ))}
-                        <span
-                            className="px-3 py-1 bg-white/5 border border-blue-500/30 rounded-lg text-[10px] text-gray-300"
-                          > + more
-                          </span>
+                        <span className="px-3 py-1 bg-white/5 border border-blue-500/30 rounded-lg text-[10px] text-gray-300">
+                          {" "}
+                          + more
+                        </span>
                       </div>
                     </div>
 
@@ -248,9 +272,9 @@ export default function PricingPage() {
                       {/* Price */}
                       <div className="text-right">
                         <div
-                          className={`text-3xl font-black bg-linear-to-r ${software.color} bg-clip-text text-transparent`}
+                          className={`text-2xl md:text-3xl font-black bg-linear-to-r ${software.color} bg-clip-text text-transparent`}
                         >
-                          {software.price}
+                          {formatPrice(software.price)}
                         </div>
                         <span className="text-gray-500 text-sm">one-time</span>
                       </div>
@@ -267,7 +291,10 @@ export default function PricingPage() {
                     {/* Features */}
                     <ul className="mb-8 flex flex-wrap gap-2">
                       {software.features.map((feature) => (
-                        <li key={feature} className="flex items-start gap-2 border w-fit px-3 py-1 rounded-full border-white/20 ">
+                        <li
+                          key={feature}
+                          className="flex items-start gap-2 border w-fit px-3 py-1 rounded-full border-white/20 "
+                        >
                           <Check
                             className="size-4 text-teal-400 shrink-0"
                             strokeWidth={3}

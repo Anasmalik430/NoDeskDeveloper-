@@ -245,14 +245,14 @@ export default function AddDeveloperModal({ isOpen, onClose, onAdd }) {
 
               <input
                 type="number"
-                placeholder="Hourly Rate (₹) *"
+                placeholder={`Hourly Rate (₹) *`}
                 required
                 min="0"
                 value={formData.hourlyRate}
                 onChange={(e) =>
                   setFormData((p) => ({ ...p, hourlyRate: e.target.value }))
                 }
-                className="px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-purple-500/60 outline-none transition-colors"
+                className="px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-blue-500/60 outline-none transition-colors"
               />
 
               <input

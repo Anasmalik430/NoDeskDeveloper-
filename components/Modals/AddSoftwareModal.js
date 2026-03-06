@@ -311,91 +311,91 @@ export default function AddSoftwareModal({ isOpen, onClose, onAdd }) {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               <input
                 type="number"
-                placeholder="Base Price (₹) *"
+                placeholder={`Base Price (₹) *`}
                 required
                 min="0"
                 value={formData.price}
                 onChange={(e) =>
                   setFormData((p) => ({ ...p, price: e.target.value }))
                 }
-                className="px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-purple-500/60 outline-none"
+                className="px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-blue-500/60 outline-none"
               />
 
               <input
                 type="number"
-                placeholder="Customization (₹)"
+                placeholder={`Customization (₹)`}
                 min="0"
                 value={formData.customization}
                 onChange={(e) =>
                   setFormData((p) => ({ ...p, customization: e.target.value }))
                 }
-                className="px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-purple-500/60 outline-none"
+                className="px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-blue-500/60 outline-none"
               />
 
               <input
                 type="number"
-                placeholder="Deployment (₹)"
+                placeholder={`Deployment (₹)`}
                 min="0"
                 value={formData.deployment}
                 onChange={(e) =>
                   setFormData((p) => ({ ...p, deployment: e.target.value }))
                 }
-                className="px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-purple-500/60 outline-none"
+                className="px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-blue-500/60 outline-none"
               />
 
               <input
                 type="number"
-                placeholder="Branding (₹)"
+                placeholder={`Branding (₹)`}
                 min="0"
                 value={formData.branding}
                 onChange={(e) =>
                   setFormData((p) => ({ ...p, branding: e.target.value }))
                 }
-                className="px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-purple-500/60 outline-none"
+                className="px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-blue-500/60 outline-none"
               />
 
               <input
                 type="number"
-                placeholder="Payment (₹)"
+                placeholder={`Payment (₹)`}
                 min="0"
                 value={formData.payment}
                 onChange={(e) =>
                   setFormData((p) => ({ ...p, payment: e.target.value }))
                 }
-                className="px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-purple-500/60 outline-none"
+                className="px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-blue-500/60 outline-none"
               />
 
               <input
                 type="number"
-                placeholder="Gateway (₹)"
+                placeholder={`Gateway (₹)`}
                 min="0"
                 value={formData.gateway}
                 onChange={(e) =>
                   setFormData((p) => ({ ...p, gateway: e.target.value }))
                 }
-                className="px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-purple-500/60 outline-none"
+                className="px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-blue-500/60 outline-none"
               />
 
               <input
                 type="number"
-                placeholder="WhatsApp (₹)"
+                placeholder={`WhatsApp (₹)`}
                 min="0"
                 value={formData.whatsapp}
                 onChange={(e) =>
                   setFormData((p) => ({ ...p, whatsapp: e.target.value }))
                 }
-                className="px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-purple-500/60 outline-none"
+                className="px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-blue-500/60 outline-none"
               />
 
               <input
                 type="number"
-                placeholder="Multi-Language (₹)"
+                placeholder={`Multi-Language (₹)`}
                 min="0"
                 value={formData.multiLanguage}
                 onChange={(e) =>
                   setFormData((p) => ({ ...p, multiLanguage: e.target.value }))
                 }
-                className="px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-purple-500/60 outline-none"
+                className="px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-blue-500/60 outline-none"
               />
             </div>
 

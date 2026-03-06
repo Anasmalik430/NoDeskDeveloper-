@@ -17,7 +17,7 @@ import useINRConverter from "@/utils/currencyConverter";
 
 const DevCard = ({ filteredDevelopers }) => {
   const [selectedDeveloper, setSelectedDeveloper] = useState(null);
-  const { convertINR, loading } = useINRConverter();
+  const { convertINR, loading: currencyLoading, symbol } = useINRConverter();
   const [formData, setFormData] = useState({
     clientName: "",
     email: "",
@@ -81,6 +81,7 @@ const DevCard = ({ filteredDevelopers }) => {
         level: selectedDeveloper.level,
         experience: selectedDeveloper.experience,
         hourlyRate: selectedDeveloper.hourlyRate,
+        localizedRate: `${convertINR(selectedDeveloper.hourlyRate)}/hr`,
       },
     };
 
@@ -270,7 +271,7 @@ const DevCard = ({ filteredDevelopers }) => {
                   <HiOutlineCash className="size-4 text-green-400 mb-1" />
                   <span className="text-xs text-green-300 pb-1">Rate</span>
                   <span className="text-sm font-bold text-white">
-                    {loading ? "......." : convertINR(dev?.hourlyRate)}/hr
+                    {currencyLoading ? "..." : convertINR(dev?.hourlyRate)}/hr
                   </span>
                 </div>
 
@@ -418,7 +419,7 @@ const DevCard = ({ filteredDevelopers }) => {
                   {/* Estimated Budget */}
                   {/* <div>
                     <label className="block text-sm font-medium text-gray-300 mb-2">
-                      Estimated Budget (₹)
+                      Estimated Budget ({symbol})
                     </label>
                     <input
                       type="number"
@@ -449,11 +450,15 @@ const DevCard = ({ filteredDevelopers }) => {
                 </div>
 
                 {/* Rate and Payment Info */}
-                {/* <div className="flex items-center justify-between bg-blue-900/20 border border-blue-500/30 rounded-xl p-4">
+                <div className="flex items-center justify-between bg-blue-900/20 border border-blue-500/30 rounded-xl p-4">
                   <div className="flex items-center gap-2 text-blue-300">
-                    <Clock className="size-5" />
+                    <HiOutlineCash className="size-5" />
                     <span className="font-medium">
-                      Rate: ₹{selectedDeveloper.hourlyRate}/hr
+                      Rate:{" "}
+                      {currencyLoading
+                        ? "..."
+                        : `${symbol}${convertINR(selectedDeveloper.hourlyRate)}`}
+                      /hr
                     </span>
                   </div>
                   <div className="flex items-center gap-2 text-green-300">
@@ -462,7 +467,7 @@ const DevCard = ({ filteredDevelopers }) => {
                       Secure payment & confirmation
                     </span>
                   </div>
-                </div> */}
+                </div>
 
                 {/* Action Buttons */}
                 <div className="flex gap-4 pt-2">

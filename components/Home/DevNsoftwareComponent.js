@@ -1,3 +1,4 @@
+"use client";
 import {
   ArrowRight,
   Utensils,
@@ -8,6 +9,7 @@ import {
   PlaneTakeoff,
 } from "lucide-react";
 import Link from "next/link";
+import useINRConverter from "@/utils/currencyConverter";
 
 const categoryIcons = {
   Food: Utensils,
@@ -80,6 +82,8 @@ const softwareProducts = [
 ];
 
 export default function DevelopersSoftwareSection() {
+  const { convertINR, loading: currencyLoading } = useINRConverter();
+
   return (
     <div className=" bg-linear-to-b from-black via-gray-950 to-black py-20 px-5 lg:px-8">
       {/* Animated Background */}
@@ -145,8 +149,8 @@ export default function DevelopersSoftwareSection() {
                     </span>
 
                     {/* Rate */}
-                    <p className="text-base md:text-2xl font-black bg-linear-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                      ₹{profile.hourlyRate}
+                    <p className="text-sm md:text-lg font-black bg-linear-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                      {currencyLoading ? "..." : convertINR(profile.hourlyRate)}
                     </p>
                   </div>
                 </div>
@@ -215,8 +219,8 @@ export default function DevelopersSoftwareSection() {
                     </div>
 
                     {/* Price */}
-                    <p className="text-base md:text-2xl font-black bg-linear-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-1">
-                      ₹{software.price?.toLocaleString()}
+                    <p className="text-sm md:text-lg font-black bg-linear-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent mb-1">
+                      {currencyLoading ? "..." : convertINR(software.price)}
                     </p>
 
                     {/* Actions */}

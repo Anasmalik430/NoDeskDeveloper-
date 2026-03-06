@@ -1,9 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Boxes, ExternalLink, Globe, Smartphone, Monitor, ChevronRight } from "lucide-react";
+import {
+  Boxes,
+  ExternalLink,
+  Globe,
+  Smartphone,
+  Monitor,
+  ChevronRight,
+} from "lucide-react";
+import useINRConverter from "@/utils/currencyConverter";
 
 export default function SoftwareCard({ software }) {
-  const totalCost = software.totalCost || software.price;
+  const { convertINR, loading: currencyLoading } = useINRConverter();
 
   return (
     <div className="group relative bg-white/[0.03] backdrop-blur-3xl border border-white/10 rounded-[2.5rem] overflow-hidden transition-all duration-500 hover:border-emerald-500/40 hover:shadow-[0_0_50px_rgba(16,185,129,0.15)] flex flex-col">
@@ -79,10 +87,11 @@ export default function SoftwareCard({ software }) {
         {/* Footer Section */}
         <div className="pt-6 border-t border-white/[0.05] mt-auto flex items-center justify-between">
           <div className="space-y-0.5">
-            <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold leading-none">Price Starting</p>
+            <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold leading-none">
+              Price Starting
+            </p>
             <div className="flex items-center gap-1.5 text-2xl font-black text-white">
-              <span className="text-emerald-400">₹</span>
-              <span>{Number(software.price).toLocaleString()}</span>
+              <span>₹{software.price}</span>
             </div>
           </div>
 
